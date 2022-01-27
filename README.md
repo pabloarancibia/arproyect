@@ -3,13 +3,6 @@
 _Estructura inicial para desarrollar un proyecto de backend en Node.js con Express y Sequelize.  
 También he instalado JWT, Bcrypy y otras librerías útiles_
 
-## Comenzando 🚀
-
-_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
-
-Mira **Deployment** para conocer como desplegar el proyecto.
-
-
 ### Pre-requisitos 📋
 
 _Instalar NPM y Nodejs_
