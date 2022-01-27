@@ -25,12 +25,10 @@ npm run dev
   
 _Ahora ve a localhost:puerto y listo_
   
-_En la sección construcción tienes la guía de como desarrolle este entorno de trabajo, ahí puedes controlar o si quieres desarrollarlo tu mismo con tus preferencias_
+_En la sección construcción tienes la guía de como desarrollé este entorno de trabajo_
 
 
 ## Construido con 🛠️
-
-_Menciona las herramientas que utilizaste para crear tu proyecto_
 
 * [Node](https://nodejs.org) - El framework
 * [Express](https://expressjs.com/) - Infraestructura para nodejs
@@ -95,8 +93,9 @@ npm install sequelize
 ```
   
 _Instala:_
-+ sequelize@6.14.1
++ sequelize@6.14.1  
 ORM para la base de datos.  
+  
   
 _Instalamos el cli de sequelize_
 ```
@@ -105,6 +104,7 @@ npm install -g sequelize-cli
 _Instala:_
 + sequelize-cli@6.4.1  
   
+    
 _Instalamos Mysql:_
 ```
 npm install mysql2
@@ -113,41 +113,49 @@ _Instala:_
 + mysql2@2.3.3
   
   
+
 _Inicializamos sequelize en nuestro proyecto, esto crea carpetas como models, migrations, seeders, etc.:_
 ```
 npx sequelize-cli init
 ```  
+  
 _Movemos las carpetas dentro de una carpeta nueva: /database/_
   
   
+
 _Archivos para variables de entorno y archivos de configuración:_
 ```
 touch .env database/.sequelizerc server.js
 ```
-_Seteamos en server.js los parámetros correspondientes_
   
+
+_Seteamos en server.js los parámetros correspondientes (revisar archivo)_
+  
+
 _Routers_  
-_Seteamos carpetas y archivos para agregar multiples files de routers_
+_Seteamos carpetas y archivos para agregar multiples files de routers_  
 _Tendremos varios archivos con rutas._
 ```
 (ver server.js y /routers)
 ```
 ```
 seteo la primer ruta para get a / y para auth en gerRouter.js y authRouter.js
-```
+```  
   
   
+
 _Configurar variables de entorno para acceso a BD_
 ```
 en archivo .env, variables de acceso a bd y puerto, también variables de seguridad para usar luego en auth con bcrypt.
-```
+```  
   
-  
+    
 _Configurar archivo sequelizerc,_
 ```
-Se indican los path donde estará el archivo de configuración, models, seeders y migrations. 
+Se indican los path donde estará el archivo de configuración, models, seeders y migrations.   
 ```
-  
+    
+
 _Creo archivo de conexión_ 
 ```
 database/config/database.js 
@@ -158,24 +166,28 @@ parámetros de conexión apuntando a variables en .env
 ```
 parámetros configuración en archivo database/models/index.js 
 ```
-_Verificar principalmente las rutas._
+_Verificar principalmente las rutas._  
   
   
+
 _Configurar package.json con nodemon_
 ```
 "scripts": {  
     "dev": "nodemon server.js"  
-  },
+  },  
 ```
-
+  
+   
 _Compruebo ejecución de la api y conexión a base de datos._ 
 ```
-npm run dev.
+npm run dev.  
 ```
   
+
+
   
 _Creo github con esqueleto inicial completo_
-[pabloarancibia node_api](https://github.com/pabloarancibia/nodejs_api.git) 😊 
+[pabloarancibia node_api](https://github.com/pabloarancibia/nodejs_api.git) 😊   
 
 
 _Continuar con… Primer modelo y migración en Sequelize._
