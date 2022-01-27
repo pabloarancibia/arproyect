@@ -1,6 +1,6 @@
-# Node.js + Express + Sequelize. Inicial Environment
+# Node.js + Express + Sequelize + MySQL. Inicial Environment
 
-_Estructura inicial para desarrollar un proyecto de backend en Node.js con Express y Sequelize.  
+_Estructura inicial para desarrollar un proyecto de backend en Node.js con Express, Sequelize y MySQL.  
 También he instalado JWT, Bcrypy y otras librerías útiles_
 
 ### Pre-requisitos 📋
