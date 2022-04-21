@@ -11,21 +11,45 @@ _Instalar NPM y Nodejs_
 * [Node](https://nodejs.org) - El framework
   
 ### Instalación 🔧
+
+_Clonar este repositorio en una carpeta nueva (ej: backend)_  
+_Verificar el package.json para corroborar las versiones de cada instalación  
+_Si quieres cambiar la versión de algo debes hacerlo ahora.!_  
+_Sino puedes continuar y luego verificar con NPM Check Updates_  
+  * [npm-check-updates](https://www.npmjs.com/package/npm-check-updates) - NPM Check Updates  
   
-_Correr solamente npm install para instalar paquetes y configurar las variabels de entorno segun los datos de tu BD_
+```
+npm i -g npm-check-updates
+ncu -u
+npm install  
+```   
   
   
+_Luego:
+_Correr npm install para instalar paquetes 
+_Configurar las variables de entorno en .env con los datos de tu BD (luego tendras que agregar este archivo a .gitignore)_  
+  
+
 ```
 npm install
 ```
   
+
 ```
 npm run dev
 ```
   
-_Ahora ve a localhost:puerto y listo_
+_Ahora ve a localhost:puerto para verificar.
   
-_En la sección construcción tienes la guía de como desarrollé este entorno de trabajo_
+  ##### MUY IMPORTANTE .!!  
+Agregar a .gitignore el archivo api/.env  
+  
+
+_ ahora puedes agregar una nueva url con tu propio repositorio y hacer push. 
+
+  
+  
+_En la siguiente sección tienes la guía de como desarrollé este entorno de trabajo_
 
 
 ## Construido con 🛠️
@@ -34,7 +58,9 @@ _En la sección construcción tienes la guía de como desarrollé este entorno d
 * [Express](https://expressjs.com/) - Infraestructura para nodejs
 * [Sequelize](https://sequelize.org/) - ORM
 * [Npm](https://www.npmjs.com/) - Gestión de paquetes
-
+  
+  
+_GUÍA DE COMO REALIZAR LAS INSTALACIONES DE MANERA MANUAL_  🛠️
 
 _Vamos a Instalar: Node, Express, Sequelize, Sequelize cli, JWT, Bcrypt, mysql._
 
@@ -183,17 +209,15 @@ _Compruebo ejecución de la api y conexión a base de datos._
 npm run dev.  
 ```
   
-
+_Creo carpetas: controllers, database y middlewares.
 
   
 _Creo github con esqueleto inicial completo_
 [pabloarancibia node_api](https://github.com/pabloarancibia/nodejs_api.git) 😊   
 
-
+_Para continuar
 _Continuar con… Primer modelo y migración en Sequelize._
   
   
 ## Autores ✒️
-
-
 * **Pablo Arancibia** - [pabloarancibia](https://github.com/pabloarancibia)
