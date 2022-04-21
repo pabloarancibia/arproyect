@@ -212,11 +212,14 @@ npm run dev.
 _Creo carpetas: controllers, database y middlewares.
 
   
-_Creo github con esqueleto inicial completo_
+_No hacer este paso: Creo github con esqueleto inicial completo_
 [pabloarancibia node_api](https://github.com/pabloarancibia/nodejs_api.git) 😊   
 
-_Para continuar
-_Continuar con… Primer modelo y migración en Sequelize._
+#### Para continuar
+_Configura .gitignore, agrega .env_
+_Crea tu repositorio en github y apunta a él  
+_Haz el primer commit y push  
+_Continuar con tu desarrollo… Por ejemplo: Primer modelo y migración en Sequelize._
   
   
 ## Autores ✒️
