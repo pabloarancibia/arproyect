@@ -13,8 +13,16 @@ _Instalar NPM y Nodejs_
 ### Instalación 🔧
 
 _Clonar este repositorio en una carpeta nueva (ej: backend)_  
+
+  ##### MUY IMPORTANTE .!!  
+Agregar a .gitignore el archivo api/.env  
+  
+  
+_ ahora puedes agregar una nueva url con tu propio repositorio y hacer push. 
+  
+  #### Continuar con...  
 _Verificar el package.json para corroborar las versiones de cada instalación  
-_Si quieres cambiar la versión de algo debes hacerlo ahora.!_  
+_Si quieres cambiar la versión de algo puedes hacerlo ahora.!_  
 _Sino puedes continuar y luego verificar con NPM Check Updates_  
   * [npm-check-updates](https://www.npmjs.com/package/npm-check-updates) - NPM Check Updates  
   
@@ -27,7 +35,7 @@ npm install
   
 _Luego:
 _Correr npm install para instalar paquetes 
-_Configurar las variables de entorno en .env con los datos de tu BD (luego tendras que agregar este archivo a .gitignore)_  
+_Configurar las variables de entorno en .env con los datos de tu BD (no olvides que tendras que agregar este archivo a .gitignore)_  
   
 
 ```
@@ -41,11 +49,6 @@ npm run dev
   
 _Ahora ve a localhost:puerto para verificar.
   
-  ##### MUY IMPORTANTE .!!  
-Agregar a .gitignore el archivo api/.env  
-  
-
-_ ahora puedes agregar una nueva url con tu propio repositorio y hacer push. 
 
   
   
