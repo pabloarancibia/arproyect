@@ -13,7 +13,7 @@ const authRouter = express.Router();
 */
 
 authRouter.get('/', function (req,res){
-    res.send('general routes')
+    res.send('general routes --- Arancibia Rectificaciones API REST')
 });
 
 module.exports = authRouter;

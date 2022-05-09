@@ -1,3 +1,5 @@
 # dependencies
 /api/node_modules
 /api/.env
+.env
+sql-data
