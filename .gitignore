@@ -3,3 +3,11 @@
 /api/.env
 .env
 sql-data
+
+# Mosquitto
+mosquitto/data
+mosquitto/log
+mosquitto/config
+config/
+log/
+data/
