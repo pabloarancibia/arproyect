@@ -1,20 +1,20 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Mqtt_messages_gral', {
+    await queryInterface.createTable('Trabajos', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      topic: {
+      nombre: {
         type: Sequelize.STRING,
+        unique: true,
         allowNull: false,
       },
-      message: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      descripcion: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -27,6 +27,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Mqtt_messages_gral');
+    await queryInterface.dropTable('Trabajos');
   }
 };

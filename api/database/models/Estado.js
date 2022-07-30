@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class mqtt_messages_gral extends Model {
+  class Estado extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,20 +13,18 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  mqtt_messages_gral.init({
+  Estado.init({
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    topic: {
-      type: DataTypes.STRING,
-      allowNull: false,
+    nombre: { 
+      type: DataTypes.STRING
     },
-    message: {
-      type: DataTypes.STRING,
-      allowNull: false,
+    detalle: {
+      type: DataTypes.STRING
     },
     createdAt: {
       allowNull: false,
@@ -36,10 +34,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.DATE
     }
-
   }, {
     sequelize,
-    modelName: 'mqtt_messages_gral',
+    modelName: 'Estado',
   });
-  return mqtt_messages_gral;
+  return Estado;
 };
