@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      // Repuesto pertenece a muchas Motos
+      Repuesto.belongsToMany(models.Moto, {through: 'Repuesto_Moto'})
     }
   }
   Repuesto.init({
@@ -24,6 +25,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
+    },
+    medida: {
+      type: DataTypes.INTEGER,
+    },
+    origen: {
+      type: DataTypes.STRING,
+    },
+    marca: {
+      type: DataTypes.STRING,
     },
     descripcion: {
       type: DataTypes.STRING,

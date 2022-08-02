@@ -1,29 +1,27 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Repuestos', {
+    await queryInterface.createTable('Motos', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nombre: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-      },
-      medida: {
-        type: DataTypes.INTEGER,
-      },
-      origen: {
-        type: DataTypes.STRING,
-      },
       marca: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING
       },
-      descripcion: {
-        type: DataTypes.STRING,
+      modelo: {
+        type: DataTypes.STRING
+      },
+      cilindrada: {
+        type: DataTypes.INTEGER
+      },
+      año: {
+        type: DataTypes.INTEGER
+      },
+      observaciones: {
+        type: DataTypes.STRING
       },
       createdAt: {
         allowNull: false,
@@ -36,6 +34,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Repuestos');
+    await queryInterface.dropTable('Motos');
   }
 };

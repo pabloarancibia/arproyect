@@ -3,37 +3,38 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Orden_Trabajo extends Model {
+  class Moto extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Orden_Trabajo.belongsTo(models.Trabajo)
-      Orden_Trabajo.belongsTo(models.Estado)
-      Orden_Trabajo.belongsTo(models.Cliente)
-      Orden_Trabajo.belongsTo(models.Registro_Repuesto)
-      Orden_Trabajo.belongsTo(models.Usuario)
-      Orden_Trabajo.belongsTo(models.Moto)
-
-
+      
+      // Moto pertenece a muchos Repuestos
+      Moto.belongsToMany(models.Repuesto, {through: 'Repuesto_Moto'})
     }
   }
-  Orden_Trabajo.init({
+  Moto.init({
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    precio:{
+    marca: {
+      type: DataTypes.STRING
+    },
+    modelo: {
+      type: DataTypes.STRING
+    },
+    cilindrada: {
       type: DataTypes.INTEGER
     },
-    fecha_entrega_estimada:{
-      type: DataTypes.DATE
+    año: {
+      type: DataTypes.INTEGER
     },
-    detalle:{
+    observaciones: {
       type: DataTypes.STRING
     },
     createdAt: {
@@ -46,7 +47,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Orden_Trabajo',
+    modelName: 'Moto',
   });
-  return Orden_Trabajo;
+  return Moto;
 };

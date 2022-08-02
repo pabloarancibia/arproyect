@@ -40,6 +40,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         references:{model:'Usuario', key:'id'}
       },
+      MotoId:{
+        type: Sequelize.INTEGER,
+        references:{model:'Moto', key:'id'}
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
