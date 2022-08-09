@@ -3,6 +3,9 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
+  /**
+   * Tipos de trabajos/servicios 
+   */
   class Trabajo extends Model {
     /**
      * Helper method for defining associations.
@@ -11,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Trabajo.hasMany(models.Orden_trabajo)
     }
   }
   Trabajo.init({
@@ -27,6 +31,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     descripcion: {
       type: DataTypes.STRING,
+    },
+    is_active: {
+      type: DataTypes.BOOLEAN
     },
     createdAt: {
       allowNull: false,

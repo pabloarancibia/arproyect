@@ -20,6 +20,7 @@
  // Routes
  app.use('/',require('./routers/genRouter'));
  app.use('/auth/',require('./routers/authRouter'));
+ app.use('/gen/',require('./routers/genRouter'));
  //app.use('/otherRouter/',require('./routers/otherRouter'));
  
  

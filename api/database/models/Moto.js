@@ -13,6 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       
       // Moto pertenece a muchos Repuestos
       Moto.belongsToMany(models.Repuesto, {through: 'Repuesto_Moto'})
+
+      Moto.hasMany(models.Orden_trabajo)
     }
   }
   Moto.init({
@@ -36,6 +38,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     observaciones: {
       type: DataTypes.STRING
+    },
+    is_active: {
+      type: DataTypes.BOOLEAN
     },
     createdAt: {
       allowNull: false,

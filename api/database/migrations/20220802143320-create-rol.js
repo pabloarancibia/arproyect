@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Clientes', {
+    await queryInterface.createTable('Rols', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,23 +11,11 @@ module.exports = {
       nombre: {
         type: Sequelize.STRING
       },
-      apellido: {
-        type: Sequelize.STRING,
-      },
-      celular: {
-        type: Sequelize.BIGINT
-      },
-      estado: {
-        type: Sequelize.STRING,
-        defaultValue: "activo"
-  
-      },
-      RolId:{
-        type: Sequelize.INTEGER,
-        references:{model:'Rol', key:'id'}
+      descripcion: {
+        type: DataTypes.STRING
       },
       is_active: {
-        type: Sequelize.BOOLEAN,
+        type: DataTypes.BOOLEAN,
         default: true,
       },
       createdAt: {
@@ -41,6 +29,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Clientes');
+    await queryInterface.dropTable('Rols');
   }
 };

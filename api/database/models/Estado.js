@@ -11,6 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Estado.hasMany(models.Orden_trabajo)
+
+      // muchos a muchos Estado Orden_trabjo
+      Estado.belongsToMany(models.Orden_trabajo, {
+        through: 'Registo_cambios_estado'
+      })
     }
   }
   Estado.init({
@@ -25,6 +31,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     detalle: {
       type: DataTypes.STRING
+    },
+    is_active: {
+      type: DataTypes.BOOLEAN
     },
     createdAt: {
       allowNull: false,

@@ -42,6 +42,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         references:{model:'Rol', key:'id'}
       },
+      is_active: {
+        type: Sequelize.BOOLEAN,
+        default: true,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

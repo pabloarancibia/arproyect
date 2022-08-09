@@ -23,6 +23,10 @@ module.exports = {
       observaciones: {
         type: DataTypes.STRING
       },
+      is_active: {
+        type: DataTypes.BOOLEAN,
+        default: true,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

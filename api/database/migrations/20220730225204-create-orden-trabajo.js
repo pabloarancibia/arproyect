@@ -44,6 +44,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         references:{model:'Moto', key:'id'}
       },
+      is_active: {
+        type: DataTypes.BOOLEAN,
+        default: true,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

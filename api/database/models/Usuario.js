@@ -8,15 +8,13 @@ module.exports = (sequelize, DataTypes) => {
    * Personal administrativo de la empresa
    */
   class Usuario extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+    
     static associate(models) {
       
       // Usuario pertenece a Rol
       Usuario.belongsTo(models.Rol)
+
+      Usuario.hasMany(models.Orden_trabajo)
     }
   }
   Usuario.init({
@@ -55,6 +53,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       defaultValue: "activo"
 
+    },
+    is_active: {
+      type: DataTypes.BOOLEAN
     },
     createdAt: {
       allowNull: false,

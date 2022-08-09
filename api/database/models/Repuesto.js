@@ -12,6 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // Repuesto pertenece a muchas Motos
       Repuesto.belongsToMany(models.Moto, {through: 'Repuesto_Moto'})
+
+      Repuesto.hasMany(models.Orden_trabajo)
     }
   }
   Repuesto.init({
@@ -37,6 +39,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     descripcion: {
       type: DataTypes.STRING,
+    },
+    is_active: {
+      type: DataTypes.BOOLEAN
     },
     createdAt: {
       allowNull: false,

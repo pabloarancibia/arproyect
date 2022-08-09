@@ -1,34 +1,26 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Clientes', {
+    await queryInterface.createTable('Registro_Cambios_Estados', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nombre: {
-        type: Sequelize.STRING
-      },
-      apellido: {
-        type: Sequelize.STRING,
-      },
-      celular: {
-        type: Sequelize.BIGINT
-      },
-      estado: {
-        type: Sequelize.STRING,
-        defaultValue: "activo"
-  
-      },
-      RolId:{
+      EstadoId: {
         type: Sequelize.INTEGER,
-        references:{model:'Rol', key:'id'}
+        references: {model: 'Estado', key: 'id'}
+      },
+      Orden_trabajoId: {
+        type: Sequelize.INTEGER,
+        references: {model: 'Orden_trabajo', key: 'id'}
+      },
+      fecha: {
+        type: DataTypes.DATE
       },
       is_active: {
-        type: Sequelize.BOOLEAN,
-        default: true,
+        type: DataTypes.BOOLEAN
       },
       createdAt: {
         allowNull: false,
@@ -41,6 +33,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Clientes');
+    await queryInterface.dropTable('Registro_Cambios_Estados');
   }
 };

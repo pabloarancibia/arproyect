@@ -17,6 +17,11 @@ module.exports = (sequelize, DataTypes) => {
       Orden_Trabajo.belongsTo(models.Usuario)
       Orden_Trabajo.belongsTo(models.Moto)
 
+      // muchos a muchos Estado Orden_trabjo
+      Orden_Trabajo.belongsToMany(models.Estado, {
+        through: 'Registo_cambios_estado'
+      })
+
 
     }
   }
@@ -35,6 +40,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     detalle:{
       type: DataTypes.STRING
+    },
+    is_active: {
+      type: DataTypes.BOOLEAN
     },
     createdAt: {
       allowNull: false,

@@ -1,24 +1,15 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Trabajos', {
+    await queryInterface.createTable('Impresion_configs', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nombre: {
-        type: Sequelize.STRING,
-        unique: true,
-        allowNull: false,
-      },
-      descripcion: {
+      observaciones: {
         type: Sequelize.STRING
-      },
-      is_active: {
-        type: Sequelize.BOOLEAN,
-        default: true,
       },
       createdAt: {
         allowNull: false,
@@ -31,6 +22,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Trabajos');
+    await queryInterface.dropTable('Impresion_configs');
   }
 };

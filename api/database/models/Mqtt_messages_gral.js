@@ -28,6 +28,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    is_active: {
+      type: DataTypes.BOOLEAN
+    },
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE

@@ -2,7 +2,7 @@
  * Rutas generales de la app
  */
 const express = require("express");
-const authRouter = express.Router();
+const genRouter = express.Router();
 
 //Middlewares
 
@@ -12,8 +12,8 @@ const authRouter = express.Router();
  * Routes
 */
 
-authRouter.get('/', function (req,res){
+genRouter.get('gen/', function (req,res){
     res.send('general routes --- Arancibia Rectificaciones API REST')
 });
 
-module.exports = authRouter;
+module.exports = genRouter;

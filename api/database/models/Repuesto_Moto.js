@@ -31,7 +31,10 @@ module.exports = (sequelize, DataTypes) => {
   },
     MotoId: {
       type: Sequelize.INTEGER,
-  }
+  },
+  is_active: {
+    type: DataTypes.BOOLEAN
+  },
   }, {
     sequelize,
     modelName: 'Repuesto_Moto',
