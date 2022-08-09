@@ -11,6 +11,39 @@ module.exports = {
       observaciones: {
         type: Sequelize.STRING
       },
+      orden_id: { 
+        type: DataTypes.BOOLEAN
+      },
+      usuario: { 
+        type: DataTypes.BOOLEAN
+      },
+      web: { 
+        type: DataTypes.BOOLEAN
+      },
+      precio: { 
+        type: DataTypes.BOOLEAN
+      },
+      entrega: { 
+        type: DataTypes.BOOLEAN
+      },
+      trabajo: { 
+        type: DataTypes.BOOLEAN
+      },
+      detalle: { 
+        type: DataTypes.BOOLEAN
+      },
+      repuesto: { 
+        type: DataTypes.BOOLEAN
+      },
+      marca: { 
+        type: DataTypes.BOOLEAN
+      },
+      origen: { 
+        type: DataTypes.BOOLEAN
+      },
+      observaciones: { 
+        type: DataTypes.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

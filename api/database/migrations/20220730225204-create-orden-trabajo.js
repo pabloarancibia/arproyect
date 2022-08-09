@@ -14,6 +14,9 @@ module.exports = {
       precio:{
         type: DataTypes.INTEGER
       },
+      entrega:{
+        type: DataTypes.INTEGER
+      },
       fecha_entrega_estimada:{
         type: DataTypes.DATE
       },

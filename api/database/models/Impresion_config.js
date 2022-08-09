@@ -16,7 +16,45 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Impresion_config.init({
-    observaciones: DataTypes.STRING
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
+    orden_id: { 
+      type: DataTypes.BOOLEAN
+    },
+    usuario: { 
+      type: DataTypes.BOOLEAN
+    },
+    web: { 
+      type: DataTypes.BOOLEAN
+    },
+    precio: { 
+      type: DataTypes.BOOLEAN
+    },
+    entrega: { 
+      type: DataTypes.BOOLEAN
+    },
+    trabajo: { 
+      type: DataTypes.BOOLEAN
+    },
+    detalle: { 
+      type: DataTypes.BOOLEAN
+    },
+    repuesto: { 
+      type: DataTypes.BOOLEAN
+    },
+    marca: { 
+      type: DataTypes.BOOLEAN
+    },
+    origen: { 
+      type: DataTypes.BOOLEAN
+    },
+    observaciones: { 
+      type: DataTypes.STRING
+    },
   }, {
     sequelize,
     modelName: 'Impresion_config',
