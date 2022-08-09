@@ -18,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
         })
       Registro_Cambios_Estado.belongsTo(models.Orden_trabajo,
         {
-          foreignKey: 'Orden_TrabajoId',
-          as:'Orden_Trabajo'
+          foreignKey: 'Orden_trabajoId',
+          as:'Orden_trabajo'
         })
     }
   }
@@ -31,10 +31,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER
     },
     EstadoId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
   },
     Orden_trabajoId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
   },
     fecha: {
       type: DataTypes.DATE

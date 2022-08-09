@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Orden_Trabajos', {
+    await queryInterface.createTable('Orden_trabajo', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,16 +12,16 @@ module.exports = {
         type: Sequelize.STRING
       },
       precio:{
-        type: DataTypes.INTEGER
+        type: Sequelize.INTEGER
       },
       entrega:{
-        type: DataTypes.INTEGER
+        type: Sequelize.INTEGER
       },
       fecha_entrega_estimada:{
-        type: DataTypes.DATE
+        type: Sequelize.DATE
       },
       detalle:{
-        type: DataTypes.STRING
+        type: Sequelize.STRING
       },
       TrabajoId:{
         type: Sequelize.INTEGER,
@@ -35,9 +35,9 @@ module.exports = {
         type: Sequelize.INTEGER,
         references:{model:'Cliente', key:'id'}
       },
-      Registro_RepuestoId:{
+      RepuestoId:{
         type: Sequelize.INTEGER,
-        references:{model:'Registro_Repuesto', key:'id'}
+        references:{model:'Repuesto', key:'id'}
       },
       UsuarioId:{
         type: Sequelize.INTEGER,
@@ -48,7 +48,7 @@ module.exports = {
         references:{model:'Moto', key:'id'}
       },
       is_active: {
-        type: DataTypes.BOOLEAN,
+        type: Sequelize.BOOLEAN,
         default: true,
       },
       createdAt: {
@@ -62,6 +62,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Orden_Trabajos');
+    await queryInterface.dropTable('Orden_trabajo');
   }
 };

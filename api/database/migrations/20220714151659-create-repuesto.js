@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Repuestos', {
+    await queryInterface.createTable('Repuesto', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -9,21 +9,21 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       nombre: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
         unique: true
       },
       medida: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
       },
       origen: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
       },
       marca: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
       },
       descripcion: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
       },
       is_active: {
         type: Sequelize.BOOLEAN,
@@ -40,6 +40,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Repuestos');
+    await queryInterface.dropTable('Repuesto');
   }
 };

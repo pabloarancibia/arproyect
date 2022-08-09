@@ -5,6 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   /**
    * Modelo de Asociacion n:m Repuestos y Motos
+   * a que motos les va este repuesto
    */
   class Repuesto_Moto extends Model {
     /**
@@ -27,10 +28,10 @@ module.exports = (sequelize, DataTypes) => {
   Repuesto_Moto.init({
     
     RepuestoId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
   },
     MotoId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
   },
   is_active: {
     type: DataTypes.BOOLEAN

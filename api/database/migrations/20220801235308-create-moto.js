@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Motos', {
+    await queryInterface.createTable('Moto', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -9,22 +9,22 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       marca: {
-        type: DataTypes.STRING
+        type: Sequelize.STRING
       },
       modelo: {
-        type: DataTypes.STRING
+        type: Sequelize.STRING
       },
       cilindrada: {
-        type: DataTypes.INTEGER
+        type: Sequelize.INTEGER
       },
       año: {
-        type: DataTypes.INTEGER
+        type: Sequelize.INTEGER
       },
       observaciones: {
-        type: DataTypes.STRING
+        type: Sequelize.STRING
       },
       is_active: {
-        type: DataTypes.BOOLEAN,
+        type: Sequelize.BOOLEAN,
         default: true,
       },
       createdAt: {
@@ -38,6 +38,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Motos');
+    await queryInterface.dropTable('Moto');
   }
 };

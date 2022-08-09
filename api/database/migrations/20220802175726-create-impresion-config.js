@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Impresion_configs', {
+    await queryInterface.createTable('Impresion_config', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,37 +12,37 @@ module.exports = {
         type: Sequelize.STRING
       },
       orden_id: { 
-        type: DataTypes.BOOLEAN
+        type: Sequelize.BOOLEAN
       },
       usuario: { 
-        type: DataTypes.BOOLEAN
+        type: Sequelize.BOOLEAN
       },
       web: { 
-        type: DataTypes.BOOLEAN
+        type: Sequelize.BOOLEAN
       },
       precio: { 
-        type: DataTypes.BOOLEAN
+        type: Sequelize.BOOLEAN
       },
       entrega: { 
-        type: DataTypes.BOOLEAN
+        type: Sequelize.BOOLEAN
       },
       trabajo: { 
-        type: DataTypes.BOOLEAN
+        type: Sequelize.BOOLEAN
       },
       detalle: { 
-        type: DataTypes.BOOLEAN
+        type: Sequelize.BOOLEAN
       },
       repuesto: { 
-        type: DataTypes.BOOLEAN
+        type: Sequelize.BOOLEAN
       },
       marca: { 
-        type: DataTypes.BOOLEAN
+        type: Sequelize.BOOLEAN
       },
       origen: { 
-        type: DataTypes.BOOLEAN
+        type: Sequelize.BOOLEAN
       },
       observaciones: { 
-        type: DataTypes.STRING
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -55,6 +55,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Impresion_configs');
+    await queryInterface.dropTable('Impresion_config');
   }
 };

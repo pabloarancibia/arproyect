@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Registro_Cambios_Estados', {
+    await queryInterface.createTable('Registro_Cambios_Estado', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -17,10 +17,10 @@ module.exports = {
         references: {model: 'Orden_trabajo', key: 'id'}
       },
       fecha: {
-        type: DataTypes.DATE
+        type: Sequelize.DATE
       },
       is_active: {
-        type: DataTypes.BOOLEAN
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
@@ -33,6 +33,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Registro_Cambios_Estados');
+    await queryInterface.dropTable('Registro_Cambios_Estado');
   }
 };

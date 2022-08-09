@@ -3,29 +3,28 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Orden_Trabajo extends Model {
+  class Orden_trabajo extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Orden_Trabajo.belongsTo(models.Trabajo)
-      Orden_Trabajo.belongsTo(models.Estado)
-      Orden_Trabajo.belongsTo(models.Cliente)
-      Orden_Trabajo.belongsTo(models.Registro_Repuesto)
-      Orden_Trabajo.belongsTo(models.Usuario)
-      Orden_Trabajo.belongsTo(models.Moto)
+      Orden_trabajo.belongsTo(models.Trabajo)
+      Orden_trabajo.belongsTo(models.Estado)
+      Orden_trabajo.belongsTo(models.Cliente)
+      Orden_trabajo.belongsTo(models.Usuario)
+      Orden_trabajo.belongsTo(models.Moto)
 
       // muchos a muchos Estado Orden_trabjo
-      Orden_Trabajo.belongsToMany(models.Estado, {
+      Orden_trabajo.belongsToMany(models.Estado, {
         through: 'Registo_cambios_estado'
       })
 
 
     }
   }
-  Orden_Trabajo.init({
+  Orden_trabajo.init({
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -57,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Orden_Trabajo',
+    modelName: 'Orden_trabajo',
   });
-  return Orden_Trabajo;
+  return Orden_trabajo;
 };
