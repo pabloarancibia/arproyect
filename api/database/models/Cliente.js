@@ -12,6 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // Cliente pertenece a Rol
       Cliente.belongsTo(models.Rol)
+
+      // Cliente tiene muchas ordenes de trabajo
       Cliente.hasMany(models.Orden_trabajo)
     }
   }

@@ -3,18 +3,20 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
+  /**
+   * Motocicletas:
+   * ej: Honda CG Titán 150 
+   */
   class Moto extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+    
     static associate(models) {
       
-      // Moto pertenece a muchos Repuestos
+      // Moto tiene muchas ordenes de trabajo
+      Moto.hasMany(models.Orden_trabajo)
+      
+      // Moto pertenece a muchos Repuestos N:M
       Moto.belongsToMany(models.Repuesto, {through: 'Repuesto_Moto'})
 
-      Moto.hasMany(models.Orden_trabajo)
     }
   }
   Moto.init({

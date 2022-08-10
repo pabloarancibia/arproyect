@@ -1,0 +1,43 @@
+'use strict';
+
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+     await queryInterface.bulkInsert('Mqtt_messages_gral', [
+        {
+            topic: 'esp32/espera',
+            messages: 'tarjeta:1, estado:espera',
+            createdAt: new Date(),
+            updatedAt: new Date()
+        },
+        {
+            topic: 'esp32/en_proceso',
+            messages: 'tarjeta:1, estado:en_proceso',
+            createdAt: new Date(),
+            updatedAt: new Date()
+        },
+        {
+            topic: 'esp32/finalizado',
+            messages: 'tarjeta:1, estado:finalizado',
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }
+    ], {});
+  },
+
+  down: async (queryInterface, Sequelize) => {
+     await queryInterface.bulkDelete('Mqtt_messages_gral', [
+        {
+            topic: 'esp32/espera',
+            messages: 'tarjeta:1, estado:espera',
+        },
+        {
+            topic: 'esp32/en_proceso',
+            messages: 'tarjeta:1, estado:en_proceso',
+        },
+        {
+            topic: 'esp32/finalizado',
+            messages: 'tarjeta:1, estado:finalizado',
+        }
+    ], {});
+  }
+};
