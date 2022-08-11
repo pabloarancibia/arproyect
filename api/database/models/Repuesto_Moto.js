@@ -8,11 +8,6 @@ module.exports = (sequelize, DataTypes) => {
    * a que motos les va este repuesto
    */
   class Repuesto_Moto extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       // define association here
       Repuesto_Moto.belongsTo(models.Repuesto, {

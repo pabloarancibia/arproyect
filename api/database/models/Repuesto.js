@@ -10,10 +10,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // Repuesto pertenece a muchas Motos
+      // Repuesto pertenece a muchas Motos N:M
       Repuesto.belongsToMany(models.Moto, {through: 'Repuesto_Moto'})
 
-      Repuesto.hasMany(models.Orden_trabajo)
+      // Repuesto pertenece a muchas Ordenes de trabajo N:M
+      Orden_trabajo.belongsToMany(models.Orden_trabajo, {
+        through: 'Orden_Repuesto'
+      })
     }
   }
   Repuesto.init({
