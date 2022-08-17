@@ -23,6 +23,9 @@ module.exports = {
       detalle:{
         type: Sequelize.STRING
       },
+      tarjeta:{
+        type: Sequelize.STRING
+      },
       TrabajoId:{
         type: Sequelize.INTEGER,
         references:{model:'Trabajo', key:'id'}

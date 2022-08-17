@@ -44,6 +44,9 @@ module.exports = (sequelize, DataTypes) => {
     detalle:{
       type: DataTypes.STRING
     },
+    tarjeta:{
+      type: DataTypes.STRING
+    },
     is_active: {
       type: DataTypes.BOOLEAN
     },

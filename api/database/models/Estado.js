@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       
       // Estado tiene muchos
       Estado.hasMany(models.Orden_trabajo)
+      Estado.hasMany(models.Tarjeta)
 
       // muchos a muchos Estado Orden_trabjo
       Estado.belongsToMany(models.Orden_trabajo, {
