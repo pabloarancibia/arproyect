@@ -21,7 +21,8 @@ module.exports = {
         references: {model: 'Estado', key: 'id'}
       },
       is_active: {
-        type: DataTypes.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        default: true,
       },
       createdAt: {
         allowNull: false,

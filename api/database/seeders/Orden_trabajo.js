@@ -13,6 +13,7 @@ module.exports = {
             entrega: 750,
             fecha_entrega_estimada: new Date(),
             detalle: 'busca por la noche 21hs',
+            tarjeta: '1111',
             createdAt: new Date(),
             updatedAt: new Date()
         },
@@ -26,6 +27,7 @@ module.exports = {
             entrega: 2500,
             fecha_entrega_estimada: new Date(),
             detalle: 'dar prioridad a este trabajo',
+            tarjeta: '1112',
             createdAt: new Date(),
             updatedAt: new Date()
         },
@@ -39,6 +41,7 @@ module.exports = {
             entrega: 1750,
             fecha_entrega_estimada: new Date(),
             detalle: 'busca primera hora de la tarde',
+            tarjeta: '1113',
             createdAt: new Date(),
             updatedAt: new Date()
         },
@@ -47,9 +50,9 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
      await queryInterface.bulkDelete('Orden_trabajo', [
-       {nombre:'Rectificación'},
-       {nombre: 'Encamisado'},
-        {nombre: 'Cambio de Biela'}
+       {id:1},
+       {id:2},
+       {id:3},
     ], {});
   }
 };

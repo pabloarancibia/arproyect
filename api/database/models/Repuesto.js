@@ -4,17 +4,12 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Repuesto extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       // Repuesto pertenece a muchas Motos N:M
       Repuesto.belongsToMany(models.Moto, {through: 'Repuesto_Moto'})
 
       // Repuesto pertenece a muchas Ordenes de trabajo N:M
-      Orden_trabajo.belongsToMany(models.Orden_trabajo, {
+      Repuesto.belongsToMany(models.Orden_trabajo, {
         through: 'Orden_Repuesto'
       })
     }
@@ -42,6 +37,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     descripcion: {
       type: DataTypes.STRING,
+    },
+    cantidad: {
+      type: DataTypes.INTEGER
+    },
+    is_stock: {
+      type: DataTypes.BOOLEAN
     },
     is_active: {
       type: DataTypes.BOOLEAN

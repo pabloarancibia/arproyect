@@ -20,7 +20,9 @@ module.exports = {
         type: Sequelize.DATE
       },
       is_active: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        default: true,
+
       },
       createdAt: {
         allowNull: false,
