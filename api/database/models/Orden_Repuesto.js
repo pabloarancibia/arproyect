@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     RepuestoId: {
       type: DataTypes.INTEGER,
   },
-    MotoId: {
+    OrdenId: {
       type: DataTypes.INTEGER,
   },
   observaciones: {

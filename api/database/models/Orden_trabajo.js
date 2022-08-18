@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       Orden_trabajo.belongsTo(models.Usuario)
       Orden_trabajo.belongsTo(models.Moto)
 
-      // Orden_trabjo tiene muchos Estados N:M
+      // Orden_trabjo tiene muchos Cambios de Estado N:M
       Orden_trabajo.belongsToMany(models.Estado, {
         through: 'Registo_cambios_estado'
       })
