@@ -2,25 +2,25 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-     await queryInterface.bulkInsert('Orden_Repuesto', [
+     await queryInterface.bulkInsert('Repuesto_Moto', [
         {
-            OrdenId: 1,
             RepuestoId: 1,
-            
+            MotoId: 1,
+            fecha: new Date(),
             createdAt: new Date(),
             updatedAt: new Date()
         },
         {
-            OrdenId: 2,
             RepuestoId: 2,
-            
+            MotoId: 2,
+            fecha: new Date(),
             createdAt: new Date(),
             updatedAt: new Date()
         },
         {
-            OrdenId: 3,
             RepuestoId: 3,
-            
+            MotoId: 3,
+            fecha: new Date(),
             createdAt: new Date(),
             updatedAt: new Date()
         },
@@ -28,7 +28,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-     await queryInterface.bulkDelete('Orden_Repuesto', [
+     await queryInterface.bulkDelete('Repuesto_Moto', [
        {id:1},
        {id:2},
        {id:3},
