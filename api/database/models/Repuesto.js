@@ -41,9 +41,6 @@ module.exports = (sequelize, DataTypes) => {
     cantidad: {
       type: DataTypes.INTEGER
     },
-    is_stock: {
-      type: DataTypes.BOOLEAN
-    },
     is_active: {
       type: DataTypes.BOOLEAN
     },

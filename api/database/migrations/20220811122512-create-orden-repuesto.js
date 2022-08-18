@@ -19,6 +19,9 @@ module.exports = {
       observaciones: {
         type: Sequelize.STRING,
       },
+      repuesto_en_stock: {
+        type: Sequelize.BOOLEAN
+      },
       is_active: {
         type: Sequelize.BOOLEAN,
         default: true,

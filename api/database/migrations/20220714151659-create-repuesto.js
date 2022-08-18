@@ -28,9 +28,7 @@ module.exports = {
       cantidad: {
         type: Sequelize.INTEGER
       },
-      is_stock: {
-        type: Sequelize.BOOLEAN
-      },
+      
       is_active: {
         type: Sequelize.BOOLEAN,
         default: true,

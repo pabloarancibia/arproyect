@@ -6,6 +6,8 @@ module.exports = {
         {
             OrdenId: 1,
             RepuestoId: 1,
+            repuesto_en_stock: true,
+
             
             createdAt: new Date(),
             updatedAt: new Date()
@@ -13,6 +15,7 @@ module.exports = {
         {
             OrdenId: 2,
             RepuestoId: 2,
+            repuesto_en_stock: true,
             
             createdAt: new Date(),
             updatedAt: new Date()
@@ -20,6 +23,7 @@ module.exports = {
         {
             OrdenId: 3,
             RepuestoId: 3,
+            repuesto_en_stock: false,
             
             createdAt: new Date(),
             updatedAt: new Date()

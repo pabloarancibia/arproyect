@@ -32,6 +32,9 @@ module.exports = (sequelize, DataTypes) => {
   observaciones: {
     type: DataTypes.STRING
   },
+  repuesto_en_stock: {
+    type: DataTypes.BOOLEAN
+  },
   is_active: {
     type: DataTypes.BOOLEAN
   }
