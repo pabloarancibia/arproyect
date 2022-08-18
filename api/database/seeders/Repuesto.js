@@ -4,21 +4,36 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
      await queryInterface.bulkInsert('Repuesto', [
         {
-            RepuestoId: 1,
+            nombre: 'Piston',
+            medida: 75,
+            marca: 'okinoi',
+            origen: 'china',
+            descripcion: 'alguna descripcion',
+            cantidad: 20,
             
             
             createdAt: new Date(),
             updatedAt: new Date()
         },
         {
-            RepuestoId: 2,
+            nombre: 'Biela',
+            medida: 0,
+            marca: 'pirulin',
+            origen: 'taiwan',
+            descripcion: 'Lorem ipsim ',
+            cantidad: 20,
             
             
             createdAt: new Date(),
             updatedAt: new Date()
         },
         {
-            RepuestoId: 3,
+            nombre: 'Cigüeñal',
+            medida: 0,
+            marca: 'DKM',
+            origen: 'Brasil',
+            descripcion: 'Lorem ipsim ',
+            cantidad: 0,
             
             
             createdAt: new Date(),
