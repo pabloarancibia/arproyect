@@ -26,6 +26,12 @@ module.exports = {
             detalle: 'Trabajo retirado por el cliente',
             createdAt: new Date(),
             updatedAt: new Date() 
+        },
+        {
+            nombre: 'Libre',
+            detalle: 'Tarjeta libre para uso',
+            createdAt: new Date(),
+            updatedAt: new Date() 
         }
     ], {});
   },
@@ -35,7 +41,8 @@ module.exports = {
         {nombre:'En Espera'},
        {nombre:'En Proceso'},
        {nombre: 'Finalizado'},
-        {nombre: 'Retirado'}
+        {nombre: 'Retirado'},
+        {nombre: 'Libre'}
     ], {});
   }
 };
