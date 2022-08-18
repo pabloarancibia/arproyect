@@ -16,24 +16,24 @@ module.exports = {
             updatedAt: new Date()
         },
         {
-            nombre: 'Biela',
+            nombre: 'Camisa',
             medida: 0,
             marca: 'pirulin',
             origen: 'taiwan',
             descripcion: 'Lorem ipsim ',
-            cantidad: 20,
+            cantidad: 0,
             
             
             createdAt: new Date(),
             updatedAt: new Date()
         },
         {
-            nombre: 'Cigüeñal',
+            nombre: 'Biela',
             medida: 0,
             marca: 'DKM',
             origen: 'Brasil',
-            descripcion: 'Lorem ipsim ',
-            cantidad: 0,
+            descripcion: 'Lorem ipsim mortum dae',
+            cantidad: 20,
             
             
             createdAt: new Date(),
