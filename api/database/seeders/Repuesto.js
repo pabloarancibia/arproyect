@@ -7,7 +7,7 @@ module.exports = {
             nombre: 'Piston',
             medida: 75,
             marca: 'okinoi',
-            origen: 'china',
+            origen: 1,
             descripcion: 'alguna descripcion',
             cantidad: 20,
             
@@ -19,7 +19,7 @@ module.exports = {
             nombre: 'Camisa',
             medida: 0,
             marca: 'pirulin',
-            origen: 'taiwan',
+            origen: 2,
             descripcion: 'Lorem ipsim ',
             cantidad: 0,
             
@@ -31,7 +31,7 @@ module.exports = {
             nombre: 'Biela',
             medida: 0,
             marca: 'DKM',
-            origen: 'Brasil',
+            origen: 3,
             descripcion: 'Lorem ipsim mortum dae',
             cantidad: 20,
             
