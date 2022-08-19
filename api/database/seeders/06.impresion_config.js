@@ -24,7 +24,9 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
      await queryInterface.bulkDelete('Impresion_config', [
-       {id:1},
+      {
+        id: [1],
+    }
     ], {});
   }
 };

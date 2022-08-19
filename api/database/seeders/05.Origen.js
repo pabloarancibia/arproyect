@@ -2,35 +2,40 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-     await queryInterface.bulkInsert('Tarjeta', [
+     await queryInterface.bulkInsert('Origen', [
         {
-            numero: 1111,
-            descripcion: 'tarjeta de prueba falsa',
-            EstadoId: 1,
+            id: 1,
+            pais: 'Argentina',
+            descripcion: 'Nacional',
             
             createdAt: new Date(),
             updatedAt: new Date()
         },
         {
-            numero: 1112,
-            descripcion: 'tarjeta de prueba falsa',
-            EstadoId: 1,
+            id: 2,
+            pais: 'Brasil',
             
             createdAt: new Date(),
             updatedAt: new Date()
         },
         {
-            numero: 1113,
-            descripcion: 'tarjeta de prueba falsa',
-            EstadoId: 1,
+            id: 3,
+            pais: 'Taiwan',
             
             createdAt: new Date(),
             updatedAt: new Date()
         },
         {
-            numero: 1114,
-            descripcion: 'tarjeta de prueba falsa',
-            EstadoId: 4,
+            id: 4,
+            pais: 'Japon',
+            
+            createdAt: new Date(),
+            updatedAt: new Date()
+        },
+        {
+            id: 5,
+            pais: 'Otro',
+            descripcion: 'otro',
             
             createdAt: new Date(),
             updatedAt: new Date()
@@ -39,11 +44,10 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-     await queryInterface.bulkDelete('Tarjeta', [
-       {id:1},
-       {id:2},
-       {id:3},
-       {id:4},
+     await queryInterface.bulkDelete('Origen', [
+        {
+            id: [1,2,3,4,5],
+        }
     ], {});
   }
 };

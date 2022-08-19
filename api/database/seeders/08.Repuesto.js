@@ -4,6 +4,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
      await queryInterface.bulkInsert('Repuesto', [
         {
+            id: 1,
             nombre: 'Piston',
             medida: 75,
             marca: 'okinoi',
@@ -16,6 +17,7 @@ module.exports = {
             updatedAt: new Date()
         },
         {
+            id: 2,
             nombre: 'Camisa',
             medida: 0,
             marca: 'pirulin',
@@ -28,6 +30,7 @@ module.exports = {
             updatedAt: new Date()
         },
         {
+            id: 3,
             nombre: 'Biela',
             medida: 0,
             marca: 'DKM',
@@ -44,9 +47,9 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
      await queryInterface.bulkDelete('Repuesto', [
-       {id:1},
-       {id:2},
-       {id:3},
+      {
+        id: [1,2,3],
+    }
     ], {});
   }
 };
