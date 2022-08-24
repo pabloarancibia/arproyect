@@ -61,6 +61,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Orden_trabajo',
+    tableName: 'Orden_trabajo',
   });
   return Orden_trabajo;
 };

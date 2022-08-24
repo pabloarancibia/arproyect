@@ -58,6 +58,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Impresion_config',
+    tableName: 'Impresion_config',
   });
   return Impresion_config;
 };

@@ -41,6 +41,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Orden_Repuesto',
+    tableName: 'Orden_Repuesto',
   });
   return Orden_Repuesto;
 };

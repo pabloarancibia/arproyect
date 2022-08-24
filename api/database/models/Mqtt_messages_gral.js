@@ -43,6 +43,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Mqtt_messages_gral',
+    tableName: 'Mqtt_messages_gral',
   });
   return Mqtt_messages_gral;
 };

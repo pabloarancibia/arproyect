@@ -53,6 +53,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Registro_Cambios_Estado',
+    tableName: 'Registro_Cambios_Estado',
   });
   return Registro_Cambios_Estado;
 };

@@ -12,7 +12,7 @@ const genRouter = express.Router();
  * Routes
 */
 
-genRouter.get('gen/', function (req,res){
+genRouter.get('/', function (req,res){
     res.send('general routes --- Arancibia Rectificaciones API REST')
 });
 

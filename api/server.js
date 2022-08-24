@@ -18,14 +18,15 @@
  app.use(express.urlencoded({}));
  
  // Routes
- app.use('/',require('./routers/genRouter'));
- app.use('/auth/',require('./routers/authRouter'));
- app.use('/gen/',require('./routers/genRouter'));
+ app.use(require('./routers/genRouter'));
+ app.use('/auth',require('./routers/authRouter'));
+ app.use('/trabajos',require('./routers/ordentrabajoRouter'));
+ app.use('/gen',require('./routers/genRouter'));
  //app.use('/otherRouter/',require('./routers/otherRouter'));
  
  
  app.listen(PORT, function (req, res) {
-     console.log('API corriendo en PUERTO:', PORT);
+     console.log('API corriendo en PUERTO:', PORT, ' Ver puerto en docker!');
  
      sequelize.authenticate().then(() => {
          console.log('Coexión a BASE DE DATOS establecida')
