@@ -8,6 +8,7 @@ module.exports = {
             nombre: 'Ramon',
             apellido: 'Comodoro',
             celular: '3624101010',
+            dni:1,
             RolId:3,
             createdAt: new Date(),
             updatedAt: new Date()
@@ -16,6 +17,7 @@ module.exports = {
             id: 2,
             nombre: 'Jose',
             apellido: 'Gomez',
+            dni:2,
             celular: '3624101010',
             RolId:3,
             createdAt: new Date(),
@@ -26,6 +28,7 @@ module.exports = {
             nombre: 'David',
             apellido: 'Lopez',
             celular: '3624101010',
+            dni:3,
             RolId:3,
             createdAt: new Date(),
             updatedAt: new Date() 

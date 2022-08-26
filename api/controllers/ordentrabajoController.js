@@ -1,6 +1,7 @@
 const {Orden_trabajo,Cliente, Estado, Moto, Trabajo, Usuario} = require('../database/models/index');
 
 const { Op, Sequelize } = require("sequelize");
+const { response } = require('express');
 
 /**
  * 
@@ -80,4 +81,29 @@ const getOrdenTrabajoBy = async(req,res)=>{
 
 }
 
-module.exports = {getOrdenesTrabajo, getOrdenTrabajoBy};
+
+const getOrdenTrabajoByCliente = async (req,res) => {
+    const dni_cliente = req.params.dni_cliente;
+    if (!dni_cliente){
+        return res.status(400).json({message: 'falta dni cliente'})
+    }
+    const cliente = await Cliente.findOne({where: {dni:dni_cliente}})
+    const ordenesTrabajo = await Orden_trabajo.findAll({
+        where: {
+            ClienteId:cliente.id
+        },
+        include: [{
+            model: Estado,
+            attributes: ['nombre'],
+            where: {
+                nombre:{
+                    [Op.like]:'%retirado%',
+                },
+            },
+        }],
+    });
+
+
+}
+
+module.exports = {getOrdenesTrabajo, getOrdenTrabajoBy, getOrdenTrabajoByCliente};

@@ -6,6 +6,7 @@ module.exports = {
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
   host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
   dialect: process.env.DB_DIALECT,
 
   // Seeds
@@ -20,5 +21,15 @@ module.exports = {
   define: {
     //prevent sequelize from pluralizing table names
     freezeTableName: true
+  },
+
+  development: {
+    //configuracion db
+    username: 'adminAR',
+    password: '4r4nc1b14&t4ll3r&SeT&DB',
+    database: 'AR_registros',
+    host: process.env.DB_HOST,
+    port: 3307,
+    dialect: 'mysql',
   }
 }

@@ -30,6 +30,9 @@ module.exports = (sequelize, DataTypes) => {
     apellido: {
       type: DataTypes.STRING,
     },
+    dni: {
+      type: DataTypes.BIGINT,
+    },
     celular: {
       type: DataTypes.BIGINT
     },
