@@ -87,23 +87,37 @@ const getOrdenTrabajoByCliente = async (req,res) => {
     if (!dni_cliente){
         return res.status(400).json({message: 'falta dni cliente'})
     }
-    const cliente = await Cliente.findOne({where: {dni:dni_cliente}})
-    const ordenesTrabajo = await Orden_trabajo.findAll({
-        where: {
-            ClienteId:cliente.id
-        },
-        include: [{
-            model: Estado,
-            attributes: ['nombre'],
+    
+    try {
+        let cliente = await Cliente.findOne({where: {dni:dni_cliente}})        
+    
+        if (!cliente){
+            return res.status(400).json({message:'No se encontró cliente'})
+        }
+
+    
+        const ordenesTrabajo = await Orden_trabajo.findAll({
             where: {
-                nombre:{
-                    [Op.like]:'%retirado%',
-                },
+                ClienteId:cliente.id
             },
-        }],
-    });
-
-
+            include: [
+                {model: Estado,
+                attributes: ['nombre'],
+                where: {
+                    nombre:{
+                        [Op.notLike]:'%retirado%',
+                    }
+                }},
+                {model: Cliente,attributes:['nombre','apellido']},
+                {model:Moto, attributes:['marca','modelo']},
+                {model:Trabajo, attributes:['nombre']}
+            ],
+            attributes: ['precio','entrega','detalle']
+        });
+        return res.json(ordenesTrabajo);
+    } catch (error) {
+        return res.status(500).json({error:error, message: 'error encontrando orden'})        
+    }
 }
 
 module.exports = {getOrdenesTrabajo, getOrdenTrabajoBy, getOrdenTrabajoByCliente};
