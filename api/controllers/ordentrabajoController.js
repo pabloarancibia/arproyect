@@ -120,4 +120,31 @@ const getOrdenTrabajoByCliente = async (req,res) => {
     }
 }
 
-module.exports = {getOrdenesTrabajo, getOrdenTrabajoBy, getOrdenTrabajoByCliente};
+const nuevaOrdenTrabajo = async (req,res) => {
+    try {
+        //buscar estado para asegurar que sea "En Espera"
+        const estado = await Estado.findOne({
+            where: {
+                nombre:{
+                    [Op.like]:'%'+req.body.estado+'%'
+                }
+            }
+        })
+        if (!estado){
+            return res.status(400).json({message: 'No se encontró estado'})
+        }
+
+        const nuevaOrdenTrabajo = await Orden_trabajo.create(
+            req.body, 
+            );
+        nuevaOrdenTrabajo.EstadoId = estado.id;
+        nuevaOrdenTrabajo.save();
+        return res.json(nuevaOrdenTrabajo);
+    } catch (error) {
+        return res.status(500).json({error:error, message:'Error cargando orden'})  
+    }
+    
+}
+
+module.exports = {getOrdenesTrabajo, getOrdenTrabajoBy, 
+    getOrdenTrabajoByCliente,nuevaOrdenTrabajo};

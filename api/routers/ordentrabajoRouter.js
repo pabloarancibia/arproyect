@@ -39,5 +39,14 @@
      */
     ordentrabajoRouter.get('/cliente/:dni_cliente',
         ordentrabajoCtrl.getOrdenTrabajoByCliente);
+
+    /**
+     * Nueva orden de trabajo
+     * @params data
+     * Recibe datos para la orden de trabajo
+     * incluido el número de tarjeta rfid
+     */
+    ordentrabajoRouter.post('/nueva',
+        ordentrabajoCtrl.nuevaOrdenTrabajo);
  
  module.exports = ordentrabajoRouter;
