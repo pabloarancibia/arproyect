@@ -1,4 +1,5 @@
-const {Orden_trabajo,Cliente, Estado, Moto, Trabajo, Usuario} = require('../database/models/index');
+const {Orden_trabajo,Cliente, Estado, Moto, Trabajo, Usuario,
+    Registro_Cambios_Estado} = require('../database/models/index');
 
 const { Op, Sequelize } = require("sequelize");
 const { response } = require('express');
@@ -146,5 +147,98 @@ const nuevaOrdenTrabajo = async (req,res) => {
     
 }
 
+/**
+     * Cambiar estado orden de trabajo y tarjeta
+     * @params id_orden, estado
+     * Recibe id_orden y estado a asignar.
+     * Si la orden tiene tarjeta cargada, cambio su estado
+     */
+const cambiarEstadoOrdenTrabajo = async (req, res) => {
+    try {
+        if (!req.body.estado || !req.body.id_orden){
+            return res.status(400).json({message:'Debe incluir estado y id de orden'})
+        }
+        // Busco el Estado 
+        const estado = await Estado.findOne({
+            where:{
+                nombre:{
+                    [Op.like]:'%'+req.body.estado+'%'
+                }
+            }
+        });
+        if (!estado){
+            return res.status(400).json({message:'No se encuentra estado'})
+        }
+
+        let orden = await Orden_trabajo.findOne({
+            where: {
+                id:req.body.id_orden,
+                }
+            });
+        
+        if(!orden){
+            return res.status(400).json({message:'No se encuentra Orden de Trabajo'})
+        }
+
+        // Modifico estado de la Orden
+        const orden_modif = await Orden_trabajo.update(
+            {EstadoId : estado.id},
+            {
+            where: {
+                id:orden.id,
+                }
+            });
+
+        
+        // Modifico estado de la Tarjeta  
+        if(orden_modif.tarjeta){
+            let tarjeta = await Tarjeta.findOne(
+                {
+                    where: {numero: orden_modif.tajeta}
+                }
+            );
+            if (tarjeta){
+                await Tarjeta.update(
+                    {EstadoId:estado.id},
+                    {
+                        where: {numero: orden_modif.tajeta}
+                    }
+                );
+            }
+        };
+
+        // Registro el cambio de estado
+        await Registro_Cambios_Estado.create({
+            EstadoId:estado.id,
+            Orden_trabajoId:orden_modif.id,
+            fecha:Date.now()
+        }
+        )
+
+        // Si el estado se registró como finalizado, 
+        // dar aviso al cliente
+
+        /*// Verifico que el estado sea finalizado y que la orden ya modificada tenga ese estado
+        if (estado.nombre == 'finalizado' && orden_modif.EstadoId == estado.id){
+            // verifico que el cliente esté cargado y tenga celular
+            const cliente = await Cliente.findOne({
+                where: {
+                    id : orden_modif.ClienteId
+                }
+            })
+            if (cliente && cliente.celular){
+                // enviar sms
+                // registrar el aviso
+            }else{
+                //registrar no aviso
+            }
+        }*/
+        
+        return res.json({message: 'Estado modificado correctamente'})
+    } catch (error) {
+        return res.status(500).json({error:error, message:'Error en la petición'})
+    }
+}
+
 module.exports = {getOrdenesTrabajo, getOrdenTrabajoBy, 
-    getOrdenTrabajoByCliente,nuevaOrdenTrabajo};
+    getOrdenTrabajoByCliente,nuevaOrdenTrabajo, cambiarEstadoOrdenTrabajo};

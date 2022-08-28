@@ -42,11 +42,21 @@
 
     /**
      * Nueva orden de trabajo
-     * @params data
+     * @params data, estado = espera
      * Recibe datos para la orden de trabajo
      * incluido el número de tarjeta rfid
      */
     ordentrabajoRouter.post('/nueva',
         ordentrabajoCtrl.nuevaOrdenTrabajo);
+
+    /**
+     * Cambiar estado orden de trabajo y tarjeta
+     * @params id_orden, estado
+     * Recibe id_orden y estado a asignar.
+     * Si la orden tiene tarjeta cargada, cambia el estado
+     * de la misma.
+     */
+     ordentrabajoRouter.put('/cambiarestado',
+        ordentrabajoCtrl.cambiarEstadoOrdenTrabajo);
  
  module.exports = ordentrabajoRouter;
