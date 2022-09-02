@@ -25,10 +25,11 @@ services:
     #     - ./api/.env
     #     volumes:
     #         - ./:/app
-    # mosquitto:
-    #     image: eclipse-mosquitto
-    #     network_mode: host
-    #     volumes:
-    #     - ./config:/mosquitto/config
-    #     - ./data:/mosquitto/data
-    #     - ./log:/mosquitto/log
+    mosquitto:
+        image: eclipse-mosquitto
+        network_mode: host
+        volumes:
+        - ./config:/mosquitto/config
+        - ./data:/mosquitto/data
+        - ./log:/mosquitto/log
+        restart: unless-stopped
