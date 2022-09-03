@@ -17,9 +17,9 @@ const receiveMessage = async (topic, message, res) => {
 
     // callback según topic recibido
         // msg test
-    if (topic == 'esp/test'){
+    //if (topic == 'esp/test'){
         testMessage(topic, message);
-    }
+    //}
         // msg cambio estado
         // msg notificación
         // msg configuración
@@ -41,7 +41,7 @@ function testMessage (topic, message){
 }
 
 /**
- * Procesa topic esp/estado
+ * Procesa topic 
  * guarda/actualiza el estado del producto
  * devuelve un pub informando la recepción al broker
  * @param {*} topic 
@@ -54,3 +54,6 @@ function testMessage (topic, message){
 
     // publisher response
 }
+
+module.exports = {receiveMessage};
+

@@ -24,7 +24,6 @@
  app.use('/gen',require('./routers/genRouter'));
  //app.use('/otherRouter/',require('./routers/otherRouter'));
  
- 
  app.listen(PORT, function (req, res) {
      console.log('API corriendo en PUERTO:', PORT, ' Ver puerto en docker!');
  
@@ -33,3 +32,45 @@
      })
  
  });
+
+ // MQTT
+
+ // mqtt config
+    const mqtt = require('mqtt')
+    const host = process.env.MQTT_SERVER
+    const port = process.env.MQTT_PORT
+    const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
+    
+    // mqtt connect function
+    const connectUrl = `mqtt://${host}:${port}`
+    const mqtt_client = mqtt.connect(connectUrl, {
+      clientId,
+      clean: true,
+      connectTimeout: 4000,
+      username: process.env.MQTT_USER,
+      password: process.env.MQTT_PASSWORD,
+      reconnectPeriod: 1000,
+    })
+    
+    // subscribe to all topics
+    const topic = process.env.MQTT_TOPIC_ALL;
+    mqtt_client.on('connect', () => {
+      console.log('mqtt client Connected')
+      mqtt_client.subscribe([topic], () => {
+        console.log(`API Subscribe to topic '${topic}'`)
+      })
+    })
+    
+    // publish test message
+    mqtt_client.on('connect', () => {
+        mqtt_client.publish(topic, 'nodejs mqtt test', { qos: 0, retain: false }, (error) => {
+          if (error) {
+            console.error(error)
+          }
+        })
+      })
+
+      // sub & print console message
+      mqtt_client.on('message', (topic, payload) => {
+        console.log('Received Message:', topic, payload.toString())
+      })
