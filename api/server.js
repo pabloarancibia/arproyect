@@ -23,6 +23,9 @@
  app.use('/ordentrabajo',require('./routers/ordentrabajoRouter'));
  app.use('/gen',require('./routers/genRouter'));
  //app.use('/otherRouter/',require('./routers/otherRouter'));
+
+ const mqttCtrl = require('./controllers/mqttController');
+
  
  app.listen(PORT, function (req, res) {
      console.log('API corriendo en PUERTO:', PORT, ' Ver puerto en docker!');
@@ -49,10 +52,10 @@
       connectTimeout: 4000,
       username: process.env.MQTT_USER,
       password: process.env.MQTT_PASSWORD,
-      reconnectPeriod: 1000,
+      reconnectPeriod: 3000,
     })
     
-    // subscribe to all topics
+    // subscribe to topics
     const topic = process.env.MQTT_TOPIC_ALL;
     mqtt_client.on('connect', () => {
       console.log('mqtt client Connected')
@@ -62,15 +65,30 @@
     })
     
     // publish test message
-    mqtt_client.on('connect', () => {
-        mqtt_client.publish(topic, 'nodejs mqtt test', { qos: 0, retain: false }, (error) => {
-          if (error) {
-            console.error(error)
-          }
-        })
-      })
+    // mqtt_client.on('connect', () => {
+    //     mqtt_client.publish(topic, 'nodejs mqtt test', { qos: 0, retain: false }, (error) => {
+    //       if (error) {
+    //         console.error(error)
+    //       }
+    //     })
+    //   })
 
       // sub & print console message
-      mqtt_client.on('message', (topic, payload) => {
-        console.log('Received Message:', topic, payload.toString())
+      mqtt_client.on('message', (topic, payload, retain) => {
+        
+        try {
+          //envio mensaje a coordinador
+          mqttCtrl.mqtt_coordinator(topic,payload,retain, mqtt_client);
+
+        } catch (error) {
+          console.log('error al recibir mqtt: ', error);
+          //error: enviar pub a nodo emisor
+          // agregar nombre nodo emisor
+          // topic_error = process.env.MQTT_TOPIC_PUB_ERROR
+          // mqtt_client.publish(topic_error, 'error', { qos: 0, retain: false }, (error) => {
+          //   if (error) {
+          //     console.error(error)
+          //   }
+          // });
+        }
       })

@@ -5,35 +5,35 @@ module.exports = {
      await queryInterface.bulkInsert('Estado', [
         {
             id: 1,
-            nombre: 'En Espera',
+            nombre: 'espera',
             detalle: 'Trabajo en espera de ser procesado',
             createdAt: new Date(),
             updatedAt: new Date()
         },
         {
             id: 2,
-            nombre: 'En Proceso',
+            nombre: 'proceso',
             detalle: 'Trabajo en proceso',
             createdAt: new Date(),
             updatedAt: new Date() 
         },
         {
             id: 3,
-            nombre: 'Finalizado',
+            nombre: 'finalizado',
             detalle: 'Trabajo finalizado, disponible para retirar',
             createdAt: new Date(),
             updatedAt: new Date() 
         },
         {
             id: 4,
-            nombre: 'Retirado',
+            nombre: 'retirado',
             detalle: 'Trabajo retirado por el cliente',
             createdAt: new Date(),
             updatedAt: new Date() 
         },
         {
             id: 5,
-            nombre: 'Libre',
+            nombre: 'libre',
             detalle: 'Tarjeta libre para uso',
             createdAt: new Date(),
             updatedAt: new Date() 
