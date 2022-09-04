@@ -35,7 +35,7 @@ const Sequelize = require('sequelize')
         //console.log(retain.retain)
         console.log('Receive Message: ',topic, payload.toString())
 
-        //Cambiar Estado
+        //CAMBIAR ESTADO
         if (topic==process.env.MQTT_TOPIC_CAMBIARESTADO){
             console.log('funcion cambiar estado');
         //   mqtt_client.publish('api/test', 'funcion cambiar estado', { qos: 0, retain: false }, (error) => {
@@ -49,9 +49,6 @@ const Sequelize = require('sequelize')
             console.log('estado recibido: ', payload_json.estado);
             console.log('tarjeta recibida: ', payload_json.tarjeta);
 
-
-            
-
             // Busco la tarjeta en la db
             const tarjeta = await Tarjeta.findOne({
                 where: {
@@ -60,11 +57,11 @@ const Sequelize = require('sequelize')
                 });
             if (!tarjeta){
                 //***hacer pub error
-                console.log('no se encuentra tarjeta en db')
+                console.log('no se encuentra tarjeta en db');
+                pubErrorMqtt(payload_json.nodo, mqtt_client);
+
                 return;
             }
-
-            console.log('tarjeta: ',tarjeta);
 
             // verifico si la tarjeta esta como libre
             const estado_libre = await Estado.findOne({
@@ -76,7 +73,8 @@ const Sequelize = require('sequelize')
             });
             if (tarjeta.EstadoId == estado_libre.id){
                 //***pub error
-                console.log('tarjeta libre!')
+                console.log('Error: tarjeta libre!');
+                pubErrorMqtt(payload_json.nodo, mqtt_client);
                 return;
             }else{
 
@@ -90,7 +88,8 @@ const Sequelize = require('sequelize')
                 if(!orden){
                     //*** pub error
                     //*** registrar log error
-                    console.log('no se encuentra orden asociada a esa tarjeta!')
+                    console.log('Error: no se encuentra orden asociada a esa tarjeta!');
+                    pubErrorMqtt(payload_json.nodo, mqtt_client);
                     return;
                 }
 
@@ -105,12 +104,11 @@ const Sequelize = require('sequelize')
                         }
                     });
                     if (!estado_a_asignar){
-                        console.log('error, mqtt sin estado a asignar')
+                        console.log('Error, mqtt sin estado a asignar');
+                        pubErrorMqtt(payload_json.nodo, mqtt_client);
                         //***hacer pub error
                         return;
                     }
-
-                    console.log('estado a asignar: ',estado_a_asignar);
 
                 // modifico orden
                 const orden_modif = await Orden_trabajo.update(
@@ -138,15 +136,50 @@ const Sequelize = require('sequelize')
 
                 }
 
-            
-            
-
-
         }
+        // DISCRIMINAR
         if (topic==process.env.MQTT_TOPIC_DISCRIMINAR){
           console.log('funcion discriminar');
-        }
+          // valido datos
+          const payload_json = JSON.parse(payload.toString());
+          //ejemplo json: { tajeta: '51210250150', nodo: 'mostrador', estado: 'discriminar' }
+          console.log('nodo recibido: ', payload_json.nodo);
+          console.log('estado recibido: ', payload_json.estado);
+          console.log('tarjeta recibida: ', payload_json.tarjeta);
 
+          // busco datos necesarios
+          const estado_libre = await Estado.findOne({
+            where:{
+                    nombre:{
+                        [Op.like]:'%libre%'
+                    }   
+                }
+            });
+
+          // buscar estado actual Tarjeta:
+          // busco la tarjeta en la db
+          const tarjeta = await Tarjeta.findOne({
+            where: {
+                numero:payload_json.tarjeta,
+                }
+            });
+            if (!tarjeta){
+                // si la tarjeta no existe debo crearla en el modelo Tarjeta
+                console.log('tarjeta nueva en db');
+                tarjeta = await Tarjeta.create({
+                    numero:payload.tarjeta,
+                    descripcion: 'alta desde api',
+                    EstadoId:estado_libre.id
+                });
+            }
+          // condicional según estado de Tarjeta
+          
+          // Tarjeta libre = accion nueva en Eventos
+            if (tarjeta.EstadoId == estado_libre.id){
+            
+            }
+          // Tarjeta no libre = accion en_uso en Eventos
+        }
     }
  }
 
@@ -160,46 +193,28 @@ const receiveMessage = async (topic, message, res) => {
     const newMessage = await Mqtt_messages_gral.create({
         topic, message
     });
-
-    // callback según topic recibido
-        // msg test
-    //if (topic == 'esp/test'){
-        //testMessage(topic, message);
-    //}
-        // msg cambio estado
-        // msg notificación
-        // msg configuración
-
-    // ** dentro de cada callback se realiza en res a mqtt broker
 }
 
 /**
- * Procesa topic esp/test
- * muestra el mensaje en consola
- * devuelve un pub informando la recepción al broker
- * @param {*} topic 
- * @param {*} payload 
+ * Publicar un error por mqtt
+ * @param {*} node nodo emisor a quien enviar el pub error
+ * @param mqtt_client conexion mqtt
+ * @param payload mensaje opcional
  */
-function testMessage (topic, payload){
-    console.log('Topic: '+topic+' Mensaje: '+payload);
+const pubErrorMqtt = async (node, mqtt_client, payload = 'error_gral' ) => {
 
-    // publisher response
+    // armo el topic
+    const topic_error = `${process.env.MQTT_TOPIC_PUB_ERROR}${node}`;
+    console.log('topic error: ',topic_error);
+
+    // envio el pub
+    mqtt_client.publish(topic_error, payload, { qos: 0, retain: false }, (error) => {
+    if (error) {
+        console.error(error)
+    }
+    });
+
 }
 
-/**
- * Procesa topic 
- * guarda/actualiza el estado del producto
- * devuelve un pub informando la recepción al broker
- * @param {*} topic 
- * @param {*} payload 
- */
- function estadoMessage (topic, payload){
-    console.log('Topic: '+topic+' Mensaje: '+payload);
-
-    // save/update db tabajo_estado
-
-    // publisher response
-}
-
-module.exports = {mqtt_coordinator};
+module.exports = {mqtt_coordinator, pubErrorMqtt};
 
