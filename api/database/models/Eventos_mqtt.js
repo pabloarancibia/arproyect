@@ -3,15 +3,17 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
+  /**
+   * maneja eventos que el front deberá consultar
+   * el campo is_active indica si el evento ya fue manejado o no
+   */
   class Eventos_mqtt extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // Eventos.OrdenId pertenece a orden_trabajo
-      Eventos_mqtt.belongsTo(models.Orden_trabajo)
+      // Eventos.OrdenId pertenece a Orden_trabajo
+      Eventos_mqtt.belongsTo(models.Orden_trabajo);
+
+      //Eventos.TarjetaId pertenece a Tarjeta
+      Eventos_mqtt.belongsTo(models.Tarjeta);
     }
   }
   Eventos_mqtt.init({
@@ -21,14 +23,17 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    tarjeta: {
-      type: DataTypes.STRING
-    },
     accion: {
       type: DataTypes.STRING
     },
-    estado_tarjeta: {
+    nodo: {
       type: DataTypes.STRING
+    },
+    observaciones: {
+      type: DataTypes.STRING
+    },
+    is_active: {
+      type: DataTypes.BOOLEAN
     },
     createdAt: {
       allowNull: false,

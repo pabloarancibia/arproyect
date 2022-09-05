@@ -16,7 +16,7 @@ module.exports = {
       descripcion: {
         type: Sequelize.STRING
       },
-      estadoId: {
+      EstadoId: {
         type: Sequelize.INTEGER,
         references: {model: 'Estado', key: 'id'}
       },

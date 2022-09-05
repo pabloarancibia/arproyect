@@ -1,21 +1,32 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('eventos_mqtts', {
+    await queryInterface.createTable('Eventos_mqtt', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      tarjeta: {
-        type: Sequelize.STRING
+      TarjetaId: {
+        type: Sequelize.INTEGER,
+        references: {model: 'Tarjeta', key: 'id'}
+      },
+      Orden_trabajoId: {
+        type: Sequelize.INTEGER,
+        references: {model: 'Orden_trabajo', key: 'id'}
       },
       accion: {
         type: Sequelize.STRING
       },
-      estado_tarjeta: {
+      nodo: {
         type: Sequelize.STRING
+      },
+      observaciones: {
+        type: Sequelize.STRING
+      },
+      is_active: {
+        type: Sequelize.BOOLEAN,
       },
       createdAt: {
         allowNull: false,
@@ -28,6 +39,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('eventos_mqtts');
+    await queryInterface.dropTable('Eventos_mqtt');
   }
 };

@@ -6,11 +6,15 @@ module.exports = (sequelize, DataTypes) => {
   class Orden_trabajo extends Model {
     
     static associate(models) {
+      //Orden_trabajo.X pertenece a X
       Orden_trabajo.belongsTo(models.Trabajo)
       Orden_trabajo.belongsTo(models.Estado)
       Orden_trabajo.belongsTo(models.Cliente)
       Orden_trabajo.belongsTo(models.Usuario)
       Orden_trabajo.belongsTo(models.Moto)
+
+      //Orden_trabajo tiene ids en la tabla X
+      Orden_trabajo.hasMany(models.Eventos_mqtt);
 
       // Orden_trabjo tiene muchos Cambios de Estado N:M
       Orden_trabajo.belongsToMany(models.Estado, {

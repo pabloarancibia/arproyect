@@ -1,10 +1,10 @@
-const {Mqtt_messages_gral, Tarjeta, Estado,Registro_Cambios_Estado, Orden_trabajo} = require('../database/models/index');
-const mqtt = require('mqtt')
+const {Mqtt_messages_gral, Tarjeta, Estado,
+        Registro_Cambios_Estado, Orden_trabajo,
+        Eventos_mqtt} = require('../database/models/index');
 
 
 const { Op } = require("sequelize");
-const Sequelize = require('sequelize')
-
+const Sequelize = require('sequelize');
 /**
  * Coordinador de mensajes mqtt recibidos.
  * @param {*} topic 
@@ -143,6 +143,7 @@ const Sequelize = require('sequelize')
           // valido datos
           const payload_json = JSON.parse(payload.toString());
           //ejemplo json: { tajeta: '51210250150', nodo: 'mostrador', estado: 'discriminar' }
+          
           console.log('nodo recibido: ', payload_json.nodo);
           console.log('estado recibido: ', payload_json.estado);
           console.log('tarjeta recibida: ', payload_json.tarjeta);
@@ -158,7 +159,7 @@ const Sequelize = require('sequelize')
 
           // buscar estado actual Tarjeta:
           // busco la tarjeta en la db
-          const tarjeta = await Tarjeta.findOne({
+          let tarjeta = await Tarjeta.findOne({
             where: {
                 numero:payload_json.tarjeta,
                 }
@@ -167,18 +168,52 @@ const Sequelize = require('sequelize')
                 // si la tarjeta no existe debo crearla en el modelo Tarjeta
                 console.log('tarjeta nueva en db');
                 tarjeta = await Tarjeta.create({
-                    numero:payload.tarjeta,
+                    numero:payload_json.tarjeta,
                     descripcion: 'alta desde api',
                     EstadoId:estado_libre.id
                 });
             }
           // condicional según estado de Tarjeta
           
-          // Tarjeta libre = accion nueva en Eventos
+          // si Tarjeta libre entonces accion = nueva en Eventos
             if (tarjeta.EstadoId == estado_libre.id){
-            
+                try {
+                    const newEvent = await Eventos_mqtt.create({
+                        TarjetaId:tarjeta.id,
+                        accion:process.env.ACCION_NUEVA,
+                        nodo:payload_json.nodo,
+                        observaciones:'en api para tarjeta libre',
+                        is_active:true
+                    });
+                    console.log('Evento nuevo: ', newEvent);
+                    console.log('tarjeta: ',tarjeta);
+                } catch (error) {
+                    console.log('Error: problema creando evento mqtt para tarjeta nueva')
+                    console.log(error);
+                    
+
+                    return;
+                }
+                
+            }else{
+                // Tarjeta no libre = accion en_uso en Eventos
+                // traigo orden asociada
+                try {
+                    await Eventos_mqtt.create({
+                        TarjetaId:tarjeta.id,
+                        accion:process.env.ACCION_ENUSO,
+                        nodo:payload_json.nodo,
+                        observaciones:'en api para tarjeta libre',
+                        is_active:true
+                    });
+                } catch (error) {
+                    console.log('Error: problema creando evento mqtt para tarjeta en uso')
+                    console.log(error)
+                    
+                    return;
+                }
             }
-          // Tarjeta no libre = accion en_uso en Eventos
+          
         }
     }
  }

@@ -10,8 +10,11 @@ module.exports = (sequelize, DataTypes) => {
   class Tarjeta extends Model {
     
     static associate(models) {
-      // define association here
+      // Tarjeta.Estado pertenece a Estado
       Tarjeta.belongsTo(models.Estado);
+
+      //Tarjeta tiene ids en la tabla Eventos_mqtt
+      Tarjeta.hasMany(models.Eventos_mqtt);
     }
   }
   Tarjeta.init({
