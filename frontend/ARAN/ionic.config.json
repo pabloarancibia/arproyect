@@ -1,0 +1,7 @@
+{
+  "name": "ARAN",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
