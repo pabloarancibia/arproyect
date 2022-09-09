@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { OrdentrabajoPageRoutingModule } from './ordentrabajo-routing.module';
+import { ListarPageRoutingModule } from './listar-routing.module';
 
-import { OrdentrabajoPage } from './ordentrabajo.page';
+import { ListarPage } from './listar.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    OrdentrabajoPageRoutingModule
+    ListarPageRoutingModule
   ],
-  declarations: [OrdentrabajoPage]
+  declarations: [ListarPage]
 })
-export class OrdentrabajoPageModule {}
+export class ListarPageModule {}

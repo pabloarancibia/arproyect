@@ -1,10 +1,29 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+import { OrdentrabajoPage } from './ordentrabajo.page';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: OrdentrabajoPage
+  },
+  {
+    path: 'nueva',
+    loadChildren: () => import('./nueva/nueva.module').then( m => m.NuevaPageModule)
+  },
+  {
+    path: 'retirar',
+    loadChildren: () => import('./retirar/retirar.module').then( m => m.RetirarPageModule)
+  },
+  {
+    path: 'listar',
+    loadChildren: () => import('./listar/listar.module').then( m => m.ListarPageModule)
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class OrdentrabajoRoutingModule { }
+export class OrdentrabajoPageRoutingModule {}
