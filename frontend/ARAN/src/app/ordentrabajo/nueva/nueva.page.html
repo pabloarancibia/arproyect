@@ -1,11 +1,22 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Agregar Orden de Trabajo</ion-title>
+    <ion-title>Nueva Orden de Trabajo</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <form [formGroup]="formNuevaOT">
+    <!-- await for target -->
+    <ion-item>
+      <ion-label>Tarjeta</ion-label>
+      <ion-input formControlName="tarjeta"  readonly></ion-input>  
+    </ion-item>
+
+    <ion-item>
+      <ion-label>N° Orden Trabajo (papel)</ion-label>
+      <ion-input formControlName="otpapel" type="number"></ion-input>  
+    </ion-item>
+
     <ion-item>
       <!-- <ion-label position="floating">Trabajo</ion-label>
       <ion-input formControlName="trabajo"></ion-input> -->
@@ -28,36 +39,45 @@
     </ion-item>
 
     <ion-item>
+      <ion-label position="floating">Repuestos</ion-label>
+      <ion-input ></ion-input>
+    </ion-item>
+
+    <ion-item>
       <ion-label position="floating">Detalle</ion-label>
       <ion-input formControlName="detalle"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Precio $</ion-label>
-      <ion-input formControlName="precio" type="number"></ion-input>
+      <ion-input formControlName="precio" type="number"
+      (ionChange)="calcSaldo()"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Entrega $</ion-label>
-      <ion-input formControlName="entrega" type="number"></ion-input>
+      <ion-input formControlName="entrega" type="number"
+      (ionChange)="calcSaldo()"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Saldo</ion-label>
-      <ion-input disabled readonly type="number" value="0"></ion-input>
+      <ion-label>Saldo $</ion-label>
+      <ion-input readonly type="number" formControlName="saldo" > </ion-input>
 
     </ion-item>
 
     <ion-item>
-    <ion-datetime 
-    presentation="date" 
-    formControlName="fecha_estimada"
-    ></ion-datetime>
+    <ion-datetime-button
+    datetime="fecha_estimada" 
+    
+    
+    ></ion-datetime-button>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="fecha_estimada" formControlName="fecha_estimada"></ion-datetime>
+      </ng-template>
+    </ion-modal>
   </ion-item>
 
-  <ion-item>
-    <ion-label>Tarjeta</ion-label>
-    <ion-input formControlName="tarjeta" disabled readonly></ion-input>
-
-  </ion-item>
+  
 
   <ion-item>
     <ion-button color="primary">Guardar</ion-button>
