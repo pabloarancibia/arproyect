@@ -5,11 +5,11 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="formNuevaOT">
+  <form [formGroup]="formNuevaOT" (ngSubmit)="onSubmit()">
     <!-- await for target -->
     <ion-item>
-      <ion-label>Tarjeta</ion-label>
-      <ion-input formControlName="tarjeta"  readonly></ion-input>  
+      <ion-label>Tarjeta </ion-label>
+      <ion-input formControlName="tarjeta"  readonly> </ion-input>  
     </ion-item>
 
     <ion-item>
@@ -20,7 +20,7 @@
     <ion-item>
       <!-- <ion-label position="floating">Trabajo</ion-label>
       <ion-input formControlName="trabajo"></ion-input> -->
-      <ion-select placeholder="Trabajo" multiple="true">
+      <ion-select placeholder="Trabajo" multiple="true" formControlName="trabajo">
         <ion-select-option value="cilindro">Rectificación Cilindro</ion-select-option>
         <ion-select-option value="tapa">Rectificación Tapa</ion-select-option>
         <ion-select-option value="cigueñal">Cigüeñal y Biela</ion-select-option>
@@ -30,17 +30,17 @@
 
     <ion-item>
       <ion-label position="floating">Cliente</ion-label>
-      <ion-input ></ion-input>
+      <ion-input formControlName="cliente"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Moto</ion-label>
-      <ion-input ></ion-input>
+      <ion-input formControlName="moto"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Repuestos</ion-label>
-      <ion-input ></ion-input>
+      <ion-input formControlName="repuestos"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -66,13 +66,11 @@
 
     <ion-item>
     <ion-datetime-button
-    datetime="fecha_estimada" 
-    
-    
+    datetime="id_fecha_entrega_estimada" 
     ></ion-datetime-button>
     <ion-modal [keepContentsMounted]="true">
       <ng-template>
-        <ion-datetime id="fecha_estimada" formControlName="fecha_estimada"></ion-datetime>
+        <ion-datetime id="id_fecha_entrega_estimada" formControlName="fecha_entrega_estimada"></ion-datetime>
       </ng-template>
     </ion-modal>
   </ion-item>
@@ -80,7 +78,7 @@
   
 
   <ion-item>
-    <ion-button color="primary">Guardar</ion-button>
+    <ion-button type="submit" color="primary">Guardar</ion-button>
   </ion-item>
 
   </form>

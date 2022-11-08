@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NuevaOTServiceService } from 'src/app/services/ordenTrabajoServices/nueva-otservice.service';
 
 @Component({
   selector: 'app-nueva',
@@ -9,29 +10,60 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class NuevaPage implements OnInit {
 
   formNuevaOT: FormGroup;
-  saldo;
+  isAddMode: boolean =  true;
 
-  constructor(public fb: FormBuilder) {
+
+  constructor(
+    private fb: FormBuilder,
+    private nuevaOTServiceService: NuevaOTServiceService
+    ) {
 
     this.formNuevaOT = this.fb.group({
       'tarjeta': new FormControl(""),
-      'trabajo': new FormControl(""),
       'otpapel': new FormControl(""),
-      'cliente': new FormControl(""),
+      'trabajo': new FormControl(""),
+      
+      'cliente': new FormControl("", Validators.required),
       'moto': new FormControl(""),
+      'repuestos': new FormControl(""),
 
       'detalle': new FormControl(""),
       'precio': new FormControl(""),
       'entrega': new FormControl(""),
       'saldo': new FormControl(""),
 
-      'fecha_estimada': new FormControl(""),
+      'fecha_entrega_estimada': new FormControl("",Validators.required),
+
+      'estado': new FormControl(""),
     })
    }
 
 
   ngOnInit() {
+    this.isAddMode = true;
 
+  }
+
+  onSubmit(){
+    if (this.isAddMode){
+      this.agregarOT();
+    }
+    if (!this.isAddMode){
+      console.log('this.editarOT()');
+    }
+  }
+
+  private agregarOT(){
+    if (this.formNuevaOT.valid) {
+      this.formNuevaOT.controls["estado"].setValue('espera');
+      const nuevaOT = this.formNuevaOT.value;
+      this.nuevaOTServiceService.nuevaOTService(nuevaOT)
+        .then(res=>{
+          console.log('envio data nueva ot ok, res: ', res);
+        })
+
+      console.log ('nueva ot', nuevaOT);
+    }
   }
 
   calcSaldo(){
