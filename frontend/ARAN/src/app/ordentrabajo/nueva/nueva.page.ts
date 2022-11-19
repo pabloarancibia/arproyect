@@ -11,19 +11,19 @@ export class NuevaPage implements OnInit {
 
   formNuevaOT: FormGroup;
   isAddMode: boolean =  true;
-
+  now = new Date();
 
   constructor(
     private fb: FormBuilder,
     private nuevaOTServiceService: NuevaOTServiceService
-    ) {
+    ) { 
 
     this.formNuevaOT = this.fb.group({
       'tarjeta': new FormControl(""),
       'otpapel': new FormControl(""),
       'trabajo': new FormControl(""),
       
-      'cliente': new FormControl("", Validators.required),
+      'cliente': new FormControl("",),
       'moto': new FormControl(""),
       'repuestos': new FormControl(""),
 
@@ -32,7 +32,7 @@ export class NuevaPage implements OnInit {
       'entrega': new FormControl(""),
       'saldo': new FormControl(""),
 
-      'fecha_entrega_estimada': new FormControl("",Validators.required),
+      'fecha_entrega_estimada': new FormControl("",),
 
       'estado': new FormControl(""),
     })
@@ -55,14 +55,24 @@ export class NuevaPage implements OnInit {
 
   private agregarOT(){
     if (this.formNuevaOT.valid) {
+      // set values
       this.formNuevaOT.controls["estado"].setValue('espera');
-      const nuevaOT = this.formNuevaOT.value;
+      
+      if (this.formNuevaOT.controls["fecha_entrega_estimada"].value == "" || 
+      !this.formNuevaOT.controls["fecha_entrega_estimada"].value ||
+      this.formNuevaOT.controls["fecha_entrega_estimada"].value == null){
+
+        this.formNuevaOT.controls["fecha_entrega_estimada"].setValue(this.now)
+      }
+
+
+      const nuevaOT = this.formNuevaOT.value;   
+
+      // send data
       this.nuevaOTServiceService.nuevaOTService(nuevaOT)
         .then(res=>{
           console.log('envio data nueva ot ok, res: ', res);
         })
-
-      console.log ('nueva ot', nuevaOT);
     }
   }
 
