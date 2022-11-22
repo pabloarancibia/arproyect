@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NuevaOTServiceService } from 'src/app/services/ordenTrabajoServices/nueva-otservice.service';
+import { NuevaOTService } from 'src/app/services/ordenTrabajoServices/ordentrabajo.service';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-nueva',
@@ -15,7 +16,7 @@ export class NuevaPage implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private nuevaOTServiceService: NuevaOTServiceService
+    private nuevaOTService: NuevaOTService
     ) { 
 
     this.formNuevaOT = this.fb.group({
@@ -41,6 +42,13 @@ export class NuevaPage implements OnInit {
 
   ngOnInit() {
     this.isAddMode = true;
+    const intervalo = interval(2000);
+
+    intervalo.subscribe(n=>{
+      'buscar numero tarjeta'
+      // si tarjeta res = actual no hago nada
+      // si tarjeta res != actual la cargo
+    })
 
   }
 
@@ -55,21 +63,25 @@ export class NuevaPage implements OnInit {
 
   private agregarOT(){
     if (this.formNuevaOT.valid) {
-      // set values
+      // set estado
       this.formNuevaOT.controls["estado"].setValue('espera');
+    
+      const nuevaOT = this.formNuevaOT.value;  
       
-      if (this.formNuevaOT.controls["fecha_entrega_estimada"].value == "" || 
-      !this.formNuevaOT.controls["fecha_entrega_estimada"].value ||
-      this.formNuevaOT.controls["fecha_entrega_estimada"].value == null){
-
-        this.formNuevaOT.controls["fecha_entrega_estimada"].setValue(this.now)
+      // check datas
+      if (nuevaOT.fecha_entrega_estimada.value == "" || 
+      !nuevaOT.fecha_entrega_estimada.value ||
+      nuevaOT.fecha_entrega_estimada.value == null){
+        nuevaOT.fecha_entrega_estimada = this.now;
+      }
+      if (nuevaOT.tarjeta.value == "" || 
+      !nuevaOT.tarjeta.value ||
+      nuevaOT.tarjeta.value == null){
+        nuevaOT.tarjeta = 'no_asignada';
       }
 
-
-      const nuevaOT = this.formNuevaOT.value;   
-
       // send data
-      this.nuevaOTServiceService.nuevaOTService(nuevaOT)
+      this.nuevaOTService.nuevaOTService(nuevaOT)
         .then(res=>{
           console.log('envio data nueva ot ok, res: ', res);
         })
