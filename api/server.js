@@ -22,7 +22,7 @@
  app.use('/auth',require('./routers/authRouter'));
  app.use('/ordentrabajo',require('./routers/ordentrabajoRouter'));
  app.use('/gen',require('./routers/genRouter'));
- //app.use('/otherRouter/',require('./routers/otherRouter'));
+ app.use('/tarjetas',require('./routers/tarjetasRouter'));
 
  const mqttCtrl = require('./controllers/mqttController');
 
