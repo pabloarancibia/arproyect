@@ -23,8 +23,7 @@
  * ej: última nueva.
  * Recibe estado.
 */
-  tarjetasRouter.get('/tarjetas/ultima/estado/:estado', function(req, res){
-    res.send('get tarjeta last by')
-  })
+  tarjetasRouter.get('/ultima/estado/:estado/fecha_desde/:fecha_desde',
+    tarjetasCtrl.getUltimaTarjetaByEstado);
 
   module.exports = tarjetasRouter;
