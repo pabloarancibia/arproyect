@@ -4,7 +4,13 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3001',
+  apiUrl: 'http://localhost:3000',
+
+  
+  ESTADO_ESPERA: 'espera',// estado de una nueva OT
+  NO_ASIGNADA: 'no_asignada', // cuando no se carga numero de tarjeta
+  ACCION_NUEVA: 'nueva', // accion nueva de evento mqtt
+
 };
 
 /*

@@ -29,8 +29,8 @@ export class TarjetasService {
    * @param estado ej: espera
    * @returns 
    */
-   getUltimaTarjetaByEstado(estado){
-    return this._http.get(this.URL + 'tarjetas/ultima/estado/'+ estado).toPromise()
-      .then(res=>{return res;})
-  }
+  //  getUltimaTarjetaByEstado(estado){
+  //   return this._http.get(this.URL + 'tarjetas/ultima/estado/'+ estado).toPromise()
+  //     .then(res=>{return res;})
+  // }
 }

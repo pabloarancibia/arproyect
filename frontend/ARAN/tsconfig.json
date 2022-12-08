@@ -12,7 +12,10 @@
     "importHelpers": true,
     "target": "es2020",
     "module": "es2020",
-    "lib": ["es2018", "dom"]
+    "lib": ["es2018", "dom"],
+    "paths": {
+      "environment/*":["src/environments/*"],
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

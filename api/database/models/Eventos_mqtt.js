@@ -13,7 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       Eventos_mqtt.belongsTo(models.Orden_trabajo);
 
       //Eventos.TarjetaId pertenece a Tarjeta
-      Eventos_mqtt.belongsTo(models.Tarjeta);
+      Eventos_mqtt.belongsTo(models.Tarjeta,{
+        as: 'Tarjeta',foreignKey:'id'
+      });
     }
   }
   Eventos_mqtt.init({

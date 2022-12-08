@@ -12,6 +12,13 @@
       <ion-input formControlName="tarjeta"  readonly> </ion-input>  
     </ion-item>
 
+    <ion-button id="addNumeroTarjeta" (click)="addNumeroTarjeta()">Buscar Tarjeta</ion-button>
+    <ion-button id="cancelAddNumeroTarjeta" 
+    (click)="cancelAddNumeroTarjeta()" disabled color="danger" >Cancelar</ion-button>
+    <ion-button id="limpiarTarjeta" (click)="limpiarTarjeta()" 
+    color="light">Limpiar</ion-button>
+
+
     <ion-item>
       <ion-label>N° Orden Trabajo (papel)</ion-label>
       <ion-input formControlName="otpapel" type="number"></ion-input>  

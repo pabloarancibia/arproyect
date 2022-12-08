@@ -203,7 +203,7 @@ const Sequelize = require('sequelize');
                         TarjetaId:tarjeta.id,
                         accion:process.env.ACCION_ENUSO,
                         nodo:payload_json.nodo,
-                        observaciones:'en api para tarjeta libre',
+                        observaciones:'en api para tarjeta en uso',
                         is_active:true
                     });
                 } catch (error) {
