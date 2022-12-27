@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NuevaOTService } from 'src/app/services/ordenTrabajoServices/ordentrabajo.service';
+import { OTService } from 'src/app/services/ordenTrabajoServices/ordentrabajo.service';
 import { EventosService } from 'src/app/services/eventos/eventos.service';
 import { interval, Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -21,7 +21,7 @@ export class NuevaPage implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private nuevaOTService: NuevaOTService,
+    private nuevaOTService: OTService,
     private eventosService: EventosService
     ) { 
 
@@ -30,7 +30,7 @@ export class NuevaPage implements OnInit {
       'otpapel': new FormControl(""),
       'trabajo': new FormControl(""),
       
-      'cliente': new FormControl("",),
+      'cliente': new FormControl(""),
       'moto': new FormControl(""),
       'repuestos': new FormControl(""),
 
@@ -93,6 +93,12 @@ export class NuevaPage implements OnInit {
 
   addNumeroTarjeta(){
     const fecha_desde = new Date()
+    // fecha_desde.setHours(0)
+    // fecha_desde.setMinutes(0)
+    // fecha_desde.setSeconds(0)
+    // fecha_desde.setMilliseconds(0)
+    // const timestamp = fecha_desde.getTime();
+
     const intervalo = interval(2000);
     document.getElementById('addNumeroTarjeta').setAttribute('disabled','true');
     document.getElementById('cancelAddNumeroTarjeta').setAttribute('disabled','false');
@@ -102,7 +108,8 @@ export class NuevaPage implements OnInit {
       this.eventosService.getUltimoEventoByAccion(environment.ACCION_NUEVA, fecha_desde)
       .then(res=>{
         this.nueva = res
-        console.log('último evento',this.nueva[0]['numero'])
+        if (this.nueva){
+          console.log('último evento',this.nueva[0]['numero'])
         console.log('tarjeta actual',this.formNuevaOT.controls["tarjeta"].value)
         if (this.nueva[0]['numero'] !== this.formNuevaOT.controls["tarjeta"].value){
           this.formNuevaOT.controls["tarjeta"].setValue(this.nueva[0]['numero']);
@@ -111,6 +118,9 @@ export class NuevaPage implements OnInit {
           document.getElementById('cancelAddNumeroTarjeta').setAttribute('disabled','true');
 
           console.log('tarjeta nueva asignada')
+
+        }
+        
         }
       })
     })

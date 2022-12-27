@@ -7,7 +7,7 @@ import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class NuevaOTService {
+export class OTService {
 
   private URL = environment.apiUrl;
 
@@ -23,7 +23,7 @@ export class NuevaOTService {
   }
 
   /**
-   * Traer OT segun fechas y estado
+   * Traer OT segun fechas y estado, ambos opcionales.
    * @params fecha_desde
    * @params fecha_hasta
    * @params estado
@@ -33,7 +33,7 @@ export class NuevaOTService {
   
   getOTBy(fecha_desde,fecha_hasta,estado){
     return this._http.get(this.URL + '/ordentrabajo/filtrado/' 
-    + '/fecha_desde/'+ fecha_desde 
+    + 'fecha_desde/'+ fecha_desde 
     + '/fecha_hasta/'+ fecha_hasta
     + '/estado/'+ estado
     ).toPromise().then(res=>{ return res;})
