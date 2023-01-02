@@ -1,9 +1,78 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>listar</ion-title>
+    <ion-title>Listado de Ordenes de Trabajo</ion-title>
   </ion-toolbar>
 </ion-header>
 
+<!-- <form>
+  <ion-item>
+    <ion-datetime-button
+    datetime="id_fecha_desde" 
+    ></ion-datetime-button>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="id_fecha_desde" formControlName="fecha_desde"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+  </ion-item>
+</form> -->
+
 <ion-content>
+  <!-- NGX DATATABLE -->
+  <!-- <input type="text" (keyup)='filterDatatable($event)'> -->
+  <input
+        type="text"
+        style="padding:8px;margin:15px auto;width:30%;"
+        placeholder="Filtrar por Cliente..."
+        (keyup)="updateFilter($event)"
+      />
+
+  <div class="ion-padding">
+    <!-- Theme classes dark, material, bootstrap -->
+    <ngx-datatable 
+      #table
+      class="bootstrap ngx-datatable"
+      [limit]="15"  
+      [rows]="rows" 
+      [rowHeight]="50" 
+      [columns]="columns"
+      [columnMode]="'force'" 
+      [sortType]="'multi'" 
+      [headerHeight]="50" 
+      [footerHeight]="50"
+      [summaryRow]="true"
+      [summaryPosition]="'bottom'"
+      [loadingIndicator]="loadingIndicator"
+      [reorderable]="reorderable"
+      [selected]="selected"
+    >
+    </ngx-datatable>
+  </div>
+  <!-- END NGX DATATABLE -->
+
+  <!-- <ion-list>
+    <ion-item>
+      <ion-label>Estado</ion-label>
+      <ion-label>Cliente</ion-label>
+      <ion-label>Trabajo</ion-label>
+      <ion-label>Moto</ion-label>
+      <ion-label>Fecha Entrega</ion-label>
+      <ion-label> </ion-label>
+    </ion-item>
+  </ion-list> -->
+
+  <!-- <ion-list *ngFor="let orden of listadoOT">   
+    <ion-item>
+      <ion-label>{{orden.Estado.nombre}}</ion-label>
+      <ion-label *ngIf="orden.Cliente; else noCliente" >{{orden.Cliente.nombre}} {{orden.Cliente.apellido}}</ion-label>
+      <ng-template #noCliente><ion-label></ion-label></ng-template>
+      <ion-label *ngIf="orden.Trabajo; else noTrabajo">{{orden.Trabajo.nombre}}</ion-label>
+      <ng-template #noTrabajo><ion-label></ion-label></ng-template>
+      <ion-label *ngIf="orden.Moto; else noMoto">{{orden.Moto.nombre}}</ion-label>
+      <ng-template #noMoto><ion-label></ion-label></ng-template>
+      <ion-label>{{orden.fecha_entrega_estimada | date: 'EE dd/MM'}}</ion-label>
+      <ion-button>Detalle</ion-button>
+    </ion-item>
+  </ion-list> -->
 
 </ion-content>
