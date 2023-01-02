@@ -65,6 +65,18 @@ const getOrdenTrabajoBy = async(req,res)=>{
                 attributes: ['nombre'],
                 // ''' inserto la condicion where previamente preparada '''
                 where: whereCondition
+            },{
+                model: Cliente,
+                attributes: ['nombre', 'apellido', 'celular'],
+
+            },{
+                model: Trabajo,
+                attributes: ['nombre', 'descripcion'],
+
+            },{
+                model: Moto,
+                attributes: ['marca', 'modelo', 'año', 'cilindrada', 'observaciones'],
+
             }],
             where:{                
                 createdAt: {
