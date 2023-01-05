@@ -1,9 +1,96 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>ordentrabajo</ion-title>
+    <ion-title>Retirar Trabajo</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <form [formGroup]="formRetirarOT" (ngSubmit)="onSubmit()">
+    <!-- await for target -->
+    <ion-item>
+      <ion-label>Tarjeta: </ion-label>  
+      <ion-label>{{orden.Tarjeta}} </ion-label>  
+    </ion-item>
+
+    <!-- <ion-button id="addNumeroTarjeta" (click)="addNumeroTarjeta()">Buscar Tarjeta</ion-button> -->
+    <!-- <ion-button id="cancelAddNumeroTarjeta"  -->
+    <!-- (click)="cancelAddNumeroTarjeta()" disabled color="danger" >Cancelar</ion-button> -->
+    <ion-button id="limpiarTarjeta" (click)="limpiarTarjeta()" 
+    color="light">Limpiar</ion-button>
+
+
+    <ion-item>
+      <ion-label>N° Orden Trabajo (papel)</ion-label>
+      <ion-label>{{oden.ordenpapel}}</ion-label>  
+    </ion-item>
+
+    <ion-item>
+      <!-- <ion-label position="floating">Trabajo</ion-label>
+      <ion-input formControlName="trabajo"></ion-input> -->
+      <ion-select placeholder="Trabajo" multiple="true" formControlName="trabajo">
+        <ion-select-option value="cilindro">Rectificación Cilindro</ion-select-option>
+        <ion-select-option value="tapa">Rectificación Tapa</ion-select-option>
+        <ion-select-option value="cigueñal">Cigüeñal y Biela</ion-select-option>
+        <ion-select-option value="encamisado">Encamisado Cilindro</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Cliente</ion-label>
+      <ion-input formControlName="cliente"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Moto</ion-label>
+      <ion-input formControlName="moto"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Repuestos</ion-label>
+      <ion-input formControlName="repuestos"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Detalle</ion-label>
+      <ion-input formControlName="detalle"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Precio $</ion-label>
+      <ion-input formControlName="precio" type="number"
+      (ionChange)="calcSaldo()"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Entrega $</ion-label>
+      <ion-input formControlName="entrega" type="number"
+      (ionChange)="calcSaldo()"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Saldo $</ion-label>
+      <ion-input readonly type="number" formControlName="saldo" > </ion-input>
+
+    </ion-item>
+
+    <ion-item>
+    <ion-datetime-button
+    datetime="id_fecha_entrega_estimada" 
+    ></ion-datetime-button>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="id_fecha_entrega_estimada" formControlName="fecha_entrega_estimada"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+  </ion-item>
+
+  
+
+  <ion-item>
+    <ion-button type="submit" color="primary">Retirar</ion-button>
+  </ion-item>
+
+  </form>
 
 </ion-content>
