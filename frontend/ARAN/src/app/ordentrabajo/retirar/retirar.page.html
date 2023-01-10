@@ -1,9 +1,89 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>retirar</ion-title>
+    <ion-title>Retirar Trabajo</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <form [formGroup]="formRetirarOT" (ngSubmit)="onSubmit()">
+    <!-- await for target -->
+    <ion-item>
+      <ion-label>Tarjeta: </ion-label>  
+      <ion-label>{{orden.Tarjeta}} </ion-label>  
+    </ion-item>
+
+    <!-- <ion-button id="addNumeroTarjeta" (click)="addNumeroTarjeta()">Buscar Tarjeta</ion-button> -->
+    <!-- <ion-button id="cancelAddNumeroTarjeta"  -->
+    <!-- (click)="cancelAddNumeroTarjeta()" disabled color="danger" >Cancelar</ion-button> -->
+    <ion-button id="limpiarTarjeta" (click)="limpiarTarjeta()" 
+    color="light">Limpiar</ion-button>
+
+
+    <ion-item>
+      <ion-label>N° Orden Trabajo (papel)</ion-label>
+      <ion-label>{{oden.ordenpapel}}</ion-label>  
+    </ion-item>
+
+    <ion-item>
+      <!-- hacer loop for -->
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Cliente</ion-label>
+      <ion-label >{{orden.Cliente.nombre}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Moto</ion-label>
+      <ion-label>{{oden.Moto}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Repuestos</ion-label>
+      <!-- hacer loop -->
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Detalle</ion-label>
+      <ion-label>{{orden.detalle}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Precio $</ion-label>
+      <ion-label>{{orden.precio}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Entrega $</ion-label>
+      <ion-label>{{orden.entrega}}</ion-label>
+      
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Saldo $</ion-label>
+      <!-- calcular saldo -->
+      <ion-label></ion-label>
+    </ion-item>
+
+    <ion-item>
+    <ion-datetime-button
+    datetime="id_fecha_entrega_estimada" 
+    ></ion-datetime-button>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="id_fecha_entrega_estimada" formControlName="fecha_entrega_estimada"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+  </ion-item>
+
+  
+
+  <ion-item>
+    <ion-button type="submit" color="primary">Retirar</ion-button>
+  </ion-item>
+
+  </form>
+
 </ion-content>
+
