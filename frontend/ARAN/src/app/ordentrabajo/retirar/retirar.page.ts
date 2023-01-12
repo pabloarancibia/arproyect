@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { interval, Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-retirar',
@@ -10,6 +12,10 @@ export class RetirarPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  addNumeroTarjeta(){
+    
   }
 
 }

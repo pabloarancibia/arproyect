@@ -13,7 +13,7 @@
       <ion-label>{{orden.Tarjeta}} </ion-label>  
     </ion-item>
 
-    <!-- <ion-button id="addNumeroTarjeta" (click)="addNumeroTarjeta()">Buscar Tarjeta</ion-button> -->
+    <ion-button id="addNumeroTarjeta" (click)="addNumeroTarjeta()">Buscar Tarjeta</ion-button>
     <!-- <ion-button id="cancelAddNumeroTarjeta"  -->
     <!-- (click)="cancelAddNumeroTarjeta()" disabled color="danger" >Cancelar</ion-button> -->
     <ion-button id="limpiarTarjeta" (click)="limpiarTarjeta()" 
@@ -67,14 +67,8 @@
     </ion-item>
 
     <ion-item>
-    <ion-datetime-button
-    datetime="id_fecha_entrega_estimada" 
-    ></ion-datetime-button>
-    <ion-modal [keepContentsMounted]="true">
-      <ng-template>
-        <ion-datetime id="id_fecha_entrega_estimada" formControlName="fecha_entrega_estimada"></ion-datetime>
-      </ng-template>
-    </ion-modal>
+    <ion-label>Fecha de entrega estimada: </ion-label>
+    <ion-label>{{orden.fecha_entrega_estimada}}</ion-label>
   </ion-item>
 
   
