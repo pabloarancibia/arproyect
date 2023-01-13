@@ -13,8 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       Orden_trabajo.belongsTo(models.Usuario)
       Orden_trabajo.belongsTo(models.Moto)
 
-      //Orden_trabajo tiene ids en la tabla X
+      //Orden_trabajo tiene ids en la tabla Eventos_mqtt
       Orden_trabajo.hasMany(models.Eventos_mqtt);
+
+      //Orden_trabajo tiene id en la tabla Tarjeta
+      Orden_trabajo.hasMany(models.Tarjeta);
 
       // Orden_trabjo tiene muchos Cambios de Estado N:M
       Orden_trabajo.belongsToMany(models.Estado, {

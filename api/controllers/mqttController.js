@@ -197,7 +197,9 @@ const Sequelize = require('sequelize');
                 
             }else{
                 // Tarjeta no libre = accion en_uso en Eventos
-                // traer orden asociada
+                // traer orden asociada:
+                // OT debe tener tarjeta.id,estado != retirado, 
+                //  
                 try {
                     await Eventos_mqtt.create({
                         TarjetaId:tarjeta.id,

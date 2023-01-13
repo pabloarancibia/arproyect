@@ -1,15 +1,19 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const {Model} = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   /**
-   * Modelo para tener registro del estado actual de cada tarjeta
+   * Modelo para tener registro del estado actual y la OT actual de cada tarjeta
    * para una lectura rápida.
+   * 
+   * Cuando estado = libre OT = null/empty
    */
   class Tarjeta extends Model {
     
     static associate(models) {
+      // Tarjeta.Orden_trabajo pertenece a Orden_trabajo
+      Tarjeta.belongsTo(models.Orden_trabajo)
+      
       // Tarjeta.Estado pertenece a Estado
       Tarjeta.belongsTo(models.Estado);
 

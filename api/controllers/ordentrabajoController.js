@@ -147,14 +147,52 @@ const nuevaOrdenTrabajo = async (req,res) => {
             return res.status(400).json({message: 'No se encontró estado'})
         }
 
+        // creo orden de trabajo
         const nuevaOrdenTrabajo = await Orden_trabajo.create(
             req.body, 
             );
         nuevaOrdenTrabajo.EstadoId = estado.id;
-        nuevaOrdenTrabajo.save();
+        
+        await nuevaOrdenTrabajo.save();
+        if (!nuevaOrdenTrabajo){
+            return res.status(400).json({
+                message: 'No se pudo crear nueva orden de trabajo',
+                context: 'api > controllers > ordenTrabajoController > nuevaOrdenTrabajo'
+            })
+        }
+
+        // Modifico estado de la Tarjeta  
+        if(nuevaOrdenTrabajo.tarjeta){
+            let tarjeta = await Tarjeta.findOne(
+                {
+                    where: {numero: nuevaOrdenTrabajo.tajeta}
+                }
+            );
+            if (tarjeta){
+                await Tarjeta.update(
+                    {EstadoId:estado.id},
+                    {
+                        where: {numero: nuevaOrdenTrabajo.tajeta}
+                    }
+                );
+            }
+        };
+
+        // Registro el cambio de estado
+        await Registro_Cambios_Estado.create({
+            EstadoId:estado.id,
+            Orden_trabajoId:nuevaOrdenTrabajo.id,
+            fecha:Date.now()
+        }
+        )
+
         return res.json(nuevaOrdenTrabajo);
     } catch (error) {
-        return res.status(500).json({error:error, message:'Error cargando orden'})  
+        return res.status(500).json({
+            error:error, 
+            message:'Error cargando orden',
+            context: 'api > controllers > ordenTrabajoController > nuevaOrdenTrabajo'
+        })  
     }
     
 }
