@@ -5,7 +5,7 @@ const { Op, Sequelize } = require("sequelize");
 const { response } = require('express');
 
 /**
- * Obtener último evento mqtt con acción nueva.
+ * Obtener último evento mqtt con acción nueva o en_uso.
  * Una vez leído se setea is_active en false.
  * @param {*} req accion, fecha_desde.
  * @param {*} res json con evento y n° de tarjeta.

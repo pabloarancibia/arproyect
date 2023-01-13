@@ -8,8 +8,11 @@ export const environment = {
 
   
   ESTADO_ESPERA: 'espera',// estado de una nueva OT
+  ESTADO_RETIRAR: 'retirar', // accion retirar de OT
   NO_ASIGNADA: 'no_asignada', // cuando no se carga numero de tarjeta
   ACCION_NUEVA: 'nueva', // accion nueva de evento mqtt
+  ACCION_EN_USO: 'en_uso', // accion retirar de evento mqtt
+
 
 };
 
