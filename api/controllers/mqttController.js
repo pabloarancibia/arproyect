@@ -203,6 +203,7 @@ const Sequelize = require('sequelize');
                 try {
                     await Eventos_mqtt.create({
                         TarjetaId:tarjeta.id,
+                        Orden_trabajoId: tarjeta.Orden_trabajoId,
                         accion:process.env.ACCION_ENUSO,
                         nodo:payload_json.nodo,
                         observaciones:'en api para tarjeta en uso',
