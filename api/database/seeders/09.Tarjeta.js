@@ -8,6 +8,7 @@ module.exports = {
             numero: '1111',
             descripcion: 'tarjeta de prueba falsa',
             EstadoId: 1,
+            Orden_trabajoId:1,
             
             createdAt: new Date(),
             updatedAt: new Date()
@@ -17,6 +18,8 @@ module.exports = {
             numero: '1112',
             descripcion: 'tarjeta de prueba falsa',
             EstadoId: 1,
+            Orden_trabajoId:2,
+
             
             createdAt: new Date(),
             updatedAt: new Date()
@@ -26,6 +29,8 @@ module.exports = {
             numero: '1113',
             descripcion: 'tarjeta de prueba falsa',
             EstadoId: 1,
+            Orden_trabajoId:3,
+
             
             createdAt: new Date(),
             updatedAt: new Date()
@@ -35,6 +40,7 @@ module.exports = {
             numero: '1114',
             descripcion: 'tarjeta de prueba falsa',
             EstadoId: 4,
+            Orden_trabajoId:4,
             
             createdAt: new Date(),
             updatedAt: new Date()
