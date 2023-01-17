@@ -1,7 +1,7 @@
 const express = require("express");
 const eventosMqttRouter = express.Router();
 
-const eventosMqttCtrl = require('../controllers/eventosMqttController');
+const eventosCtrl = require('../controllers/eventosController');
 
 eventosMqttRouter.get('/', function(req,res){
     res.send('Eventos Mqtt Router Ok')
@@ -13,6 +13,6 @@ eventosMqttRouter.get('/', function(req,res){
  * fecha_desde: 2022-09-05T00:30:00Z
  */
 eventosMqttRouter.get('/ultimo/accion/:accion/fecha_desde/:fecha_desde',
-eventosMqttCtrl.getUltimoEventoByAccion)
+eventosCtrl.getUltimoEventoByAccion)
 
 module.exports = eventosMqttRouter;
