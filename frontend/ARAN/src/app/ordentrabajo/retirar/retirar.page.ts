@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { interval, Subscription } from 'rxjs';
 import { EventosService } from 'src/app/services/eventos/eventos.service';
 import { environment } from 'src/environments/environment';
@@ -10,13 +11,16 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./retirar.page.scss'],
 })
 export class RetirarPage implements OnInit {
+  formRetirarOT: FormGroup;
   ot = {}
   subscription: Subscription
 
 
   constructor(
     private eventosService: EventosService,
-  ) { }
+  ) { 
+
+  }
 
   ngOnInit() {
   }
@@ -34,6 +38,14 @@ export class RetirarPage implements OnInit {
         }
       })
     });
+  }
+
+  limpiarTarjeta(){
+    this.ot['Tarjeta']='';
+  }
+
+  stopSearch(){
+    this.subscription.unsubscribe()
   }
 
 }

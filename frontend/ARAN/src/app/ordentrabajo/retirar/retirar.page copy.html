@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Retirar Trabajo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="formRetirarOT" (ngSubmit)="onSubmit()">
+    <!-- await for target -->
+    <ion-item>
+      <ion-label>Tarjeta: </ion-label>  
+      <ion-label>{{ot.Tarjeta}} </ion-label>  
+    </ion-item>
+
+    <ion-button id="addNumeroTarjeta" (click)="addNumeroTarjeta()">Buscar Tarjeta</ion-button>
+    <!-- <ion-button id="cancelAddNumeroTarjeta"  -->
+    <!-- (click)="cancelAddNumeroTarjeta()" disabled color="danger" >Cancelar</ion-button> -->
+    <ion-button id="limpiarTarjeta" (click)="limpiarTarjeta()" 
+    color="light">Limpiar</ion-button>
+
+
+    <ion-item>
+      <ion-label>N° Orden Trabajo (papel)</ion-label>
+      <ion-label>{{oden.ordenpapel}}</ion-label>  
+    </ion-item>
+
+    <ion-item>
+      <!-- hacer loop for -->
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Cliente</ion-label>
+      <ion-label >{{ot.Cliente.nombre}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Moto</ion-label>
+      <ion-label>{{oden.Moto}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Repuestos</ion-label>
+      <!-- hacer loop -->
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Detalle</ion-label>
+      <ion-label>{{ot.detalle}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Precio $</ion-label>
+      <ion-label>{{ot.precio}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Entrega $</ion-label>
+      <ion-label>{{ot.entrega}}</ion-label>
+      
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Saldo $</ion-label>
+      <!-- calcular saldo -->
+      <ion-label></ion-label>
+    </ion-item>
+
+    <ion-item>
+    <ion-label>Fecha de entrega estimada: </ion-label>
+    <ion-label>{{ot.fecha_entrega_estimada}}</ion-label>
+  </ion-item>
+
+  
+
+  <ion-item>
+    <ion-button type="submit" color="primary">Retirar</ion-button>
+  </ion-item>
+
+  </form>
+
+</ion-content>
+

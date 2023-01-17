@@ -30,10 +30,16 @@ const getUltimoEventoByAccion = async (req, res)=>{
 
     let evento_mqtt = await sequelize.query(
         "SELECT `Eventos_mqtt`.`id`, `accion`, `nodo`, `observaciones`, `Eventos_mqtt`.`is_active`, \
-        `Eventos_mqtt`.`createdAt`, `Eventos_mqtt`.`updatedAt`, `Orden_TrabajoId`, `TarjetaId` , Tarjeta.numero\
+        `Eventos_mqtt`.`createdAt`, `Eventos_mqtt`.`updatedAt`, \
+        `Eventos_mqtt`.`Orden_trabajoId`, \
+        `Orden_Trabajo`.`EstadoId` AS `Orden_trabajo.EstadoId`,\
+        `Orden_Trabajo`.`detalle` AS `Orden_trabajo.detalle`,\
+        `TarjetaId` , `Tarjeta`.`numero` AS `Tarjeta.numero`\
         FROM `Eventos_mqtt` AS `Eventos_mqtt` \
         INNER JOIN `Tarjeta` AS `Tarjeta` \
         ON TarjetaId = Tarjeta.id \
+        INNER JOIN `Orden_trabajo` AS `Orden_Trabajo` \
+        ON `Eventos_mqtt`.`Orden_trabajoId` = Orden_Trabajo.id \
         WHERE `Eventos_mqtt`.`updatedAt` >= :fechadesde \
         AND `Eventos_mqtt`.`accion` = :accion \
         AND `Eventos_mqtt`.`is_active` = :is_active \
@@ -51,10 +57,10 @@ const getUltimoEventoByAccion = async (req, res)=>{
     }
 
     // debido a que ya se leyó el evento, lo marco como is_active false.
-    Eventos_mqtt.update(
-        {is_active:false},
-        {where:{id:evento_mqtt[0]['id']}}
-        );
+    // Eventos_mqtt.update(
+    //     {is_active:false},
+    //     {where:{id:evento_mqtt[0]['id']}}
+    //     );
 
     return res.status(200).json(evento_mqtt);
 
