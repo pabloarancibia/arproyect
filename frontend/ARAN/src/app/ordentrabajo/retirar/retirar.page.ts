@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { interval, Subscription } from 'rxjs';
 import { EventosService } from 'src/app/services/eventos/eventos.service';
 import { environment } from 'src/environments/environment';
@@ -17,8 +17,20 @@ export class RetirarPage implements OnInit {
 
 
   constructor(
+    private fb: FormBuilder,
     private eventosService: EventosService,
   ) { 
+
+    this.formRetirarOT = this.fb.group({
+      'tarjeta': new FormControl(""),
+      'precio': new FormControl(""),
+      'entrega': new FormControl(""),
+      'cancela': new FormControl(""),
+      'fecha_entrega_estimada': new FormControl(""),
+      'createdAt': new FormControl(""),
+      'updatedAt': new FormControl(""),
+      'observaciones': new FormControl(""),
+    })
 
   }
 
@@ -28,24 +40,54 @@ export class RetirarPage implements OnInit {
   addNumeroTarjeta(){
     const fecha_desde = new Date()
     const intervalo = interval(2000);
+    console.log('inicio busqueda', fecha_desde)
     this.subscription =  intervalo.subscribe(n=>{
       this.eventosService.getUltimoEventoByAccion(environment.ACCION_EN_USO, fecha_desde)
       .then(res=>{
-        this.ot = res
-        if (this.ot){
-          console.log(res)
-          console.log('último evento',this.ot[0]['numero'])
+        //this.ot = res
+        if (res){
+          this.formRetirarOT.controls['entrega'].setValue(res[0]['Orden_trabajo.entrega'])
+          this.formRetirarOT.controls['tarjeta'].setValue(res[0]['Tarjeta.numero'])
+          console.log('res',res)
+          //console.log('this.ot',this.ot)
+          //console.log('último evento',this.ot[0]['Tarjeta.numero'])
+          this.unsubscribe();
         }
       })
     });
   }
 
   limpiarTarjeta(){
-    this.ot['Tarjeta']='';
+    this.formRetirarOT.controls['tarjeta'].setValue('')
+    //this.ot['Tarjeta']='';
   }
 
   stopSearch(){
-    this.subscription.unsubscribe()
+    this.unsubscribe();
   }
+
+  private unsubscribe(){
+    if (this.subscription){
+      this.subscription.unsubscribe()
+      console.log('unsuscribe')
+    }
+  }
+  cantelaTotalSaldo(){
+    alert('cancelar total');
+  }
+  modificarPrecio(){
+    alert('modificar Precio');
+  }
+
+  onSubmit(){
+    this.unsubscribe();
+    
+
+    if (this.formRetirarOT.valid){
+      console.log(this.formRetirarOT.value)
+    }
+  }
+
+
 
 }

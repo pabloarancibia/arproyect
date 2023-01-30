@@ -34,12 +34,17 @@ const getUltimoEventoByAccion = async (req, res)=>{
         `Eventos_mqtt`.`Orden_trabajoId`, \
         `Orden_Trabajo`.`EstadoId` AS `Orden_trabajo.EstadoId`,\
         `Orden_Trabajo`.`detalle` AS `Orden_trabajo.detalle`,\
+        `Orden_Trabajo`.`precio` AS `Orden_trabajo.precio`,\
+        `Orden_Trabajo`.`entrega` AS `Orden_trabajo.entrega`,\
+        `Estado_OT`.`nombre` AS `Estado.nombre`,\
         `TarjetaId` , `Tarjeta`.`numero` AS `Tarjeta.numero`\
         FROM `Eventos_mqtt` AS `Eventos_mqtt` \
         INNER JOIN `Tarjeta` AS `Tarjeta` \
         ON TarjetaId = Tarjeta.id \
         INNER JOIN `Orden_trabajo` AS `Orden_Trabajo` \
         ON `Eventos_mqtt`.`Orden_trabajoId` = Orden_Trabajo.id \
+        INNER JOIN `Estado` AS `Estado_OT` \
+        ON `Orden_Trabajo`.`EstadoId` = Estado_OT.id \
         WHERE `Eventos_mqtt`.`updatedAt` >= :fechadesde \
         AND `Eventos_mqtt`.`accion` = :accion \
         AND `Eventos_mqtt`.`is_active` = :is_active \
@@ -57,10 +62,10 @@ const getUltimoEventoByAccion = async (req, res)=>{
     }
 
     // debido a que ya se leyó el evento, lo marco como is_active false.
-    // Eventos_mqtt.update(
-    //     {is_active:false},
-    //     {where:{id:evento_mqtt[0]['id']}}
-    //     );
+    Eventos_mqtt.update(
+        {is_active:false},
+        {where:{id:evento_mqtt[0]['id']}}
+        );
 
     return res.status(200).json(evento_mqtt);
 
