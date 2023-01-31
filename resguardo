@@ -1,0 +1,43 @@
+// let evento_mqtt = await sequelize.query(
+    //     "SELECT `Eventos_mqtt`.`id`, `accion`, `nodo`, `Eventos_mqtt`.`observaciones`, `Eventos_mqtt`.`is_active`, \
+    //     `Eventos_mqtt`.`createdAt`, `Eventos_mqtt`.`updatedAt`, \
+    //     `Eventos_mqtt`.`OrdenTrabajoId`, \
+    //     `OrdenTrabajo`.`EstadoId` AS `OrdenTrabajo.EstadoId`,\
+    //     `OrdenTrabajo`.`detalle` AS `OrdenTrabajo.detalle`,\
+    //     `OrdenTrabajo`.`precio` AS `OrdenTrabajo.precio`,\
+    //     `OrdenTrabajo`.`entrega` AS `OrdenTrabajo.entrega`,\
+    //     `Estado_OT`.`nombre` AS `Estado.nombre`,\
+    //     `Trabajo_OT`.`nombre` AS `Trabajo.nombre`,\
+    //     `Cliente_OT`.`nombre` AS `Cliente.nombre`,\
+    //     `Cliente_OT`.`apellido` AS `Cliente.apellido`,\
+    //     `Cliente_OT`.`dni` AS `Cliente.dni`,\
+    //     `Cliente_OT`.`celular` AS `Cliente.celular`,\
+    //     `Moto_OT`.`marca` AS `Moto.marca`,\
+    //     `Moto_OT`.`modelo` AS `Moto.modelo`,\
+    //     `Moto_OT`.`año` AS `Moto.año`,\
+    //     `Moto_OT`.`observaciones` AS `Moto.observaciones`,\
+    //     `TarjetaId` , `Tarjeta`.`numero` AS `Tarjeta.numero`\
+    //     FROM `Eventos_mqtt` AS `Eventos_mqtt` \
+    //     INNER JOIN `Tarjeta` AS `Tarjeta` \
+    //     ON TarjetaId = Tarjeta.id \
+    //     INNER JOIN `OrdenTrabajo` AS `OrdenTrabajo` \
+    //     ON `Eventos_mqtt`.`OrdenTrabajoId` = OrdenTrabajo.id \
+    //     INNER JOIN `Estado` AS `Estado_OT` \
+    //     ON `OrdenTrabajo`.`EstadoId` = Estado_OT.id \
+    //     INNER JOIN `Trabajo` AS `Trabajo_OT` \
+    //     ON `OrdenTrabajo`.`TrabajoId` = Trabajo_OT.id \
+    //     INNER JOIN `Cliente` AS `Cliente_OT` \
+    //     ON `OrdenTrabajo`.`ClienteId` = Cliente_OT.id \
+    //     INNER JOIN `Moto` AS `Moto_OT` \
+    //     ON `OrdenTrabajo`.`MotoId` = Moto_OT.id \
+    //     WHERE `Eventos_mqtt`.`updatedAt` >= :fechadesde \
+    //     AND `Eventos_mqtt`.`accion` = :accion \
+    //     AND `Eventos_mqtt`.`is_active` = :is_active \
+    //     ORDER BY `Eventos_mqtt`.`updatedAt` \
+    //     DESC LIMIT 1;", { 
+    //         replacements: { 
+    //             fechadesde: fechadesde,
+    //             accion: accion,
+    //             is_active: is_active
+    //         },
+    //         type: QueryTypes.SELECT })

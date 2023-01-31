@@ -12,6 +12,8 @@ module.exports = (sequelize, DataTypes) => {
       Repuesto.belongsToMany(models.OrdenTrabajo, {
         through: 'Orden_Repuesto'
       })
+      // Repuesto.belongsTo(models.OrdenTrabajo)
+      // Repuesto.hasMany(models.OrdenTrabajo)
     }
   }
   Repuesto.init({

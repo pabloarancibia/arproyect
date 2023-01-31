@@ -1,5 +1,5 @@
 const {Mqtt_messages_gral, Tarjeta, Estado,
-        Registro_Cambios_Estado, Orden_trabajo,
+        Registro_Cambios_Estado, OrdenTrabajo,
         Eventos_mqtt} = require('../database/models/index');
 
 
@@ -79,7 +79,7 @@ const Sequelize = require('sequelize');
             }else{
 
                 // Busco la Orden en la db
-                const orden = await Orden_trabajo.findOne({
+                const orden = await OrdenTrabajo.findOne({
                 where: {
                     tarjeta:tarjeta.numero,
                     }
@@ -111,7 +111,7 @@ const Sequelize = require('sequelize');
                     }
 
                 // modifico orden
-                const orden_modif = await Orden_trabajo.update(
+                const orden_modif = await OrdenTrabajo.update(
                     {EstadoId : estado_a_asignar.id},
                     {
                     where: {
@@ -129,7 +129,7 @@ const Sequelize = require('sequelize');
                 // Registro el cambio de estado
                 await Registro_Cambios_Estado.create({
                     EstadoId:estado_a_asignar.id,
-                    Orden_trabajoId:orden_modif.id,
+                    OrdenTrabajoId:orden_modif.id,
                     fecha:Date.now()
                 }
                 )
@@ -203,7 +203,7 @@ const Sequelize = require('sequelize');
                 try {
                     await Eventos_mqtt.create({
                         TarjetaId:tarjeta.id,
-                        Orden_trabajoId: tarjeta.Orden_trabajoId,
+                        OrdenTrabajoId: tarjeta.OrdenTrabajoId,
                         accion:process.env.ACCION_ENUSO,
                         nodo:payload_json.nodo,
                         observaciones:'en api para tarjeta en uso',

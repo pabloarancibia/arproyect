@@ -1,4 +1,4 @@
-const {Orden_trabajo,Cliente, Estado, Moto, Trabajo, Usuario,
+const {OrdenTrabajo,Cliente, Estado, Moto, Trabajo, Usuario,
     Registro_Cambios_Estado} = require('../database/models/index');
 
 const { Op, Sequelize } = require("sequelize");
@@ -13,7 +13,7 @@ const { response } = require('express');
  * listado de todas las ordenes de trabajos existentes
  */
 const getOrdenesTrabajo = async (req, res)=>{
-    const ordenesTrabajo = await Orden_trabajo.findAll({
+    const ordenesTrabajo = await OrdenTrabajo.findAll({
         include:[
             {model:Cliente},
             {model: Estado},
@@ -58,7 +58,7 @@ const getOrdenTrabajoBy = async(req,res)=>{
         }
     }
     try {
-        let ordenesTrabajo = await Orden_trabajo.findAll({
+        let ordenesTrabajo = await OrdenTrabajo.findAll({
             order: [["id", "ASC"]],
             include: [{
                 model: Estado,
@@ -109,7 +109,7 @@ const getOrdenTrabajoByCliente = async (req,res) => {
         }
 
     
-        const ordenesTrabajo = await Orden_trabajo.findAll({
+        const ordenesTrabajo = await OrdenTrabajo.findAll({
             where: {
                 ClienteId:cliente.id
             },
@@ -148,7 +148,7 @@ const nuevaOrdenTrabajo = async (req,res) => {
         }
 
         // creo orden de trabajo
-        const nuevaOrdenTrabajo = await Orden_trabajo.create(
+        const nuevaOrdenTrabajo = await OrdenTrabajo.create(
             req.body, 
             );
         nuevaOrdenTrabajo.EstadoId = estado.id;
@@ -181,7 +181,7 @@ const nuevaOrdenTrabajo = async (req,res) => {
         // Registro el cambio de estado
         await Registro_Cambios_Estado.create({
             EstadoId:estado.id,
-            Orden_trabajoId:nuevaOrdenTrabajo.id,
+            OrdenTrabajoId:nuevaOrdenTrabajo.id,
             fecha:Date.now()
         }
         )
@@ -220,7 +220,7 @@ const cambiarEstadoOrdenTrabajo = async (req, res) => {
             return res.status(400).json({message:'No se encuentra estado'})
         }
 
-        let orden = await Orden_trabajo.findOne({
+        let orden = await OrdenTrabajo.findOne({
             where: {
                 id:req.body.id_orden,
                 }
@@ -231,7 +231,7 @@ const cambiarEstadoOrdenTrabajo = async (req, res) => {
         }
 
         // Modifico estado de la Orden
-        const orden_modif = await Orden_trabajo.update(
+        const orden_modif = await OrdenTrabajo.update(
             {EstadoId : estado.id},
             {
             where: {
@@ -260,7 +260,7 @@ const cambiarEstadoOrdenTrabajo = async (req, res) => {
         // Registro el cambio de estado
         await Registro_Cambios_Estado.create({
             EstadoId:estado.id,
-            Orden_trabajoId:orden_modif.id,
+            OrdenTrabajoId:orden_modif.id,
             fecha:Date.now()
         }
         )

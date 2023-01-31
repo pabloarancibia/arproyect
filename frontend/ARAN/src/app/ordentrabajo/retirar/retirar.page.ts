@@ -46,8 +46,9 @@ export class RetirarPage implements OnInit {
       .then(res=>{
         //this.ot = res
         if (res){
-          this.formRetirarOT.controls['entrega'].setValue(res[0]['Orden_trabajo.entrega'])
-          this.formRetirarOT.controls['tarjeta'].setValue(res[0]['Tarjeta.numero'])
+          console.log('res',res)
+          this.formRetirarOT.controls['entrega'].setValue(res['OrdenTrabajo']['entrega'])
+          this.formRetirarOT.controls['tarjeta'].setValue(res['Tarjeta']['numero'])
           console.log('res',res)
           //console.log('this.ot',this.ot)
           //console.log('último evento',this.ot[0]['Tarjeta.numero'])
