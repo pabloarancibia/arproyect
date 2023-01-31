@@ -6,7 +6,7 @@ module.exports = {
         {
             id: 1,
             EstadoId: 1,
-            Orden_trabajoId: 1,
+            OrdenTrabajoId: 1,
             fecha: new Date(),
             createdAt: new Date(),
             updatedAt: new Date()
@@ -14,7 +14,7 @@ module.exports = {
         {
             id: 2,
             EstadoId: 1,
-            Orden_trabajoId: 2,
+            OrdenTrabajoId: 2,
             fecha: new Date(),
             createdAt: new Date(),
             updatedAt: new Date()
@@ -22,7 +22,7 @@ module.exports = {
         {
             id: 3,
             EstadoId: 1,
-            Orden_trabajoId: 3,
+            OrdenTrabajoId: 3,
             fecha: new Date(),
             createdAt: new Date(),
             updatedAt: new Date()

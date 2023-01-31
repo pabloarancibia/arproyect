@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       Repuesto.belongsToMany(models.Moto, {through: 'Repuesto_Moto'})
 
       // Repuesto pertenece a muchas Ordenes de trabajo N:M
-      Repuesto.belongsToMany(models.Orden_trabajo, {
+      Repuesto.belongsToMany(models.OrdenTrabajo, {
         through: 'Orden_Repuesto'
       })
     }

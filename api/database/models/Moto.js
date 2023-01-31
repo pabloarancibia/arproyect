@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       
       // Moto tiene muchas ordenes de trabajo
-      Moto.hasMany(models.Orden_trabajo)
+      Moto.hasMany(models.OrdenTrabajo)
       
       // Moto pertenece a muchos Repuestos N:M
       Moto.belongsToMany(models.Repuesto, {through: 'Repuesto_Moto'})

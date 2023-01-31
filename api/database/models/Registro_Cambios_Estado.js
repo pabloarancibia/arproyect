@@ -4,7 +4,7 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   /**
-   * Asociacion N:M entre Estado y Orden_trabajo
+   * Asociacion N:M entre Estado y OrdenTrabajo
    * para registrar los cambios de estado
    */
   class Registro_Cambios_Estado extends Model {
@@ -16,10 +16,10 @@ module.exports = (sequelize, DataTypes) => {
           foreignKey: 'EstadoId',
           as:'Estado'
         })
-      Registro_Cambios_Estado.belongsTo(models.Orden_trabajo,
+      Registro_Cambios_Estado.belongsTo(models.OrdenTrabajo,
         {
-          foreignKey: 'Orden_trabajoId',
-          as:'Orden_trabajo'
+          foreignKey: 'OrdenTrabajoId',
+          as:'OrdenTrabajo'
         })
     }
   }
@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     EstadoId: {
       type: DataTypes.INTEGER,
   },
-    Orden_trabajoId: {
+    OrdenTrabajoId: {
       type: DataTypes.INTEGER,
   },
     fecha: {

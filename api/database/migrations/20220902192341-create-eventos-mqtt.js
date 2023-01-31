@@ -12,9 +12,9 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {model: 'Tarjeta', key: 'id'}
       },
-      Orden_trabajoId: {
+      OrdenTrabajoId: {
         type: Sequelize.INTEGER,
-        references: {model: 'Orden_trabajo', key: 'id'}
+        references: {model: 'OrdenTrabajo', key: 'id'}
       },
       accion: {
         type: Sequelize.STRING

@@ -12,9 +12,9 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {model: 'Estado', key: 'id'}
       },
-      Orden_trabajoId: {
+      OrdenTrabajoId: {
         type: Sequelize.INTEGER,
-        references: {model: 'Orden_trabajo', key: 'id'}
+        references: {model: 'OrdenTrabajo', key: 'id'}
       },
       fecha: {
         type: Sequelize.DATE

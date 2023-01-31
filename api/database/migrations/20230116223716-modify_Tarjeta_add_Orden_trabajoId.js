@@ -10,9 +10,9 @@ module.exports = {
      */
     return queryInterface.sequelize.transaction(t => {
       return Promise.all([
-        queryInterface.addColumn('Tarjeta', 'Orden_trabajoId', {
+        queryInterface.addColumn('Tarjeta', 'OrdenTrabajoId', {
           type: Sequelize.INTEGER,
-          references: {model: 'Orden_trabajo', key: 'id'}
+          references: {model: 'OrdenTrabajo', key: 'id'}
 
         }, { transaction: t }),
       ]);
@@ -28,7 +28,7 @@ module.exports = {
      */
     return queryInterface.sequelize.transaction(t => {
       return Promise.all([
-        queryInterface.removeColumn('Tarjeta', 'Orden_trabajoId', { transaction: t }),
+        queryInterface.removeColumn('Tarjeta', 'OrdenTrabajoId', { transaction: t }),
       ]);
     });
   }

@@ -12,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       
       // Estado tiene muchos
-      Estado.hasMany(models.Orden_trabajo)
+      Estado.hasMany(models.OrdenTrabajo)
       Estado.hasMany(models.Tarjeta)
 
       // muchos a muchos Estado Orden_trabjo
-      Estado.belongsToMany(models.Orden_trabajo, {
+      Estado.belongsToMany(models.OrdenTrabajo, {
         through: 'Registo_cambios_estado'
       })
     }

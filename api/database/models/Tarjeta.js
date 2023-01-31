@@ -11,14 +11,16 @@ module.exports = (sequelize, DataTypes) => {
   class Tarjeta extends Model {
     
     static associate(models) {
-      // Tarjeta.Orden_trabajo pertenece a Orden_trabajo
-      Tarjeta.belongsTo(models.Orden_trabajo)
+      // Tarjeta.OrdenTrabajo pertenece a OrdenTrabajo
+      Tarjeta.belongsTo(models.OrdenTrabajo)
       
       // Tarjeta.Estado pertenece a Estado
       Tarjeta.belongsTo(models.Estado);
 
       //Tarjeta tiene ids en la tabla Eventos_mqtt
-      Tarjeta.hasMany(models.Eventos_mqtt);
+      Tarjeta.hasMany(models.Eventos_mqtt
+        ,{foreignKey:'id'}
+        );
     }
   }
   Tarjeta.init({

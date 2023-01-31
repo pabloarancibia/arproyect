@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       Cliente.belongsTo(models.Rol)
 
       // Cliente tiene muchas ordenes de trabajo
-      Cliente.hasMany(models.Orden_trabajo)
+      Cliente.hasMany(models.OrdenTrabajo)
     }
   }
   Cliente.init({

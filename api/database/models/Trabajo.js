@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Trabajo.hasMany(models.Orden_trabajo)
+      Trabajo.hasMany(models.OrdenTrabajo)
     }
   }
   Trabajo.init({

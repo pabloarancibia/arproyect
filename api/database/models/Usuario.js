@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       // Usuario pertenece a Rol
       Usuario.belongsTo(models.Rol)
 
-      Usuario.hasMany(models.Orden_trabajo)
+      Usuario.hasMany(models.OrdenTrabajo)
     }
   }
   Usuario.init({

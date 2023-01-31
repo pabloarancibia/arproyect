@@ -3,36 +3,36 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Orden_trabajo extends Model {
+  class OrdenTrabajo extends Model {
     
     static associate(models) {
-      //Orden_trabajo.X pertenece a X
-      Orden_trabajo.belongsTo(models.Trabajo)
-      Orden_trabajo.belongsTo(models.Estado)
-      Orden_trabajo.belongsTo(models.Cliente)
-      Orden_trabajo.belongsTo(models.Usuario)
-      Orden_trabajo.belongsTo(models.Moto)
+      //OrdenTrabajo.X pertenece a X
+      OrdenTrabajo.belongsTo(models.Trabajo)
+      OrdenTrabajo.belongsTo(models.Estado)
+      OrdenTrabajo.belongsTo(models.Cliente)
+      OrdenTrabajo.belongsTo(models.Usuario)
+      OrdenTrabajo.belongsTo(models.Moto)
 
-      //Orden_trabajo tiene ids en la tabla Eventos_mqtt
-      Orden_trabajo.hasMany(models.Eventos_mqtt);
+      //OrdenTrabajo tiene ids en la tabla Eventos_mqtt
+      OrdenTrabajo.hasMany(models.Eventos_mqtt);
 
-      //Orden_trabajo tiene id en la tabla Tarjeta
-      Orden_trabajo.hasMany(models.Tarjeta);
+      //OrdenTrabajo tiene id en la tabla Tarjeta
+      OrdenTrabajo.hasMany(models.Tarjeta);
 
       // Orden_trabjo tiene muchos Cambios de Estado N:M
-      Orden_trabajo.belongsToMany(models.Estado, {
+      OrdenTrabajo.belongsToMany(models.Estado, {
         through: 'Registo_cambios_estado'
       })
 
       // Orden de trabajo tiene muchos Repuestos N:M
-      Orden_trabajo.belongsToMany(models.Repuesto, {
+      OrdenTrabajo.belongsToMany(models.Repuesto, {
         through: 'Orden_Repuesto'
       })
 
 
     }
   }
-  Orden_trabajo.init({
+  OrdenTrabajo.init({
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -67,8 +67,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Orden_trabajo',
-    tableName: 'Orden_trabajo',
+    modelName: 'OrdenTrabajo',
+    tableName: 'OrdenTrabajo',
   });
-  return Orden_trabajo;
+  return OrdenTrabajo;
 };
