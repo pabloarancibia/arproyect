@@ -1,5 +1,5 @@
 const {Eventos_mqtt, Estado,Trabajo, Repuesto, 
-    OrdenTrabajo, Tarjeta,Orden_Repuesto} = require('../database/models/index');
+    OrdenTrabajo, Tarjeta,Cliente, Moto} = require('../database/models/index');
 const { QueryTypes } = require('sequelize');
 
 const { Op, Sequelize } = require("sequelize");
@@ -30,11 +30,8 @@ const getUltimoEventoByAccion = async (req, res)=>{
         //attributes: {exclude: ['TarjetumId']},
         include: [{
             model:OrdenTrabajo,
-            // include: Trabajo,
-            // include: Estado,
-
-            //include: Repuesto//, as: 'Repuesto'
-            include: { all: true}
+            include: [Trabajo,Estado, Repuesto, Cliente, Moto],
+            //include: { all: true}
 
         },{
             model: Tarjeta, as: 'Tarjeta'

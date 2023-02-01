@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
         as: 'Repuesto'
       });
       Orden_Repuesto.belongsTo(models.OrdenTrabajo, {
-        foreignKey: 'OrdenId',
+        foreignKey: 'OrdenTrabajoId',
         as: 'OrdenTrabajo'
       })
     }
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     RepuestoId: {
       type: DataTypes.INTEGER,
   },
-    OrdenId: {
+    OrdenTrabajoId: {
       type: DataTypes.INTEGER,
   },
   observaciones: {
