@@ -30,6 +30,10 @@ export class RetirarPage implements OnInit {
       'createdAt': new FormControl(""),
       'updatedAt': new FormControl(""),
       'observaciones': new FormControl(""),
+      'saldo': new FormControl(""),
+      'otpapel': new FormControl(""),
+
+
     })
 
   }
@@ -46,9 +50,11 @@ export class RetirarPage implements OnInit {
       .then(res=>{
         //this.ot = res
         if (res){
-          console.log('res',res)
           this.formRetirarOT.controls['entrega'].setValue(res['OrdenTrabajo']['entrega'])
+          this.formRetirarOT.controls['precio'].setValue(res['OrdenTrabajo']['precio'])
+          this.formRetirarOT.controls['fecha_entrega_estimada'].setValue(res['OrdenTrabajo']['fecha_entrega_estimada'])
           this.formRetirarOT.controls['tarjeta'].setValue(res['Tarjeta']['numero'])
+          this.calcSaldo();
           console.log('res',res)
           //console.log('this.ot',this.ot)
           //console.log('último evento',this.ot[0]['Tarjeta.numero'])
@@ -65,6 +71,8 @@ export class RetirarPage implements OnInit {
 
   stopSearch(){
     this.unsubscribe();
+    console.log('unsuscribe')
+
   }
 
   private unsubscribe(){
@@ -73,12 +81,26 @@ export class RetirarPage implements OnInit {
       console.log('unsuscribe')
     }
   }
-  cantelaTotalSaldo(){
-    alert('cancelar total');
+  calcSaldo(){
+    this.formRetirarOT.controls['saldo']
+    .setValue(
+      this.formRetirarOT.controls['precio'].value 
+      - this.formRetirarOT.controls['entrega'].value
+      - this.formRetirarOT.controls['cancela'].value
+      );
   }
+  cantelaTotalSaldo(){
+    this.formRetirarOT.controls['cancela']
+    .setValue(
+      this.formRetirarOT.controls['precio'].value 
+      - this.formRetirarOT.controls['entrega'].value
+      );
+  }
+
   modificarPrecio(){
     alert('modificar Precio');
   }
+
 
   onSubmit(){
     this.unsubscribe();

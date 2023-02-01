@@ -20,7 +20,8 @@
     <ion-label>Precio: </ion-label>
     <ion-input formControlName="precio" readonly></ion-input>  
   </ion-item>
-  <ion-button id="modificarPrecio" (click)="modificarPrecio()">total</ion-button>
+  <ion-button id="modificarPrecio" (click)="modificarPrecio()"
+  (ionChange)="calcSaldo()">Modificar</ion-button>
 
 
 
@@ -30,10 +31,16 @@
   </ion-item>
 
   <ion-item>
+    <ion-label>Saldo Pendiente: </ion-label>
+    <ion-input formControlName="saldo" readonly></ion-input>  
+  </ion-item>
+
+  <ion-item>
     <ion-label>Cancela con: </ion-label>
     <!-- agregar la suma al campo 'entrega' 
     agregar tmb linea en campo 'descripcion' con el detalle de esta suma y fecha -->
-    <ion-input formControlName="cancela" type="number"></ion-input>  
+    <ion-input formControlName="cancela" type="number" 
+    (ionChange)="calcSaldo()"></ion-input>  
   </ion-item>
   <ion-button id="cantelaTotalSaldo" (click)="cantelaTotalSaldo()">total</ion-button>
 
