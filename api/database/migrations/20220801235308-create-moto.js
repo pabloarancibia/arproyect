@@ -17,7 +17,7 @@ module.exports = {
       cilindrada: {
         type: Sequelize.INTEGER
       },
-      año: {
+      anio: {
         type: Sequelize.INTEGER
       },
       observaciones: {

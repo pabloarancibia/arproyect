@@ -62,7 +62,23 @@
   </ion-list>
 
   <!-- DATOS MOTO -->
-
+  <ion-list>
+    <ion-label>MOTO</ion-label>
+    <ion-item>
+      <ion-label>Marca</ion-label>
+      <ion-label>Modelo</ion-label>
+      <ion-label>Cilindrada</ion-label>
+      <ion-label>Año</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item *ngIf="OTaRetirar">
+      <ion-label >{{OTaRetirar.OrdenTrabajo.Moto.marca}} </ion-label>
+      <ion-label >{{OTaRetirar.OrdenTrabajo.Moto.modelo}} </ion-label>
+      <ion-label >{{OTaRetirar.OrdenTrabajo.Moto.cilindrada}} </ion-label>
+      <ion-label >{{OTaRetirar.OrdenTrabajo.Moto.anio}} </ion-label>
+    </ion-item>
+  </ion-list>
 
 
   <!-- DATOS PRECIO/SALDO/ENTREGA/CANCELA -->

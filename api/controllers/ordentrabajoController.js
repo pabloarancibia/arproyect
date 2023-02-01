@@ -75,7 +75,7 @@ const getOrdenTrabajoBy = async(req,res)=>{
 
             },{
                 model: Moto,
-                attributes: ['marca', 'modelo', 'año', 'cilindrada', 'observaciones'],
+                attributes: ['marca', 'modelo', 'anio', 'cilindrada', 'observaciones'],
 
             }],
             where:{                

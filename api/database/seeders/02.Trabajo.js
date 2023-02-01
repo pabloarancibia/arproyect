@@ -20,7 +20,7 @@ module.exports = {
         {
           id: 3,
             nombre: 'Cambio de Biela',
-            descripcion: 'Cambio de biela y centrado de cigüeñal',
+            descripcion: 'Cambio de biela y centrado de cigüenial',
             createdAt: new Date(),
             updatedAt: new Date() 
         }

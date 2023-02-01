@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     cilindrada: {
       type: DataTypes.INTEGER
     },
-    año: {
+    anio: {
       type: DataTypes.INTEGER
     },
     observaciones: {
