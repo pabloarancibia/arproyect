@@ -82,12 +82,13 @@
 
 
   <!-- DATOS PRECIO/SALDO/ENTREGA/CANCELA -->
+  <ion-label>PRECIOS </ion-label>
   <ion-item>
     <ion-label>Precio: </ion-label>
-    <ion-input formControlName="precio" readonly></ion-input>  
+    <ion-input formControlName="precio" type="number" readonly="{{isPrecioReadOnly}}"
+    (ionChange)="calcSaldo()"></ion-input>  
   </ion-item>
-  <ion-button id="modificarPrecio" (click)="modificarPrecio()"
-  (ionChange)="calcSaldo()">Modificar</ion-button>
+  <ion-button id="modificarPrecio" (click)="modificarPrecio()">Modificar</ion-button>
 
 
 
@@ -108,13 +109,13 @@
     <ion-input formControlName="cancela" type="number" 
     (ionChange)="calcSaldo()"></ion-input>  
   </ion-item>
-  <ion-button color="success" id="cantelaTotalSaldo" (click)="cantelaTotalSaldo()">total</ion-button>
+  <ion-button color="success" id="cantelaTotalSaldo" (click)="cantelaTotalSaldo()">Total</ion-button>
 
 
   <ion-item>
     <ion-label>Observaciones: </ion-label>
     <!-- concatenar con el campo detalles a la hora de actualizar en la db -->
-    <ion-input formControlName="observaciones" type="number"></ion-input>  
+    <ion-input formControlName="observaciones" ></ion-input>  
   </ion-item>
 
   <ion-item>

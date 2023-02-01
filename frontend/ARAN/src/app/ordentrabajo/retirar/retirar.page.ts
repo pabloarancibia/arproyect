@@ -15,6 +15,7 @@ export class RetirarPage implements OnInit {
   OTaRetirar;
   Repuestos;
   subscription: Subscription
+  isPrecioReadOnly=true
 
 
   constructor(
@@ -63,8 +64,7 @@ export class RetirarPage implements OnInit {
 
           console.log('res',res)
           console.log('this.OTaRetirar',this.OTaRetirar)
-          //console.log('this.ot',this.ot)
-          //console.log('último evento',this.ot[0]['Tarjeta.numero'])
+
           this.unsubscribe();
         }
       })
@@ -105,7 +105,7 @@ export class RetirarPage implements OnInit {
   }
 
   modificarPrecio(){
-    alert('modificar Precio');
+    this.isPrecioReadOnly=!this.isPrecioReadOnly;
   }
 
 
