@@ -33,7 +33,6 @@ export class RetirarPage implements OnInit {
       'updatedAt': new FormControl(""),
       'observaciones': new FormControl(""),
       'saldo': new FormControl(""),
-      'otpapel': new FormControl(""),
 
 
     })
@@ -115,6 +114,8 @@ export class RetirarPage implements OnInit {
 
     if (this.formRetirarOT.valid){
       console.log(this.formRetirarOT.value)
+      // enviar OT id, precio,saldo, observaciones, estado='retirado'
+      // Tarjeta id, estado='libre'
     }
   }
 
