@@ -16,6 +16,56 @@
   <ion-button id="addNumeroTarjeta" (click)="addNumeroTarjeta()">Buscar Tarjeta</ion-button>
   <ion-button id="stopSearch" (click)="stopSearch()">Cancelar</ion-button>
 
+  <!-- DATOS CLIENTE -->
+  <ion-list>
+    <ion-label>DATOS CLIENTE</ion-label>
+    <ion-item>
+      <ion-label>Nombre</ion-label>
+      <ion-label>DNI</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item *ngIf="OTaRetirar">
+      <ion-label >{{OTaRetirar.OrdenTrabajo.Cliente.nombre}} {{OTaRetirar.OrdenTrabajo.Cliente.apellido}}</ion-label>
+      <ion-label >{{OTaRetirar.OrdenTrabajo.Cliente.dni}}</ion-label>
+    </ion-item>
+  </ion-list>
+  <!-- DATOS TRABAJO -->
+  <ion-list>
+    <ion-item>
+      <ion-label>TRABAJO</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item *ngIf="OTaRetirar">
+      <ion-label >{{OTaRetirar.OrdenTrabajo.Trabajo.nombre}} </ion-label>
+    </ion-item>
+  </ion-list>
+  <!-- DATOS REPUESTOS -->
+  <ion-list>
+    <ion-label>DATOS REPUESTOS</ion-label>
+    <ion-item>
+      <ion-label>Nombre</ion-label>
+      <ion-label>Marca</ion-label>
+      <ion-label>Medida</ion-label>
+      <ion-label>Origen</ion-label>
+    </ion-item>
+  </ion-list>
+  
+  <ion-list *ngFor="let repuesto of Repuestos">
+    <ion-item *ngIf="Repuestos">
+      <ion-label >{{repuesto.nombre}}</ion-label>
+      <ion-label >{{repuesto.marca}}</ion-label>
+      <ion-label >{{repuesto.medida}}</ion-label>
+      <ion-label >{{repuesto.Origen.pais}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- DATOS MOTO -->
+
+
+
+  <!-- DATOS PRECIO/SALDO/ENTREGA/CANCELA -->
   <ion-item>
     <ion-label>Precio: </ion-label>
     <ion-input formControlName="precio" readonly></ion-input>  
@@ -26,11 +76,11 @@
 
 
   <ion-item>
-    <ion-label>Entrega: </ion-label>
+    <ion-label>Entrega Realizada: </ion-label>
     <ion-input formControlName="entrega" readonly></ion-input>  
-  </ion-item>
+  <!-- </ion-item>
 
-  <ion-item>
+  <ion-item> -->
     <ion-label>Saldo Pendiente: </ion-label>
     <ion-input formControlName="saldo" readonly></ion-input>  
   </ion-item>
@@ -42,7 +92,7 @@
     <ion-input formControlName="cancela" type="number" 
     (ionChange)="calcSaldo()"></ion-input>  
   </ion-item>
-  <ion-button id="cantelaTotalSaldo" (click)="cantelaTotalSaldo()">total</ion-button>
+  <ion-button color="success" id="cantelaTotalSaldo" (click)="cantelaTotalSaldo()">total</ion-button>
 
 
   <ion-item>

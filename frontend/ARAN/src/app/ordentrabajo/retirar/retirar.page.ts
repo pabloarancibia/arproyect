@@ -12,7 +12,8 @@ import { environment } from 'src/environments/environment';
 })
 export class RetirarPage implements OnInit {
   formRetirarOT: FormGroup;
-  ot = {}
+  OTaRetirar;
+  Repuestos;
   subscription: Subscription
 
 
@@ -50,12 +51,18 @@ export class RetirarPage implements OnInit {
       .then(res=>{
         //this.ot = res
         if (res){
+          this.OTaRetirar = res
           this.formRetirarOT.controls['entrega'].setValue(res['OrdenTrabajo']['entrega'])
           this.formRetirarOT.controls['precio'].setValue(res['OrdenTrabajo']['precio'])
           this.formRetirarOT.controls['fecha_entrega_estimada'].setValue(res['OrdenTrabajo']['fecha_entrega_estimada'])
           this.formRetirarOT.controls['tarjeta'].setValue(res['Tarjeta']['numero'])
           this.calcSaldo();
+
+          this.Repuestos = this.OTaRetirar.OrdenTrabajo.Repuestos;
+          console.log('Repuestos',this.Repuestos)
+
           console.log('res',res)
+          console.log('this.OTaRetirar',this.OTaRetirar)
           //console.log('this.ot',this.ot)
           //console.log('último evento',this.ot[0]['Tarjeta.numero'])
           this.unsubscribe();
