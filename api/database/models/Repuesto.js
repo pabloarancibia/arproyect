@@ -12,8 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       Repuesto.belongsToMany(models.OrdenTrabajo, {
         through: 'Orden_Repuesto'
       })
-      // Repuesto.belongsTo(models.OrdenTrabajo)
-      // Repuesto.hasMany(models.OrdenTrabajo)
+      Repuesto.belongsTo(models.Origen)
     }
   }
   Repuesto.init({
@@ -30,9 +29,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     medida: {
       type: DataTypes.INTEGER,
-    },
-    origen: {
-      type: DataTypes.STRING,
     },
     marca: {
       type: DataTypes.STRING,

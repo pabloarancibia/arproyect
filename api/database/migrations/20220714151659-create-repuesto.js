@@ -19,6 +19,10 @@ module.exports = {
       origen: {
         type: Sequelize.STRING,
       },
+      OrigenId:{
+        type: Sequelize.INTEGER,
+        references:{model:'Origen', key:'id'}
+      },
       marca: {
         type: Sequelize.STRING,
       },

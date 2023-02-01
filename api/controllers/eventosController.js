@@ -34,7 +34,7 @@ const getUltimoEventoByAccion = async (req, res)=>{
             // include: Estado,
 
             //include: Repuesto//, as: 'Repuesto'
-            include: { all: true, exclude: 'Repuestos' }
+            include: { all: true}
 
         },{
             model: Tarjeta, as: 'Tarjeta'
