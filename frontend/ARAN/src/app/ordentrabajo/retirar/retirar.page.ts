@@ -114,8 +114,8 @@ export class RetirarPage implements OnInit {
 
     if (this.formRetirarOT.valid){
       console.log(this.formRetirarOT.value)
-      // enviar OT id, precio,saldo, observaciones, estado='retirado'
-      // Tarjeta id, estado='libre'
+      // enviar OT id, precio,saldo, detalle(observaciones), estado='retirado'
+      // TarjetaId, TarjetaEstado='libre'
     }
   }
 
