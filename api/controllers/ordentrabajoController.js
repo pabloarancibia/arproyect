@@ -202,14 +202,19 @@ const nuevaOrdenTrabajo = async (req,res) => {
 }
 
 /**
-     * Cambiar estado orden de trabajo y tarjeta
-     * @params id_orden, estado
-     * Recibe id_orden y estado a asignar.
-     * Si la orden tiene tarjeta cargada, cambio su estado
+     * Cambiar estado orden de trabajo y [tarjeta]
+     * @params id_orden, precio, saldo, detalle, estado(OT)
+     * [TarjetaId][TarjetaEstado]
+     * Si se recibe TarjetaId y TarjetaEstado se cambia el mismo
      */
 const cambiarEstadoOrdenTrabajo = async (req, res) => {
     try {
-        if (!req.body.estado || !req.body.id_orden){
+        if (!req.body.estado 
+            || !req.body.id_orden 
+            || !req.body.precio
+            || !req.body.saldo
+            || !req.body.detalle
+            ){
             return res.status(400).json({message:'Debe incluir estado y id de orden'})
         }
         // Busco el Estado 
@@ -234,9 +239,14 @@ const cambiarEstadoOrdenTrabajo = async (req, res) => {
             return res.status(400).json({message:'No se encuentra Orden de Trabajo'})
         }
 
-        // Modifico estado de la Orden
+        // Modifico estado, precio, detalle y saldo de la Orden
         const orden_modif = await OrdenTrabajo.update(
-            {EstadoId : estado.id},
+            {
+                EstadoId : estado.id,
+                precio: req.body.precio,
+                saldo: req.body.saldo,
+                detalle: req.body.detalle
+            },
             {
             where: {
                 id:orden.id,
@@ -244,7 +254,43 @@ const cambiarEstadoOrdenTrabajo = async (req, res) => {
             });
 
         
-        // Modifico estado de la Tarjeta  
+        // Busco la Tarjeta según el id enviado en body
+        // Modifico estado de la Tarjeta 
+
+        if(req.body.TarjetaId && req.body.TarjetaEstado){
+            let tarjeta = await Tarjeta.findOne(
+                {
+                    where: {
+                        id: req.body.TarjetaId
+                    }
+                }
+            );
+            if (tarjeta){
+                // Busco el Estado para la Tarjeta
+                const estadoTarjeta = await Estado.findOne({
+                    where:{
+                        nombre:{
+                            [Op.like]:'%'+req.body.TarjetaEstado+'%'
+                        }
+                    }
+                });
+                if (!estadoTarjeta){
+                    return res.status(400).json({message:'No se encuentra estado de tarjeta'})
+                }
+
+                await Tarjeta.update(
+                    {
+                        EstadoId:estadoTarjeta.id},
+                    {
+                        where: {
+                            id: req.body.TarjetaId
+                        }
+                    }
+                );
+            }
+
+        }; 
+        /*
         if(orden_modif.tarjeta){
             let tarjeta = await Tarjeta.findOne(
                 {
@@ -260,6 +306,7 @@ const cambiarEstadoOrdenTrabajo = async (req, res) => {
                 );
             }
         };
+        */
 
         // Registro el cambio de estado
         await Registro_Cambios_Estado.create({
