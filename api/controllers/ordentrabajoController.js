@@ -161,6 +161,7 @@ const nuevaOrdenTrabajo = async (req,res) => {
             })
         }
 
+        // Asigno a Tarjeta la ref a la nueva OT
         // Modifico estado de la Tarjeta  
         if(nuevaOrdenTrabajo.tarjeta){
             let tarjeta = await Tarjeta.findOne(
@@ -170,7 +171,10 @@ const nuevaOrdenTrabajo = async (req,res) => {
             );
             if (tarjeta){
                 await Tarjeta.update(
-                    {EstadoId:estado.id},
+                    {
+                        EstadoId : estado.id,
+                        OrdenTrabajoId : nuevaOrdenTrabajo.id
+                    },
                     {
                         where: {numero: nuevaOrdenTrabajo.tajeta}
                     }
