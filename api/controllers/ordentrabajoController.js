@@ -210,12 +210,12 @@ const nuevaOrdenTrabajo = async (req,res) => {
 const cambiarEstadoOrdenTrabajo = async (req, res) => {
     try {
         if (!req.body.estado 
-            || !req.body.id_orden 
+            || !req.params.id_orden 
             || !req.body.precio
             || !req.body.saldo
             || !req.body.detalle
             ){
-            return res.status(400).json({message:'Debe incluir estado y id de orden'})
+            return res.status(400).json({message:'Debe incluir estado, id de orden, precio, saldo y detalle'})
         }
         // Busco el Estado 
         const estado = await Estado.findOne({
@@ -231,7 +231,7 @@ const cambiarEstadoOrdenTrabajo = async (req, res) => {
 
         let orden = await OrdenTrabajo.findOne({
             where: {
-                id:req.body.id_orden,
+                id:req.params.id_orden,
                 }
             });
         

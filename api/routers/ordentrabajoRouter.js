@@ -50,13 +50,12 @@
         ordentrabajoCtrl.nuevaOrdenTrabajo);
 
     /**
-     * Cambiar estado orden de trabajo y tarjeta
-     * @params id_orden, estado
-     * Recibe id_orden y estado a asignar.
-     * Si la orden tiene tarjeta cargada, cambia el estado
-     * de la misma.
+     * Cambiar estado orden de trabajo y [tarjeta]
+     * @params id_orden, precio, saldo, detalle, estado(OT)
+     * [TarjetaId][TarjetaEstado]
+     * Si se recibe TarjetaId y TarjetaEstado se cambia el mismo
      */
-     ordentrabajoRouter.put('/cambiarestado',
+     ordentrabajoRouter.put('/cambiarestado/:id_orden',
         ordentrabajoCtrl.cambiarEstadoOrdenTrabajo);
  
  module.exports = ordentrabajoRouter;

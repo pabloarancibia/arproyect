@@ -38,6 +38,27 @@ export class OTService {
     + '/estado/'+ estado
     ).toPromise().then(res=>{ return res;})
   }
+
+  /**
+   * Service para actualizar estado de OT y Tarjeta asociada a la misma.
+   * @param id_orden id de orden de trabajo
+   * @param otprecio precio
+   * @param otsaldo saldo
+   * @param otdetalle detalle
+   * @param otestado estado para OT
+   * @param TarjetaId id de Tarjeta
+   * @param TarjetaEstado estado para Tarjeta
+   * @returns 
+   */
+  putEstadoOTyTarjeta(
+    id_orden, changes: Partial<any>
+  ){
+    return this._http.put(this.URL + '/ordentrabajo/cambiarestado/' + id_orden, changes)
+    .toPromise()
+    .then(res=>{
+      return res
+    });
+  }
   
 
 
