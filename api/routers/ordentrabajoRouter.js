@@ -56,6 +56,6 @@
      * Si se recibe TarjetaId y TarjetaEstado se cambia el mismo
      */
      ordentrabajoRouter.put('/cambiarestado/:id_orden',
-        ordentrabajoCtrl.cambiarEstadoOrdenTrabajo);
+        ordentrabajoCtrl.retirarOrdenTrabajo);
  
  module.exports = ordentrabajoRouter;

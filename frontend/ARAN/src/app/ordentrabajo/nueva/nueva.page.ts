@@ -75,7 +75,7 @@ export class NuevaPage implements OnInit {
       if (nuevaOT.tarjeta.value == "" || 
       !nuevaOT.tarjeta.value ||
       nuevaOT.tarjeta.value == null){
-        nuevaOT.tarjeta = environment.NO_ASIGNADA;
+        nuevaOT.tarjeta = environment.TARJETA_NO_ASIGNADA;
       }
 
       // send data

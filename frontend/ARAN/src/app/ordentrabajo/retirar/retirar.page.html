@@ -111,10 +111,13 @@
   </ion-item>
   <ion-button color="success" id="cantelaTotalSaldo" (click)="cantelaTotalSaldo()">Total</ion-button>
 
+  <ion-item>
+    <ion-label>Detalles de la Orden de Trabajo: </ion-label>
+    <ion-label *ngIf="OTaRetirar">{{OTaRetirar.OrdenTrabajo.detalle}}</ion-label>  
+  </ion-item>
 
   <ion-item>
     <ion-label>Observaciones: </ion-label>
-    <!-- concatenar con el campo detalles a la hora de actualizar en la db -->
     <ion-input formControlName="observaciones" ></ion-input>  
   </ion-item>
 

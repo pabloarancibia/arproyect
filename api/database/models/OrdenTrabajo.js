@@ -51,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE
     },
     detalle:{
-      type: DataTypes.STRING
+      type: DataTypes.TEXT('long')
     },
     tarjeta:{
       type: DataTypes.STRING

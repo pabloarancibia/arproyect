@@ -1,5 +1,5 @@
 const {OrdenTrabajo,Cliente, Estado, Moto, Trabajo, Usuario,
-    Registro_Cambios_Estado} = require('../database/models/index');
+    Registro_Cambios_Estado, Tarjeta} = require('../database/models/index');
 
 const { Op, Sequelize } = require("sequelize");
 const { response } = require('express');
@@ -89,7 +89,7 @@ const getOrdenTrabajoBy = async(req,res)=>{
         return res.json(ordenesTrabajo)
 
     }catch (error){
-        res.status(500).json(error.message);
+        res.status(400).json(error.message);
     }
 
 }
@@ -129,7 +129,7 @@ const getOrdenTrabajoByCliente = async (req,res) => {
         });
         return res.json(ordenesTrabajo);
     } catch (error) {
-        return res.status(500).json({error:error, message: 'error encontrando orden'})        
+        return res.status(400).json({error:error.message, message: 'error encontrando orden'})        
     }
 }
 
@@ -192,8 +192,8 @@ const nuevaOrdenTrabajo = async (req,res) => {
 
         return res.json(nuevaOrdenTrabajo);
     } catch (error) {
-        return res.status(500).json({
-            error:error, 
+        return res.status(400).json({
+            error:error.message, 
             message:'Error cargando orden',
             context: 'api > controllers > ordenTrabajoController > nuevaOrdenTrabajo'
         })  
@@ -207,12 +207,12 @@ const nuevaOrdenTrabajo = async (req,res) => {
      * [TarjetaId][TarjetaEstado]
      * Si se recibe TarjetaId y TarjetaEstado se cambia el mismo
      */
-const cambiarEstadoOrdenTrabajo = async (req, res) => {
+const retirarOrdenTrabajo = async (req, res) => {
     try {
         if (!req.body.estado 
             || !req.params.id_orden 
             || !req.body.precio
-            || !req.body.saldo
+            || !req.body.entrega
             || !req.body.detalle
             ){
             return res.status(400).json({message:'Debe incluir estado, id de orden, precio, saldo y detalle'})
@@ -244,7 +244,7 @@ const cambiarEstadoOrdenTrabajo = async (req, res) => {
             {
                 EstadoId : estado.id,
                 precio: req.body.precio,
-                saldo: req.body.saldo,
+                entrega: req.body.entrega,
                 detalle: req.body.detalle
             },
             {
@@ -278,35 +278,15 @@ const cambiarEstadoOrdenTrabajo = async (req, res) => {
                     return res.status(400).json({message:'No se encuentra estado de tarjeta'})
                 }
 
-                await Tarjeta.update(
+                // Actualizo el estado 
+                await tarjeta.update(
                     {
-                        EstadoId:estadoTarjeta.id},
-                    {
-                        where: {
-                            id: req.body.TarjetaId
-                        }
+                        EstadoId:estadoTarjeta.id
                     }
                 );
             }
 
         }; 
-        /*
-        if(orden_modif.tarjeta){
-            let tarjeta = await Tarjeta.findOne(
-                {
-                    where: {numero: orden_modif.tajeta}
-                }
-            );
-            if (tarjeta){
-                await Tarjeta.update(
-                    {EstadoId:estado.id},
-                    {
-                        where: {numero: orden_modif.tajeta}
-                    }
-                );
-            }
-        };
-        */
 
         // Registro el cambio de estado
         await Registro_Cambios_Estado.create({
@@ -335,11 +315,16 @@ const cambiarEstadoOrdenTrabajo = async (req, res) => {
             }
         }*/
         
-        return res.json({message: 'Estado modificado correctamente'})
+        return res.json({
+            message: 'Estado modificado correctamente'
+        })
     } catch (error) {
-        return res.status(500).json({error:error, message:'Error en la petición'})
+        return res.status(400).json({
+            error: error.message, 
+            message:'Error en la petición'
+        })
     }
 }
 
 module.exports = {getOrdenesTrabajo, getOrdenTrabajoBy, 
-    getOrdenTrabajoByCliente,nuevaOrdenTrabajo, cambiarEstadoOrdenTrabajo};
+    getOrdenTrabajoByCliente,nuevaOrdenTrabajo, retirarOrdenTrabajo};

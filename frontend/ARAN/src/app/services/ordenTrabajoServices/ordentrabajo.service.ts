@@ -42,10 +42,10 @@ export class OTService {
   /**
    * Service para actualizar estado de OT y Tarjeta asociada a la misma.
    * @param id_orden id de orden de trabajo
-   * @param otprecio precio
-   * @param otsaldo saldo
-   * @param otdetalle detalle
-   * @param otestado estado para OT
+   * @param precio precio
+   * @param saldo saldo
+   * @param detalle detalle
+   * @param estado estado para OT
    * @param TarjetaId id de Tarjeta
    * @param TarjetaEstado estado para Tarjeta
    * @returns 

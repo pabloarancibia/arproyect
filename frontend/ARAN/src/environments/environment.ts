@@ -6,10 +6,17 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost:3000',
 
-  
+  // ESTADOS PARA OT
   ESTADO_ESPERA: 'espera',// estado de una nueva OT
-  ESTADO_RETIRAR: 'retirar', // accion retirar de OT
-  NO_ASIGNADA: 'no_asignada', // cuando no se carga numero de tarjeta
+  ESTADO_RETIRAR: 'retirado', // Trabajo retirado por el cliente
+  ESTADO_FINALIZADO: 'finalizado', // Trabajo finalizado
+  ESTADO_PROCESO: 'proceso', // Trabajo en proceso
+
+  // ESTADOS TARJETAS
+  TARJETA_NO_ASIGNADA: 'no_asignada', // cuando no se carga numero de tarjeta a una OT
+  TARJETA_LIBRE: 'libre', // Tarjeta libre para su uso
+
+  // ACCIONES PARA ESTADOS
   ACCION_NUEVA: 'nueva', // accion nueva de evento mqtt
   ACCION_EN_USO: 'en_uso', // accion retirar de evento mqtt
 

@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       detalle:{
-        type: Sequelize.STRING
+        type: Sequelize.TEXT('long')
       },
       tarjeta:{
         type: Sequelize.STRING
