@@ -159,7 +159,7 @@ export class RetirarPage implements OnInit {
         console.log('datos para enviar \n ORDEN ID: ',this.OTaRetirar.OrdenTrabajo.id,'DATA \n', data)
 
       // Envio datos de la orden y tarjeta para actualizar
-      this.otService.putEstadoOTyTarjeta(
+      this.otService.putRetirarOTyTarjeta(
         this.OTaRetirar.OrdenTrabajo.id,
         data
       ).then(res=>{

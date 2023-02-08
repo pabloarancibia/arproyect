@@ -203,6 +203,7 @@ const nuevaOrdenTrabajo = async (req,res) => {
 
 /**
      * Cambiar estado orden de trabajo y [tarjeta]
+     * a retirado y libre respectivamente
      * @params id_orden, precio, saldo, detalle, estado(OT)
      * [TarjetaId][TarjetaEstado]
      * Si se recibe TarjetaId y TarjetaEstado se cambia el mismo

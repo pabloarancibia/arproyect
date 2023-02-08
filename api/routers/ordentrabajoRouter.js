@@ -50,12 +50,12 @@
         ordentrabajoCtrl.nuevaOrdenTrabajo);
 
     /**
-     * Cambiar estado orden de trabajo y [tarjeta]
+     * Retirar orden de trabajo y [tarjeta]
      * @params id_orden, precio, saldo, detalle, estado(OT)
      * [TarjetaId][TarjetaEstado]
      * Si se recibe TarjetaId y TarjetaEstado se cambia el mismo
      */
-     ordentrabajoRouter.put('/cambiarestado/:id_orden',
+     ordentrabajoRouter.put('/retirar/:id_orden',
         ordentrabajoCtrl.retirarOrdenTrabajo);
  
  module.exports = ordentrabajoRouter;

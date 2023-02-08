@@ -50,10 +50,10 @@ export class OTService {
    * @param TarjetaEstado estado para Tarjeta
    * @returns 
    */
-  putEstadoOTyTarjeta(
+  putRetirarOTyTarjeta(
     id_orden, changes: Partial<any>
   ){
-    return this._http.put(this.URL + '/ordentrabajo/cambiarestado/' + id_orden, changes)
+    return this._http.put(this.URL + '/ordentrabajo/retirar/' + id_orden, changes)
     .toPromise()
     .then(res=>{
       return res
