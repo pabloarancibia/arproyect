@@ -56,6 +56,9 @@ module.exports = (sequelize, DataTypes) => {
     tarjeta:{
       type: DataTypes.STRING
     },
+    ordenPapel:{
+      type: DataTypes.STRING
+    },
     is_active: {
       type: DataTypes.BOOLEAN
     },

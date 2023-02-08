@@ -15,6 +15,7 @@ module.exports = {
             fecha_entrega_estimada: new Date(),
             detalle: 'busca por la noche 21hs',
             tarjeta: '1111',
+            ordenPapel: '123456789',
             createdAt: new Date(),
             updatedAt: new Date()
         },
@@ -30,6 +31,7 @@ module.exports = {
             fecha_entrega_estimada: new Date(),
             detalle: 'dar prioridad a este trabajo',
             tarjeta: '1112',
+            ordenPapel: '987654321',
             createdAt: new Date(),
             updatedAt: new Date()
         },
@@ -45,6 +47,7 @@ module.exports = {
             fecha_entrega_estimada: new Date(),
             detalle: 'busca primera hora de la tarde',
             tarjeta: '1113',
+            ordenPapel: '11122334455',
             createdAt: new Date(),
             updatedAt: new Date()
         },
