@@ -12,10 +12,11 @@ import { HttpClientModule } from '@angular/common/http';
 import localEs from '@angular/common/locales/es-AR'
 import { DatePipe, registerLocaleData } from '@angular/common';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 registerLocaleData(localEs,'es-AR')
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SidenavComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     HttpClientModule, NgxDatatableModule],
   providers: [{ 
