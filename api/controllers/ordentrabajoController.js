@@ -133,9 +133,16 @@ const getOrdenTrabajoByCliente = async (req,res) => {
     }
 }
 
+/**
+ * Crear nueva orden de trabajo
+ * Estado recien creada debe ser 'espera'
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const nuevaOrdenTrabajo = async (req,res) => {
     try {
-        //buscar estado para asegurar que sea "En Espera"
+        //buscar estado para asegurar que sea "espera"
         const estado = await Estado.findOne({
             where: {
                 nombre:{
@@ -163,20 +170,19 @@ const nuevaOrdenTrabajo = async (req,res) => {
 
         // Asigno a Tarjeta la ref a la nueva OT
         // Modifico estado de la Tarjeta  
-        if(nuevaOrdenTrabajo.tarjeta){
-            let tarjeta = await Tarjeta.findOne(
+        if(req.body.TarjetaId){
+            let tarjetaActual = await Tarjeta.findOne(
                 {
-                    where: {numero: nuevaOrdenTrabajo.tajeta}
+                    where: {
+                        id: req.body.TarjetaId
+                    }
                 }
             );
-            if (tarjeta){
-                await Tarjeta.update(
+            if (tarjetaActual){
+                await tarjetaActual.update(
                     {
                         EstadoId : estado.id,
                         OrdenTrabajoId : nuevaOrdenTrabajo.id
-                    },
-                    {
-                        where: {numero: nuevaOrdenTrabajo.tajeta}
                     }
                 );
             }

@@ -27,7 +27,8 @@ export class NuevaPage implements OnInit {
 
     this.formNuevaOT = this.fb.group({
       'tarjeta': new FormControl(""),
-      'otpapel': new FormControl(""),
+      'TarjetaId': new FormControl(""),
+      'ordenPapel': new FormControl(""),
       'trabajo': new FormControl(""),
       
       'cliente': new FormControl(""),
@@ -64,18 +65,25 @@ export class NuevaPage implements OnInit {
       // set estado
       this.formNuevaOT.controls["estado"].setValue(environment.ESTADO_ESPERA);
     
+      console.log('this.formNuevaOT.value: ',this.formNuevaOT.value)
       const nuevaOT = this.formNuevaOT.value;  
       
       // check datas
-      if (nuevaOT.fecha_entrega_estimada.value == "" || 
-      !nuevaOT.fecha_entrega_estimada.value ||
-      nuevaOT.fecha_entrega_estimada.value == null){
+      if (nuevaOT.fecha_entrega_estimada == "" || 
+      !nuevaOT.fecha_entrega_estimada ||
+      nuevaOT.fecha_entrega_estimada == null){
         nuevaOT.fecha_entrega_estimada = this.now;
       }
-      if (nuevaOT.tarjeta.value == "" || 
-      !nuevaOT.tarjeta.value ||
-      nuevaOT.tarjeta.value == null){
+      if (nuevaOT.tarjeta == "" || 
+      !nuevaOT.tarjeta ||
+      nuevaOT.tarjeta == null){
         nuevaOT.tarjeta = environment.TARJETA_NO_ASIGNADA;
+      }
+
+      if (nuevaOT.ordenPapel == "" || 
+      !nuevaOT.ordenPapel ||
+      nuevaOT.ordenPapel == null){
+        nuevaOT.ordenPapel = environment.TARJETA_NO_ASIGNADA;
       }
 
       // send data
@@ -107,17 +115,21 @@ export class NuevaPage implements OnInit {
       'buscar numero tarjeta'
       this.eventosService.getUltimoEventoByAccion(environment.ACCION_NUEVA, fecha_desde)
       .then(res=>{
+        console.log('res ', res)
         this.nueva = res
         if (this.nueva){
-          console.log('último evento',this.nueva[0]['numero'])
-        console.log('tarjeta actual',this.formNuevaOT.controls["tarjeta"].value)
-        if (this.nueva[0]['numero'] !== this.formNuevaOT.controls["tarjeta"].value){
-          this.formNuevaOT.controls["tarjeta"].setValue(this.nueva[0]['numero']);
+          console.log('último evento: ',this.nueva['Tarjeta']['numero'])
+        console.log('tarjeta actual: ',this.formNuevaOT.controls["tarjeta"].value)
+        if (this.nueva['Tarjeta']['numero']!== this.formNuevaOT.controls["tarjeta"].value){
+          this.formNuevaOT.controls["tarjeta"].setValue(this.nueva['Tarjeta']['numero']);
+          this.formNuevaOT.controls["TarjetaId"].setValue(this.nueva['Tarjeta']['id']);
+          
           this.subscription.unsubscribe()
+          
           document.getElementById('addNumeroTarjeta').setAttribute('disabled','false');
           document.getElementById('cancelAddNumeroTarjeta').setAttribute('disabled','true');
 
-          console.log('tarjeta nueva asignada')
+          console.log('tarjeta nueva asignada: ', this.formNuevaOT.controls["tarjeta"].value)
 
         }
         

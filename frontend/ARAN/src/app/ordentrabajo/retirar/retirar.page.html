@@ -16,6 +16,10 @@
     <ion-input formControlName="tarjeta" readonly></ion-input>
   </ion-item>
 
+  <ion-item>
+    <ion-label>Orden Papel N°</ion-label>
+    <ion-label *ngIf="OTaRetirar">{{OTaRetirar.OrdenTrabajo.ordenPapel}}</ion-label>
+  </ion-item>
 
   <ion-button id="addNumeroTarjeta" (click)="addNumeroTarjeta()">Buscar Tarjeta</ion-button>
   <ion-button id="stopSearch" (click)="stopSearch()">Cancelar</ion-button>
