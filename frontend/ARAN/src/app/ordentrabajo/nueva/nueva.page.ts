@@ -118,7 +118,8 @@ export class NuevaPage implements OnInit {
         console.log('res ', res)
         this.nueva = res
         if (this.nueva){
-          console.log('último evento: ',this.nueva['Tarjeta']['numero'])
+          console.log('último evento, tarjeta n: ',this.nueva['Tarjeta']['numero'])
+          console.log('último evento tarjeta id: ',this.nueva['Tarjeta']['id'])
         console.log('tarjeta actual: ',this.formNuevaOT.controls["tarjeta"].value)
         if (this.nueva['Tarjeta']['numero']!== this.formNuevaOT.controls["tarjeta"].value){
           this.formNuevaOT.controls["tarjeta"].setValue(this.nueva['Tarjeta']['numero']);

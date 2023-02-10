@@ -12,7 +12,8 @@ const { response } = require('express');
  * @returns res
  */
 const getUltimoEventoByAccion = async (req, res)=>{
-    let {fecha_desde, accion} = req.params;
+    try {
+        let {fecha_desde, accion} = req.params;
     if (!accion) {res.status(400).json({message:'Debe incluir accion a buscar'});}
     if (!fecha_desde) {res.status(400).json({message:'Debe incluir desde que fecha buscar'});}
 
@@ -29,6 +30,8 @@ const getUltimoEventoByAccion = async (req, res)=>{
         },
         //attributes: {exclude: ['TarjetumId']},
         include: [{
+            model: Tarjeta, as: 'Tarjeta'
+        },{
             model:OrdenTrabajo,
             include: [
                 {model: Trabajo},
@@ -42,8 +45,6 @@ const getUltimoEventoByAccion = async (req, res)=>{
             ],
             //include: { all: true}
 
-        },{
-            model: Tarjeta, as: 'Tarjeta'
         }],
         order:[['updatedAt','DESC']],
         
@@ -56,13 +57,23 @@ const getUltimoEventoByAccion = async (req, res)=>{
     }
 
     // debido a que ya se leyó el evento, lo marco como is_active false.
-    evento_mqtt.update(
-        {
-            is_active:false
-        },
-        );
+    // evento_mqtt.update(
+    //     {
+    //         is_active:false
+    //     },
+    //     );
 
     return res.status(200).json(evento_mqtt);
+        
+    } catch (error) {
+        return res.status(400).json({
+            error: error.message, 
+            message: 'fallo en leer tarjeta',
+            context: 'fallo en busqueda de último evento mqtt'});
+
+        
+    }
+    
 
 
 }

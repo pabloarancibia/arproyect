@@ -9,12 +9,12 @@ module.exports = (sequelize, DataTypes) => {
    */
   class Eventos_mqtt extends Model {
     static associate(models) {
-      // Eventos.OrdenId pertenece a OrdenTrabajo
+      // Eventos.OrdenTrabajoId pertenece a OrdenTrabajo
       Eventos_mqtt.belongsTo(models.OrdenTrabajo);
 
       //Eventos.TarjetaId pertenece a Tarjeta
       Eventos_mqtt.belongsTo(models.Tarjeta
-        ,{foreignKey: 'id', as: 'Tarjeta'}
+        ,{foreignKey: 'TarjetaId', as: 'Tarjeta'}
       );
     }
   }
