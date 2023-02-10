@@ -247,17 +247,12 @@ const retirarOrdenTrabajo = async (req, res) => {
         }
 
         // Modifico estado, precio, detalle y saldo de la Orden
-        const orden_modif = await OrdenTrabajo.update(
+        await orden.update(
             {
                 EstadoId : estado.id,
                 precio: req.body.precio,
                 entrega: req.body.entrega,
                 detalle: req.body.detalle
-            },
-            {
-            where: {
-                id:orden.id,
-                }
             });
 
         
@@ -298,7 +293,7 @@ const retirarOrdenTrabajo = async (req, res) => {
         // Registro el cambio de estado
         await Registro_Cambios_Estado.create({
             EstadoId:estado.id,
-            OrdenTrabajoId:orden_modif.id,
+            OrdenTrabajoId:orden.id,
             fecha:Date.now()
         }
         )

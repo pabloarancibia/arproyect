@@ -57,11 +57,11 @@ const getUltimoEventoByAccion = async (req, res)=>{
     }
 
     // debido a que ya se leyó el evento, lo marco como is_active false.
-    // evento_mqtt.update(
-    //     {
-    //         is_active:false
-    //     },
-    //     );
+    evento_mqtt.update(
+        {
+            is_active:false
+        },
+        );
 
     return res.status(200).json(evento_mqtt);
         
