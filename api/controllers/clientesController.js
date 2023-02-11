@@ -1,4 +1,4 @@
-const {Cliente} = require('../database/models/index');
+const {Cliente, Rol} = require('../database/models/index');
 
 const { Op, Sequelize } = require("sequelize");
 const { response } = require('express');
@@ -26,10 +26,17 @@ const nuevoCliente = async (req, res)=>{
 
 const listarCliente = async (req, res)=>{
     try {
-        const listadoClientes = await Cliente.findAll();
+        const listadoClientes = await Cliente.findAll({
+            include:{
+                model: Rol,
+                attributes: ['id','nombre', 'descripcion']
+            }
+        });
+        
         return res.status(200).json({
             listadoClientes
         }); 
+
     } catch (error) {
         return res.status(400).json({
             error: error.message,
@@ -42,7 +49,11 @@ const listarCliente = async (req, res)=>{
 const getById = async (req, res)=>{
     try {
         const cliente = await Cliente.findOne({
-            where: {id : req.params.ClienteId}
+            where: {id : req.params.ClienteId},
+            include:{
+                model: Rol,
+                attributes: ['id','nombre', 'descripcion']
+            }
         });
         return res.status(200).json({
             cliente
