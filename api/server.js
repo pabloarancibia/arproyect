@@ -27,6 +27,7 @@
  app.use('/clientes',require('./routers/clientesRouter'));
  app.use('/repuestos',require('./routers/repuestosRouter'));
  app.use('/motos',require('./routers/motosRouter'));
+ app.use('/trabajos',require('./routers/trabajosRouter'));
 
  const mqttCtrl = require('./controllers/mqttController');
 
