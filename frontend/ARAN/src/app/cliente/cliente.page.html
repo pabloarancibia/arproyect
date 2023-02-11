@@ -1,6 +1,11 @@
-<ion-header>
+<!-- no uso eeste page, en su lugar el componente nuevo-->
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Cliente</ion-title>
+    <ion-title size="large">BUSCAR O AÑADIR CLIENTE</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button color="primary" menuId="sideMenu">
+      </ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -27,6 +32,8 @@
     </ion-item>
 
   </form>
+
+
 
   <ion-grid>
     <ion-row>

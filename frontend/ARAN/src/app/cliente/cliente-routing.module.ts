@@ -7,10 +7,10 @@ import { NuevoComponent } from './nuevo/nuevo.component';
 const routes: Routes = [
   {
     path: '',
-    component: ClientePage
+    component: NuevoComponent
   },
   {
-    path: 'nuevo',
+    path: 'buscaragregar',
     component: NuevoComponent,
 
   }

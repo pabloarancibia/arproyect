@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title size="large">NUEVO CLIENTE</ion-title>
+    <ion-title size="large">BUSCAR O AGREGAR NUEVO CLIENTE</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button color="primary" menuId="sideMenu">
       </ion-menu-button>
@@ -17,27 +17,65 @@
 			"celular": 
    -->
   <ion-item>
-    <ion-label>Nombre</ion-label>
+    <ion-label position="floating">Nombre</ion-label>
     <ion-input></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label>Apellido</ion-label>
+    <ion-label position="floating">Apellido</ion-label>
     <ion-input></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label>DNI</ion-label>
+    <ion-label position="floating">DNI</ion-label>
     <ion-input></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label>Celular</ion-label>
+    <ion-label position="floating">Celular</ion-label>
     <ion-input></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-button type="submit" color="primary">Guardar</ion-button>
+    <ion-button type="submit" color="primary">Buscar</ion-button>
   </ion-item>
-
+  <ion-item>
+    <ion-button color="primary" >Añadir Como Nuevo Cliente</ion-button>
+  </ion-item>
 </form>
+
+<!-- Listado de Clientes -->
+<ion-content>
+  <!-- NGX DATATABLE -->
+ 
+  <!-- <input
+        type="text"
+        style="padding:8px;margin:15px auto;width:30%;"
+        placeholder="Filtrar por Cliente..."
+        (keyup)="updateFilter($event)"
+      /> -->
+
+  <div class="ion-padding">
+    <!-- Theme classes dark, material, bootstrap -->
+    <ngx-datatable 
+      #table
+      class="bootstrap ngx-datatable"
+      [limit]="15"  
+      [rows]="rows" 
+      [rowHeight]="50" 
+      [columns]="columns"
+      [columnMode]="'force'" 
+      [sortType]="'multi'" 
+      [headerHeight]="50" 
+      [footerHeight]="50"
+      [summaryRow]="true"
+      [summaryPosition]="'bottom'"
+      [loadingIndicator]="loadingIndicator"
+      [reorderable]="reorderable"
+      [selected]="selected"
+    >
+    </ngx-datatable>
+  </div>
+  <!-- END NGX DATATABLE -->
+
+
 </ion-content>
 
 
