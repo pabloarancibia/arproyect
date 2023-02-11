@@ -20,9 +20,11 @@ clientesRouter.post('/nuevo', clientesCtrl.nuevoCliente);
 
 clientesRouter.get('/listar', clientesCtrl.listarCliente);
 
+clientesRouter.get('/:ClienteId', clientesCtrl.getById);
+
 clientesRouter.put('/editar/:ClienteId', clientesCtrl.editarCliente);
 
-clientesRouter.delete('/eliminar/:ClienteId', clientes.eliminarCliente);
+clientesRouter.delete('/eliminar/:ClienteId', clientesCtrl.eliminarCliente);
 
 
 
