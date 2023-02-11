@@ -24,6 +24,7 @@
  app.use('/gen',require('./routers/genRouter'));
  app.use('/tarjetas',require('./routers/tarjetasRouter'));
  app.use('/eventosmqtt',require('./routers/eventosMqttRouter'));
+ app.use('/clientes',require('./routers/clientesRouter'));
 
  const mqttCtrl = require('./controllers/mqttController');
 
