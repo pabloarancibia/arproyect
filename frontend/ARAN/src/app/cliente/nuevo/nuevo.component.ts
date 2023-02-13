@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { ClientesService } from 'src/app/services/clientes/clientes.service';
 
 @Component({
   selector: 'app-nuevo',
@@ -8,6 +10,7 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 })
 export class NuevoComponent implements OnInit {
 
+  formCliente: FormGroup
   lstClientes;
   /**
    * ngx datatable
@@ -23,16 +26,50 @@ export class NuevoComponent implements OnInit {
 
 
 
-  constructor() { }
+  constructor(
+    private clientesServices: ClientesService,
+    private formBuider: FormBuilder
+  ) {
+
+    this.formCliente = this.formBuider.group({
+    "nombre": new FormControl(""),
+    "apellido": new FormControl(""),
+    "dni": new FormControl(""),
+    "celular": new FormControl("")
+    });
+
+  }
 
   ngOnInit() {
     this.columns = [
       { prop: 'nombre', name: 'Nombre', summaryFunc: () => null },
+      { prop: 'apellido', name: 'Apellido', summaryFunc: () => null },
+      { prop: 'celular', name: 'Celular', summaryFunc: () => null },
 
     ];
 
-    // service
+  }
+
+  onSubmit(){
+    
+    if (this.formCliente.valid){
+      const data = this.formCliente.value;
+      if (!data.nombre){data.nombre = ' '}
+      if (!data.apellido){data.apellido = ' '}
+      if (!data.celular){data.celular = ' '}
+      
+      this.clientesServices.getClientes(data.nombre, data.apellido, data.celular)
+      .then(
+        res=>{
+          
+          console.log('res en nuevo.component',res)
+          let dat = (JSON.parse(JSON.stringify(res).replace(/^\{(.*)\}$/,"[ { $1 }]")));
+          console.log(dat)
+          this.rows = res['res']//dat[0]['res']
+        }
+      )
     //this.rows = res
+    }
   }
 
 }
