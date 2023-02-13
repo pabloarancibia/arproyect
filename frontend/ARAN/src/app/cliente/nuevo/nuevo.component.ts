@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-nuevo',
@@ -7,8 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NuevoComponent implements OnInit {
 
+  lstClientes;
+  /**
+   * ngx datatable
+   */
+  // public data: Data;
+  public columns: any;
+  public rows: any;
+  loadingIndicator = true;
+  reorderable = true;
+  temp: any;
+  @ViewChild(DatatableComponent) table: DatatableComponent;
+  selected = [];
+
+
+
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.columns = [
+      { prop: 'nombre', name: 'Nombre', summaryFunc: () => null },
+
+    ];
+
+    // service
+    //this.rows = res
+  }
 
 }
