@@ -20,6 +20,8 @@ clientesRouter.post('/nuevo', clientesCtrl.nuevoCliente);
 
 clientesRouter.get('/listar', clientesCtrl.listarCliente);
 
+clientesRouter.get('/buscar/nombre/:nombre?/apellido/:apellido?/celular/:celular?', clientesCtrl.buscarCliente);
+
 clientesRouter.get('/:ClienteId', clientesCtrl.getById);
 
 clientesRouter.put('/editar/:ClienteId', clientesCtrl.editarCliente);

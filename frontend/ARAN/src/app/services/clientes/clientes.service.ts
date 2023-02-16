@@ -31,4 +31,15 @@ export class ClientesService {
       return res;
     })
   }
+
+  /**
+   * Nuevo Cliente
+   * data: nombre, apellido, dni, celular,
+   */
+  postCliente(data){
+    return this._http.post(this.URL + '/clientes/nuevo', data).toPromise()
+    .then(res=>{
+      return res;
+    })
+  }
 }

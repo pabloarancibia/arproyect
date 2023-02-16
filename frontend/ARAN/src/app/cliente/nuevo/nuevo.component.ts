@@ -34,7 +34,7 @@ export class NuevoComponent implements OnInit {
     this.formCliente = this.formBuider.group({
     "nombre": new FormControl(""),
     "apellido": new FormControl(""),
-    "dni": new FormControl(""),
+    "dni": new FormControl("",),
     "celular": new FormControl("")
     });
 
@@ -63,12 +63,27 @@ export class NuevoComponent implements OnInit {
         res=>{
           
           console.log('res en nuevo.component',res)
-          let dat = (JSON.parse(JSON.stringify(res).replace(/^\{(.*)\}$/,"[ { $1 }]")));
-          console.log(dat)
           this.rows = res['res']//dat[0]['res']
         }
       )
     //this.rows = res
+    }
+  }
+
+  nuevoCliente(){
+    if (this.formCliente.valid){
+      const data = this.formCliente.value
+      if (data.dni == '' || data.dni == ' '){
+        data.dni = 0
+      }
+      if (data.celular == '' || data.celular == ' '){
+        data.celular = 0
+      }
+      console.log(data)
+      this.clientesServices.postCliente(data).then(res=>{
+        console.log(res);
+      })
+      
     }
   }
 
