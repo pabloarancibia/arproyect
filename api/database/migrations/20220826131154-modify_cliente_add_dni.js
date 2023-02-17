@@ -6,7 +6,7 @@ module.exports = {
       return Promise.all([
         queryInterface.addColumn('Cliente', 'dni', {
           type: Sequelize.DataTypes.BIGINT,
-          unique: true,
+          defaultValue: 0,
 
         }, { transaction: t }),
       ]);

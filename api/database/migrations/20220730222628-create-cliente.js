@@ -15,7 +15,12 @@ module.exports = {
         type: Sequelize.STRING,
       },
       celular: {
-        type: Sequelize.BIGINT
+        type: Sequelize.BIGINT,
+        defaultValue: 0
+      },
+      dni: {
+        type: Sequelize.BIGINT,
+        defaultValue: 0
       },
       estado: {
         type: Sequelize.STRING,
