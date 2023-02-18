@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ClientesService } from 'src/app/services/clientes/clientes.service';
 
@@ -28,7 +29,8 @@ export class NuevoComponent implements OnInit {
 
   constructor(
     private clientesServices: ClientesService,
-    private formBuider: FormBuilder
+    private formBuider: FormBuilder,
+    private modalCtrl: ModalController
   ) {
 
     this.formCliente = this.formBuider.group({
@@ -79,12 +81,53 @@ export class NuevoComponent implements OnInit {
       if (data.celular == '' || data.celular == ' '){
         data.celular = 0
       }
-      console.log(data)
+      
+      if ((!data.nombre || data.nombre == '' || data.nombre == ' ') &&
+            (!data.apellido || data.apellido == '' || data.apellido == ' ') &&
+            (!data.dni || data.dni==0) &&
+            (!data.celular || data.celular==0)){
+                console.log('No pueden estar todos los campos vacíos')
+                return 
+            }
+      
       this.clientesServices.postCliente(data).then(res=>{
         console.log(res);
+        // llamo a onsubmit para que muestre el cliente añadido en la lista
+        this.onSubmit();
       })
       
     }
+  }
+
+  onActivate(event) {
+    if(event.type == 'click') {
+        console.log(event.row);
+        this.selected = event.row
+        console.log(this.selected)
+    }
+}
+
+  /**
+   * 
+   * @returns Cerrar modal sin cambios
+   */
+  cancel(){
+    return this.modalCtrl.dismiss(null, 'cancel');
+  }
+
+  /**
+   * Cerrar modal retornando los datos del cliente seleccionado
+   * @returns 
+   */
+  confirm(){
+    // const data = {
+    //   'nombre':'nombre',
+    //   'apellido':'apellido',
+    //   'id':123,
+    //   'dni': ''
+    // }
+    const data = this.selected;
+    return this.modalCtrl.dismiss(data,'confirm')
   }
 
 }

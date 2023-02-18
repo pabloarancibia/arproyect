@@ -4,6 +4,8 @@ import { OTService } from 'src/app/services/ordenTrabajoServices/ordentrabajo.se
 import { EventosService } from 'src/app/services/eventos/eventos.service';
 import { interval, Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ModalController } from '@ionic/angular';
+import { NuevoComponent } from 'src/app/cliente/nuevo/nuevo.component';
 
 @Component({
   selector: 'app-nueva',
@@ -22,7 +24,8 @@ export class NuevaPage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private nuevaOTService: OTService,
-    private eventosService: EventosService
+    private eventosService: EventosService,
+    private modalCtrl: ModalController
     ) { 
 
     this.formNuevaOT = this.fb.group({
@@ -147,6 +150,22 @@ export class NuevaPage implements OnInit {
 
   limpiarTarjeta(){
     this.formNuevaOT.controls["tarjeta"].setValue('');
+  }
+
+  async openModalClientes(){
+
+    const modalClientes = await this.modalCtrl.create({
+      component: NuevoComponent,
+    });
+    modalClientes.present();
+
+    const { data, role } = await modalClientes.onWillDismiss();
+    if (role === 'confirm') {
+      console.log (data);
+    this.formNuevaOT.controls["cliente"].setValue(data.id);
+
+    }
+
   }
 
 }

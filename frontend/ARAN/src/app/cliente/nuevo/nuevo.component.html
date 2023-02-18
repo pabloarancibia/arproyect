@@ -1,9 +1,20 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title size="large">BUSCAR O AGREGAR NUEVO CLIENTE</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button color="primary" menuId="sideMenu">
       </ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header> -->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancelar</ion-button>
+    </ion-buttons>
+    <ion-title>Buscar o Agregar Clientes</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()">Confirmar</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -71,6 +82,7 @@
       [loadingIndicator]="loadingIndicator"
       [reorderable]="reorderable"
       [selected]="selected"
+      (activate)="onActivate($event)"
     >
     </ngx-datatable>
   </div>

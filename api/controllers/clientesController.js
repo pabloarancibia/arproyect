@@ -25,6 +25,15 @@ const nuevoCliente = async (req, res)=>{
         )
 
         //const {nombre, apellido, dni, celular} = req.body;
+
+        if ((!req.body.nombre || req.body.nombre == '' || req.body.nombre == ' ') &&
+            (!req.body.apellido || req.body.apellido == '' || req.body.apellido == ' ') &&
+            (!req.body.dni || req.body.dni==0) &&
+            (!req.body.celular || req.body.celular==0)){
+                return res.status(400).json({
+                    message: 'No pueden estar todo los campos vacíos',
+                })
+            }
         
         let nuevoCliente = await Cliente.create(
             //nombre:nombre, apellido:apellido, dni:dni, celular:celular, 
