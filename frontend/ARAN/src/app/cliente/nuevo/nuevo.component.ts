@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
-import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { DatatableComponent, SelectionType } from '@swimlane/ngx-datatable';
 import { ClientesService } from 'src/app/services/clientes/clientes.service';
 
 @Component({
@@ -24,6 +24,7 @@ export class NuevoComponent implements OnInit {
   temp: any;
   @ViewChild(DatatableComponent) table: DatatableComponent;
   selected = [];
+  SelectionType = SelectionType;
 
 
 
@@ -101,11 +102,15 @@ export class NuevoComponent implements OnInit {
 
   onActivate(event) {
     if(event.type == 'click') {
-        console.log(event.row);
+        //this.selected = []
+        console.log('event.row ',event.row);
         this.selected = event.row
-        console.log(this.selected)
+        console.log('this.selected ',this.selected)
     }
-}
+  }
+  // onSelect({ selected }) {
+  //   //console.log('Select Event', selected, this.selected);
+  // }
 
   /**
    * 

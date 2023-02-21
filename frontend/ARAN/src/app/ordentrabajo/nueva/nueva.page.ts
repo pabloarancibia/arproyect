@@ -18,6 +18,7 @@ export class NuevaPage implements OnInit {
   isAddMode: boolean =  true;
   now = new Date();
   nueva = {}
+  cliente = [];
 
   subscription: Subscription 
 
@@ -34,7 +35,7 @@ export class NuevaPage implements OnInit {
       'ordenPapel': new FormControl(""),
       'trabajo': new FormControl(""),
       
-      'cliente': new FormControl(""),
+      'ClienteId': new FormControl(""),
       'moto': new FormControl(""),
       'repuestos': new FormControl(""),
 
@@ -46,7 +47,8 @@ export class NuevaPage implements OnInit {
       'fecha_entrega_estimada': new FormControl("",),
 
       'estado': new FormControl(""),
-    })
+    });
+
    }
 
 
@@ -162,7 +164,9 @@ export class NuevaPage implements OnInit {
     const { data, role } = await modalClientes.onWillDismiss();
     if (role === 'confirm') {
       console.log (data);
-    this.formNuevaOT.controls["cliente"].setValue(data.id);
+    this.formNuevaOT.controls["ClienteId"].setValue(data.id);
+    this.cliente = data;
+    console.log('this.cliente', this.cliente);
 
     }
 

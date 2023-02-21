@@ -83,7 +83,13 @@
       [reorderable]="reorderable"
       [selected]="selected"
       (activate)="onActivate($event)"
+      
+      
     >
+    <!-- 
+      (select)="onSelect($event)"
+      [selectionType]="SelectionType.single"
+     -->
     </ngx-datatable>
   </div>
   <!-- END NGX DATATABLE -->

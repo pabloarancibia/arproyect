@@ -39,9 +39,27 @@
       </ion-select>
     </ion-item>
 
+    <ion-label position="floating">Cliente</ion-label>
+    <ion-list>
+      <ion-item>
+        <ion-label>Nombre</ion-label>
+        <ion-label>Apellido</ion-label>
+        <ion-label>Celular</ion-label>
+        <ion-label>DNI</ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>{{cliente.nombre}}</ion-label>
+        <ion-label>{{cliente.apellido}}</ion-label>
+        <ion-label>{{cliente.celular}}</ion-label>
+        <ion-label>{{cliente.dni}}</ion-label>
+      </ion-item>
+
+    </ion-list>
+
     <ion-item>
-      <ion-label position="floating">Cliente</ion-label>
-      <ion-input formControlName="cliente"></ion-input>
       <ion-button (click)="openModalClientes()"> Buscar </ion-button>
     </ion-item>
 
