@@ -20,6 +20,10 @@ const routes: Routes = [
     loadChildren: () => import('./cliente/cliente.module').then( m => m.ClientePageModule)
   },
   {
+    path: 'moto',
+    loadChildren: () => import('./moto/moto.module').then( m => m.MotoModule)
+  },
+  {
     path: 'repuesto',
     loadChildren: () => import('./repuesto/repuesto.module').then( m => m.RepuestoModule)
   },

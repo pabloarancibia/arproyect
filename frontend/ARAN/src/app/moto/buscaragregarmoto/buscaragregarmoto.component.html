@@ -12,7 +12,7 @@
     <ion-buttons slot="start">
       <ion-button color="medium" (click)="cancel()">Cancelar</ion-button>
     </ion-buttons>
-    <ion-title>Buscar o Agregar Clientes</ion-title>
+    <ion-title>Buscar o Agregar Motos</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="confirm()">Confirmar</ion-button>
     </ion-buttons>
@@ -20,56 +20,46 @@
 </ion-header>
 
 <ion-content>
-<form [formGroup]="formCliente" (ngSubmit)="onSubmit()">
-  <!-- 
-    "nombre": "",
-			"apellido": "",
-			"dni": ,
-			"celular": 
-   -->
+<form [formGroup]="formMoto" (ngSubmit)="onSubmit()">
   <ion-item>
     <ion-label 
-      position="floating">Nombre</ion-label>
-    <ion-input formControlName="nombre"></ion-input>
+      position="floating">Marca</ion-label>
+    <ion-input formControlName="marca"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label position="floating">Apellido</ion-label>
-    <ion-input formControlName="apellido"></ion-input>
+    <ion-label position="floating">Modelo</ion-label>
+    <ion-input formControlName="modelo"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label position="floating">DNI</ion-label>
-    <ion-input formControlName="dni"></ion-input>
+    <ion-label position="floating">Cilindrada</ion-label>
+    <ion-input formControlName="cilindrada" type="number"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label position="floating">Celular</ion-label>
-    <ion-input formControlName="celular"></ion-input>
+    <ion-label position="floating">Año</ion-label>
+    <ion-input formControlName="anio" type="number"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Observaciones</ion-label>
+    <ion-textarea formControlName="observaciones"></ion-textarea>
   </ion-item>
 
   <ion-item>
-    <ion-button type="submit" color="primary">Buscar</ion-button>
+    <ion-button type="submit" color="primary">Buscar Moto</ion-button>
   </ion-item>
   <ion-item>
-    <ion-button color="primary" (click)="nuevoCliente()" >Añadir Como Nuevo Cliente</ion-button>
+    <ion-button color="primary" (click)="nuevaMoto()" >Añadir Como Nueva Moto</ion-button>
   </ion-item>
 </form>
-
 <ion-item *ngIf="selected">
   <ion-label>Seleccionado:</ion-label>
-  <ion-label>{{selected.nombre}} - {{selected.apellido}}
-    - {{selected.celular}} - {{selected.dni}}
+  <ion-label>{{selected.marca}} - {{selected.modelo}}
+    - {{selected.cilindrada}} - {{selected.anio}}
   </ion-label>
 </ion-item>
 
-<!-- Listado de Clientes -->
+<!-- Listado de Motos -->
 <ion-content>
   <!-- NGX DATATABLE -->
- 
-  <!-- <input
-        type="text"
-        style="padding:8px;margin:15px auto;width:30%;"
-        placeholder="Filtrar por Cliente..."
-        (keyup)="updateFilter($event)"
-      /> -->
 
   <div class="ion-padding">
     <!-- Theme classes dark, material, bootstrap -->
@@ -93,15 +83,12 @@
       
       
     >
-    <!-- 
-      (select)="onSelect($event)"
-      [selectionType]="SelectionType.single"
-     -->
     </ngx-datatable>
   </div>
   <!-- END NGX DATATABLE -->
 
 
 </ion-content>
+
 
 

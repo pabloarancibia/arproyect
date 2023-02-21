@@ -6,6 +6,7 @@ import { interval, Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ModalController } from '@ionic/angular';
 import { NuevoComponent } from 'src/app/cliente/nuevo/nuevo.component';
+import { BuscaragregarmotoComponent } from 'src/app/moto/buscaragregarmoto/buscaragregarmoto.component';
 
 @Component({
   selector: 'app-nueva',
@@ -19,6 +20,7 @@ export class NuevaPage implements OnInit {
   now = new Date();
   nueva = {}
   cliente = [];
+  moto = [];
 
   subscription: Subscription 
 
@@ -36,7 +38,7 @@ export class NuevaPage implements OnInit {
       'trabajo': new FormControl(""),
       
       'ClienteId': new FormControl(""),
-      'moto': new FormControl(""),
+      'MotoId': new FormControl(""),
       'repuestos': new FormControl(""),
 
       'detalle': new FormControl(""),
@@ -167,6 +169,24 @@ export class NuevaPage implements OnInit {
     this.formNuevaOT.controls["ClienteId"].setValue(data.id);
     this.cliente = data;
     console.log('this.cliente', this.cliente);
+
+    }
+
+  }
+
+  async openModalMotos(){
+
+    const modalMotos = await this.modalCtrl.create({
+      component: BuscaragregarmotoComponent,
+    });
+    modalMotos.present();
+
+    const { data, role } = await modalMotos.onWillDismiss();
+    if (role === 'confirm') {
+      console.log ('data',data);
+    this.formNuevaOT.controls["MotoId"].setValue(data.id);
+    this.moto = data;
+    console.log('this.moto', this.moto);
 
     }
 
