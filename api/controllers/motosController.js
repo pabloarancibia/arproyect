@@ -100,6 +100,40 @@ const eliminarMoto = async (req, res) => {
     }
 }
 
+/**
+ * Busqueda de Moto por:
+ * modelo, marca o cilindrada
+ * @param {*} req 
+ * @param {*} res 
+ * @returns {motos}
+ */
+const buscarMoto = async (req, res)=>{
+    try {
+        const {marca, modelo,cilindrada} = req.params;
+        
+        const busquedaMotos = await Moto.findAll({
+            where: {
+                [Op.or]: [
+                    { 'marca': { [Op.like]: '%' + marca + '%' } },
+                    { 'modelo': { [Op.like]: '%' + modelo + '%' } },
+                    { 'cilindrada': { [Op.like]: '%' + cilindrada + '%' } },
+                  ]
+            }
+        });
+        
+        return res.status(200).json({
+            motos:busquedaMotos
+        }); 
+
+    } catch (error) {
+        return res.status(400).json({
+            error: error.message,
+            message: 'Error buscando motos'
+        })
+    }
+    
+};
+
 
 // Exports
-module.exports = {nuevaMoto, listarMoto, editarMoto,eliminarMoto, getById}
+module.exports = {nuevaMoto, listarMoto, editarMoto,eliminarMoto, getById, buscarMoto}

@@ -20,6 +20,8 @@ motosRouter.post('/nueva', motosCtrl.nuevaMoto);
 
 motosRouter.get('/listar', motosCtrl.listarMoto);
 
+motosRouter.get('/buscar/marca/:marca?/modelo/:modelo?/cilindrada/:cilindrada?', motosCtrl.buscarMoto);
+
 motosRouter.get('/:MotoId', motosCtrl.getById);
 
 motosRouter.put('/editar/:MotoId', motosCtrl.editarMoto);
