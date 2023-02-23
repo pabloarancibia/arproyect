@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { ModalController } from '@ionic/angular';
 import { NuevoComponent } from 'src/app/cliente/nuevo/nuevo.component';
 import { BuscaragregarmotoComponent } from 'src/app/moto/buscaragregarmoto/buscaragregarmoto.component';
+import { TrabajosService } from 'src/app/services/trabajos/trabajos.service';
 
 @Component({
   selector: 'app-nueva',
@@ -21,6 +22,7 @@ export class NuevaPage implements OnInit {
   nueva = {}
   cliente = [];
   moto = [];
+  trabajos = [];
 
   subscription: Subscription 
 
@@ -28,14 +30,15 @@ export class NuevaPage implements OnInit {
     private fb: FormBuilder,
     private nuevaOTService: OTService,
     private eventosService: EventosService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private trabajosServices: TrabajosService
     ) { 
 
     this.formNuevaOT = this.fb.group({
       'tarjeta': new FormControl(""),
       'TarjetaId': new FormControl(""),
       'ordenPapel': new FormControl(""),
-      'trabajo': new FormControl(""),
+      'TrabajoId': new FormControl(""),
       
       'ClienteId': new FormControl(""),
       'MotoId': new FormControl(""),
@@ -56,6 +59,14 @@ export class NuevaPage implements OnInit {
 
   ngOnInit() {
     this.isAddMode = true;
+
+    //traigo tipos de trabajo
+    this.trabajosServices.getTrabajos()
+    .then(res=>{
+      console.log('res trabajos', res['listadoTrabajos'])
+      this.trabajos = res['listadoTrabajos'];
+      console.log('this.trabajos',this.trabajos)
+    })
   }
 
   onSubmit(){

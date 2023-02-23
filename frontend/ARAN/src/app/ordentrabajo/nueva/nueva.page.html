@@ -31,11 +31,10 @@
     <ion-item>
       <!-- <ion-label position="floating">Trabajo</ion-label>
       <ion-input formControlName="trabajo"></ion-input> -->
-      <ion-select placeholder="Trabajo" multiple="false" formControlName="trabajo">
-        <ion-select-option value="cilindro">Rectificación Cilindro</ion-select-option>
-        <ion-select-option value="tapa">Rectificación Tapa</ion-select-option>
-        <ion-select-option value="cigueñal">Cigüeñal y Biela</ion-select-option>
-        <ion-select-option value="encamisado">Encamisado Cilindro</ion-select-option>
+      <ion-select placeholder="Trabajo" multiple="false" formControlName="TrabajoId">
+        <ion-content *ngFor="let trabajo of trabajos">
+        <ion-select-option value="trabajo.id">{{trabajo.nombre}}</ion-select-option>
+        </ion-content>
       </ion-select>
     </ion-item>
 
