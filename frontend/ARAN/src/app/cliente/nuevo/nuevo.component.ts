@@ -98,6 +98,7 @@ export class NuevoComponent implements OnInit {
         console.log(res);
         // llamo a onsubmit para que muestre el cliente añadido en la lista
         this.onSubmit();
+        this.formCliente.reset();
       })
       
     }

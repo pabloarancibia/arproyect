@@ -99,6 +99,7 @@ export class BuscaragregarmotoComponent implements OnInit {
         console.log('post moto',res);
         // llamo a onsubmit para que muestre la moto añadido en la lista
         this.onSubmit();
+        this.formMoto.reset();
       })
       
     }
