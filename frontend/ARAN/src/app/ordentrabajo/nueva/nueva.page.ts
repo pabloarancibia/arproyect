@@ -108,6 +108,8 @@ export class NuevaPage implements OnInit {
       this.nuevaOTService.nuevaOTService(nuevaOT)
         .then(res=>{
           console.log('envio data nueva ot ok, res: ', res);
+          // limpio formulario
+          this.resetForm();
         })
     }
   }
@@ -200,6 +202,26 @@ export class NuevaPage implements OnInit {
     console.log('this.moto', this.moto);
 
     }
+
+  }
+
+  /**
+   * Limpiar formulario formNuevaOT
+   */
+  resetForm(){
+    // limpiar campos
+    this.formNuevaOT.reset();
+
+    // limpiar validaciones
+    Object.keys(this.formNuevaOT.controls).forEach(key => {
+      this.formNuevaOT.get(key).setErrors(null) ;
+    });
+
+    // limpiar objetos nueva,cliente,moto
+    this.nueva = {}
+    this.cliente = [];
+    this.moto = [];
+
 
   }
 

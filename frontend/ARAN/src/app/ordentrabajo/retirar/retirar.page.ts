@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { interval, Subscription } from 'rxjs';
 import { EventosService } from 'src/app/services/eventos/eventos.service';
 import { OTService } from 'src/app/services/ordenTrabajoServices/ordentrabajo.service';
@@ -21,6 +22,7 @@ export class RetirarPage implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private router: Router,
     private eventosService: EventosService,
     private otService: OTService,
   ) { 
@@ -163,14 +165,16 @@ export class RetirarPage implements OnInit {
         this.OTaRetirar.OrdenTrabajo.id,
         data
       ).then(res=>{
-        console.log('respuesta retirar: ', res)
-      });
+        console.log('respuesta retirar: ', res);
+        //this.resetForm()
+        this.router.navigate(['ordentrabajo/retirar/refresh']);
+
+
+      }).catch(err => console.error(err));
 
       // enviar OT id, precio,saldo, detalle(observaciones), estado='retirado'
       // TarjetaId, TarjetaEstado='libre'
     };
   }
-
-
 
 }

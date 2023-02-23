@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: RetirarPage
-  }
+  },
+  {
+    path: ':refresh',
+    component: RetirarPage
+  },
 ];
 
 @NgModule({

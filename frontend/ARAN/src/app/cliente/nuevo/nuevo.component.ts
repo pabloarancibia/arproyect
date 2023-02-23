@@ -53,6 +53,9 @@ export class NuevoComponent implements OnInit {
 
   }
 
+  /**
+   * busqueda
+   */
   onSubmit(){
     
     if (this.formCliente.valid){
