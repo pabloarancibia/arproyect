@@ -16,7 +16,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 registerLocaleData(localEs,'es-AR')
 
 @NgModule({
-  declarations: [AppComponent, SidenavComponent],
+  declarations: [AppComponent, SidenavComponent,],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     HttpClientModule, NgxDatatableModule],
   providers: [{ 

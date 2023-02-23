@@ -13,7 +13,7 @@ import { OrdentrabajoPage } from './ordentrabajo.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    OrdentrabajoPageRoutingModule
+    OrdentrabajoPageRoutingModule,
   ],
   declarations: [OrdentrabajoPage]
 })

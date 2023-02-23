@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { NuevaPageRoutingModule } from './nueva-routing.module';
 import { NuevaPage } from './nueva.page';
 import { NuevoComponent } from 'src/app/cliente/nuevo/nuevo.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { NuevoComponent } from 'src/app/cliente/nuevo/nuevo.component';
     FormsModule,
     IonicModule,
     NuevaPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxDatatableModule
   ],
   declarations: [
     NuevaPage,
