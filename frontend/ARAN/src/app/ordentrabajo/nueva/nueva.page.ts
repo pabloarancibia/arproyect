@@ -69,16 +69,18 @@ export class NuevaPage implements OnInit {
     })
   }
 
-  onSubmit(){
+  onSubmit(action: string){
     if (this.isAddMode){
-      this.agregarOT();
+      this.agregarOT(action);
     }
+
+
     if (!this.isAddMode){
       console.log('this.editarOT()');
     }
   }
 
-  private agregarOT(){
+  private agregarOT(action: string){
     if (this.formNuevaOT.valid) {
       // set estado
       this.formNuevaOT.controls["estado"].setValue(environment.ESTADO_ESPERA);
@@ -108,8 +110,9 @@ export class NuevaPage implements OnInit {
       this.nuevaOTService.nuevaOTService(nuevaOT)
         .then(res=>{
           console.log('envio data nueva ot ok, res: ', res);
-          // limpio formulario
-          this.resetForm();
+
+          // limpio formulario segun action
+          this.resetForm(action);
         })
     }
   }
@@ -208,7 +211,7 @@ export class NuevaPage implements OnInit {
   /**
    * Limpiar formulario formNuevaOT
    */
-  resetForm(){
+  resetForm(action: string){
     // limpiar campos
     this.formNuevaOT.reset();
 
@@ -219,9 +222,10 @@ export class NuevaPage implements OnInit {
 
     // limpiar objetos nueva,cliente,moto
     this.nueva = {}
-    this.cliente = [];
-    this.moto = [];
-
+    if(action=='limpiar'){
+      this.cliente = [];
+      this.moto = [];
+    }
 
   }
 

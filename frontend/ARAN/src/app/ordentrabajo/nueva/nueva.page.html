@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="formNuevaOT" (ngSubmit)="onSubmit()">
+  <form [formGroup]="formNuevaOT" (ngSubmit)="onSubmit(limpiar)">
     <!-- await for target -->
     <ion-item>
       <ion-label>Tarjeta </ion-label>
@@ -130,7 +130,11 @@
   
 
   <ion-item>
-    <ion-button type="submit" color="primary">Guardar</ion-button>
+    <ion-button [disabled]="!formNuevaOT.valid" color="primary" (click)="onSubmit(limpiar)">Guardar y Limpiar</ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-button [disabled]="!formNuevaOT.valid" color="primary" (click)="onSubmit(nolimpiar)">Guardar y Seguir Añadiendo</ion-button>
   </ion-item>
 
   </form>

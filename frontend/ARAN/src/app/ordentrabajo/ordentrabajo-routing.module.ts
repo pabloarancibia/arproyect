@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { OrdentrabajoPage } from './ordentrabajo.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: OrdentrabajoPage
+    loadChildren: () => import('./nueva/nueva.module').then( m => m.NuevaPageModule)
   },
   {
     path: 'nueva',
