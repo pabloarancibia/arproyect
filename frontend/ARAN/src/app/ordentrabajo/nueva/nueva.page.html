@@ -33,7 +33,7 @@
       <ion-input formControlName="trabajo"></ion-input> -->
       <ion-select placeholder="Trabajo" multiple="false" formControlName="TrabajoId">
         <ion-content *ngFor="let trabajo of trabajos">
-        <ion-select-option value="trabajo.id">{{trabajo.nombre}}</ion-select-option>
+        <ion-select-option value="{{trabajo.id}}">{{trabajo.nombre}}</ion-select-option>
         </ion-content>
       </ion-select>
     </ion-item>
