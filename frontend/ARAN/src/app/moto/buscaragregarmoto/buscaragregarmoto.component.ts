@@ -92,6 +92,7 @@ export class BuscaragregarmotoComponent implements OnInit {
             (!data.observaciones || data.observaciones == '' || data.observaciones == ' ') &&
             (!data.cilindrada || data.cilindrada==0)){
                 console.log('No pueden estar todos los campos vacíos')
+                alert('No pueden estar todos los campos vacíos')
                 return 
             }
       

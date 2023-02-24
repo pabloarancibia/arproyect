@@ -31,17 +31,20 @@
     <ion-item>
       <!-- <ion-label position="floating">Trabajo</ion-label>
       <ion-input formControlName="trabajo"></ion-input> -->
-      <ion-select placeholder="Trabajo" multiple="false" formControlName="TrabajoId">
+      <ion-select placeholder="Trabajo (*)" multiple="false" formControlName="TrabajoId">
         <ion-content *ngFor="let trabajo of trabajos">
         <ion-select-option value="{{trabajo.id}}">{{trabajo.nombre}}</ion-select-option>
         </ion-content>
       </ion-select>
+      
+
     </ion-item>
 
     <!-- CLIENTES -->
     <ion-item>
-      <ion-button (click)="openModalClientes()"> Agregar Cliente </ion-button>
+      <ion-button (click)="openModalClientes()"> Agregar Cliente (*)</ion-button>
     </ion-item>
+
 
     <ion-list>
       <ion-item>
@@ -72,7 +75,7 @@
         <ion-label>Marca</ion-label>
         <ion-label>Modelo</ion-label>
         <ion-label>Cilindrada</ion-label>
-        <ion-label>Anio</ion-label>
+        <ion-label>Año</ion-label>
         <ion-label>Observaciones</ion-label>
       </ion-item>
     </ion-list>

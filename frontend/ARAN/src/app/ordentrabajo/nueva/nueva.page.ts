@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { OTService } from 'src/app/services/ordenTrabajoServices/ordentrabajo.service';
 import { EventosService } from 'src/app/services/eventos/eventos.service';
 import { interval, Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { NuevoComponent } from 'src/app/cliente/nuevo/nuevo.component';
 import { BuscaragregarmotoComponent } from 'src/app/moto/buscaragregarmoto/buscaragregarmoto.component';
 import { TrabajosService } from 'src/app/services/trabajos/trabajos.service';
@@ -14,7 +14,7 @@ import { TrabajosService } from 'src/app/services/trabajos/trabajos.service';
   templateUrl: './nueva.page.html',
   styleUrls: ['./nueva.page.scss'],
 })
-export class NuevaPage implements OnInit {
+export class NuevaPage implements OnInit, OnDestroy {
 
   formNuevaOT: FormGroup;
   isAddMode: boolean =  true;
@@ -31,16 +31,17 @@ export class NuevaPage implements OnInit {
     private nuevaOTService: OTService,
     private eventosService: EventosService,
     private modalCtrl: ModalController,
-    private trabajosServices: TrabajosService
+    private trabajosServices: TrabajosService,
+    private alertController: AlertController
     ) { 
 
     this.formNuevaOT = this.fb.group({
       'tarjeta': new FormControl(""),
       'TarjetaId': new FormControl(""),
       'ordenPapel': new FormControl(""),
-      'TrabajoId': new FormControl(""),
+      'TrabajoId': new FormControl("",[Validators.required]),
       
-      'ClienteId': new FormControl(""),
+      'ClienteId': new FormControl("",[Validators.required]),
       'MotoId': new FormControl(""),
       'repuestos': new FormControl(""),
 
@@ -71,7 +72,7 @@ export class NuevaPage implements OnInit {
 
   onSubmit(action: string){
     if (this.isAddMode){
-      this.agregarOT(action);
+      this.presentAlertConfirm(action)
     }
 
 
@@ -133,12 +134,12 @@ export class NuevaPage implements OnInit {
     const intervalo = interval(2000);
     document.getElementById('addNumeroTarjeta').setAttribute('disabled','true');
     document.getElementById('cancelAddNumeroTarjeta').setAttribute('disabled','false');
-
+    let countObs = 0;
     this.subscription =  intervalo.subscribe(n=>{
       'buscar numero tarjeta'
       this.eventosService.getUltimoEventoByAccion(environment.ACCION_NUEVA, fecha_desde)
       .then(res=>{
-        console.log('res ', res)
+        console.log('this.subscription res ', res)
         this.nueva = res
         if (this.nueva){
           console.log('último evento, tarjeta n: ',this.nueva['Tarjeta']['numero'])
@@ -148,15 +149,16 @@ export class NuevaPage implements OnInit {
           this.formNuevaOT.controls["tarjeta"].setValue(this.nueva['Tarjeta']['numero']);
           this.formNuevaOT.controls["TarjetaId"].setValue(this.nueva['Tarjeta']['id']);
           
-          this.subscription.unsubscribe()
+          this.cancelAddNumeroTarjeta()
           
-          document.getElementById('addNumeroTarjeta').setAttribute('disabled','false');
-          document.getElementById('cancelAddNumeroTarjeta').setAttribute('disabled','true');
-
           console.log('tarjeta nueva asignada: ', this.formNuevaOT.controls["tarjeta"].value)
 
         }
         
+        }else{
+          countObs++;
+          console.log('count: ',countObs)
+          if(countObs==10){this.cancelAddNumeroTarjeta();}
         }
       })
     })
@@ -165,7 +167,7 @@ export class NuevaPage implements OnInit {
   cancelAddNumeroTarjeta(){
     document.getElementById('addNumeroTarjeta').setAttribute('disabled','false');
     document.getElementById('cancelAddNumeroTarjeta').setAttribute('disabled','true');
-    this.subscription.unsubscribe()
+    this.unsubscribe()
   }
 
   limpiarTarjeta(){
@@ -228,5 +230,51 @@ export class NuevaPage implements OnInit {
     }
 
   }
+  private unsubscribe(){
+    if (this.subscription){
+      this.subscription.unsubscribe()
+      console.log('unsuscribe')
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.subscription){
+      this.subscription.unsubscribe()
+      console.log('unsubscribe onDestroy')
+    }
+  }
+
+  /**
+   * Diálogo de confirmación
+   */
+  async presentAlertConfirm(action: string) {
+    const alert = await this.alertController.create({
+      header: 'Confirmación',
+      message: '¿Desea confirmar nueva orden?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+            
+          }
+        }, {
+          text: 'Confirmar',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.agregarOT(action);
+            
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+
+
+  }
+
 
 }

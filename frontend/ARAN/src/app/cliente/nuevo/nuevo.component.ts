@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { DatatableComponent, SelectionType } from '@swimlane/ngx-datatable';
 import { ClientesService } from 'src/app/services/clientes/clientes.service';
@@ -91,6 +91,7 @@ export class NuevoComponent implements OnInit {
             (!data.dni || data.dni==0) &&
             (!data.celular || data.celular==0)){
                 console.log('No pueden estar todos los campos vacíos')
+                alert('No pueden estar todos los campos vacíos')
                 return 
             }
       

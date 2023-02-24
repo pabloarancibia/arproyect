@@ -12,7 +12,7 @@
   <form [formGroup]="formRetirarOT" (ngSubmit)="onSubmit()">
   
   <ion-item>
-    <ion-label>Tarjeta N°</ion-label>
+    <ion-label>(*) Tarjeta N°</ion-label>
     <ion-input formControlName="tarjeta" readonly></ion-input>
   </ion-item>
 
@@ -96,7 +96,7 @@
     <ion-input formControlName="precio" type="number" readonly="{{isPrecioReadOnly}}"
     (ionChange)="calcSaldo()"></ion-input>  
   </ion-item>
-  <ion-button id="modificarPrecio" (click)="modificarPrecio()">Modificar</ion-button>
+  <ion-button id="modificarPrecio" (click)="modificarPrecio()">Modificar Precio</ion-button>
 
 
 
@@ -117,7 +117,7 @@
     <ion-input formControlName="cancela" type="number" 
     (ionChange)="calcSaldo()"></ion-input>  
   </ion-item>
-  <ion-button color="success" id="cantelaTotalSaldo" (click)="cantelaTotalSaldo()">Total</ion-button>
+  <ion-button color="success" id="cantelaTotalSaldo" (click)="cantelaTotalSaldo()">Cancelar Total</ion-button>
 
   <ion-item>
     <ion-label>Detalles de la Orden de Trabajo: </ion-label>
@@ -130,7 +130,7 @@
   </ion-item>
 
   <ion-item>
-    <ion-button type="submit" color="primary">Retirar</ion-button>
+    <ion-button [disabled]="!formRetirarOT.valid" type="submit" color="primary">Retirar Trabajo</ion-button>
   </ion-item>
 
   </form>

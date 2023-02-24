@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { interval, Subscription } from 'rxjs';
 import { EventosService } from 'src/app/services/eventos/eventos.service';
 import { OTService } from 'src/app/services/ordenTrabajoServices/ordentrabajo.service';
@@ -12,7 +13,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './retirar.page.html',
   styleUrls: ['./retirar.page.scss'],
 })
-export class RetirarPage implements OnInit {
+export class RetirarPage implements OnInit, OnDestroy {
   formRetirarOT: FormGroup;
   OTaRetirar;
   Repuestos;
@@ -25,10 +26,11 @@ export class RetirarPage implements OnInit {
     private router: Router,
     private eventosService: EventosService,
     private otService: OTService,
+    private alertController: AlertController
   ) { 
 
     this.formRetirarOT = this.fb.group({
-      'tarjeta': new FormControl(""),
+      'tarjeta': new FormControl("",[Validators.required]),
       'precio': new FormControl(""),
       'entrega': new FormControl(""),
       'cancela': new FormControl(""),
@@ -44,12 +46,17 @@ export class RetirarPage implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   addNumeroTarjeta(){
+    document.getElementById('addNumeroTarjeta').setAttribute('disabled','true');
+    document.getElementById('stopSearch').setAttribute('disabled','false');
+   
     const fecha_desde = new Date()
     const intervalo = interval(2000);
     console.log('inicio busqueda', fecha_desde)
+    let countObs = 0;
     this.subscription =  intervalo.subscribe(n=>{
       this.eventosService.getUltimoEventoByAccion(environment.ACCION_EN_USO, fecha_desde)
       .then(res=>{
@@ -75,8 +82,14 @@ export class RetirarPage implements OnInit {
           console.log('res',res)
           console.log('this.OTaRetirar',this.OTaRetirar)
 
-          // llamo a metodo para desuscribirme
-          this.unsubscribe();
+          // llamo a metodo para desuscribirme y habilitar btn busqueda
+          this.stopSearch();
+        }
+        else{
+          countObs++;
+          console.log('count: ',countObs)
+          // llamo a metodo para desuscribirme y habilitar btn busqueda
+          if(countObs==10){this.stopSearch();}
         }
       })
     });
@@ -88,6 +101,9 @@ export class RetirarPage implements OnInit {
   }
 
   stopSearch(){
+    document.getElementById('addNumeroTarjeta').setAttribute('disabled','false');
+    document.getElementById('stopSearch').setAttribute('disabled','true');
+   
     this.unsubscribe();
     console.log('unsuscribe')
 
@@ -117,13 +133,24 @@ export class RetirarPage implements OnInit {
 
   modificarPrecio(){
     this.isPrecioReadOnly=!this.isPrecioReadOnly;
+
+    
   }
 
 
+  /**
+   * click en Retirar
+   */
   onSubmit(){
-    this.unsubscribe();
-    
+    // pido confirmación
+    this.presentAlertConfirm()
+  }
 
+  /**
+   * Retirar
+   */
+  retirarOT(){
+    this.unsubscribe();
     if (this.formRetirarOT.valid){
       console.log(this.formRetirarOT.value)
       console.log(this.OTaRetirar)
@@ -175,6 +202,43 @@ export class RetirarPage implements OnInit {
       // enviar OT id, precio,saldo, detalle(observaciones), estado='retirado'
       // TarjetaId, TarjetaEstado='libre'
     };
+  }
+
+  ngOnDestroy() {
+    if (this.subscription){
+      this.subscription.unsubscribe()
+      console.log('unsubscribe onDestroy')
+    }
+    
+  }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Confirmación',
+      message: '¿Desea confirmar el retiro?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+            
+          }
+        }, {
+          text: 'Confirmar',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.retirarOT();
+            
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+
+
   }
 
 }
