@@ -42,7 +42,7 @@ export class NuevaPage implements OnInit, OnDestroy {
       'TrabajoId': new FormControl("",[Validators.required]),
       
       'ClienteId': new FormControl("",[Validators.required]),
-      'MotoId': new FormControl(""),
+      'MotoId': new FormControl("",[Validators.required]),
       'repuestos': new FormControl(""),
 
       'detalle': new FormControl(""),
@@ -106,6 +106,20 @@ export class NuevaPage implements OnInit, OnDestroy {
       nuevaOT.ordenPapel == null){
         nuevaOT.ordenPapel = environment.TARJETA_NO_ASIGNADA;
       }
+
+      if (nuevaOT.precio == "" || nuevaOT.precio == " " ||
+      !nuevaOT.precio ||
+      nuevaOT.precio == null){
+        nuevaOT.precio = 0;
+      }
+
+      if (nuevaOT.entrega == "" || nuevaOT.entrega == " " ||
+      !nuevaOT.entrega ||
+      nuevaOT.entrega == null){
+        nuevaOT.entrega = 0;
+      }
+
+      
 
       // send data
       this.nuevaOTService.nuevaOTService(nuevaOT)
