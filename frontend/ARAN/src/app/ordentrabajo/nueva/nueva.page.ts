@@ -8,6 +8,7 @@ import { AlertController, ModalController } from '@ionic/angular';
 import { NuevoComponent } from 'src/app/cliente/nuevo/nuevo.component';
 import { BuscaragregarmotoComponent } from 'src/app/moto/buscaragregarmoto/buscaragregarmoto.component';
 import { TrabajosService } from 'src/app/services/trabajos/trabajos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nueva',
@@ -32,7 +33,8 @@ export class NuevaPage implements OnInit, OnDestroy {
     private eventosService: EventosService,
     private modalCtrl: ModalController,
     private trabajosServices: TrabajosService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private router: Router
     ) { 
 
     this.formNuevaOT = this.fb.group({
@@ -288,6 +290,10 @@ export class NuevaPage implements OnInit, OnDestroy {
     await alert.present();
 
 
+  }
+
+  limpiarForm(){
+    this.router.navigate(['ordentrabajo/nueva/refresh']);
   }
 
 

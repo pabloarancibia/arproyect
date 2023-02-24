@@ -241,4 +241,8 @@ export class RetirarPage implements OnInit, OnDestroy {
 
   }
 
+  limpiarForm(){
+    this.router.navigate(['ordentrabajo/retirar/refresh']);
+  }
+
 }

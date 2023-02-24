@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: NuevaPage
-  }
+  },
+  {
+    path: ':refresh',
+    component: NuevaPage
+  },
 ];
 
 @NgModule({
