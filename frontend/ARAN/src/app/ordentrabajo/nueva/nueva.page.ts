@@ -293,7 +293,7 @@ export class NuevaPage implements OnInit, OnDestroy {
   }
 
   limpiarForm(){
-    this.router.navigate(['ordentrabajo/nueva/refresh']);
+    this.resetForm('limpiar');
   }
 
 
