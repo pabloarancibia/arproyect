@@ -10,15 +10,20 @@ import { DatePipe, registerLocaleData } from '@angular/common';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
+
 registerLocaleData(localEs,'es-AR')
 @NgModule({
   declarations: [AppComponent, SidenavComponent,],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
-    HttpClientModule, NgxDatatableModule, BrowserAnimationsModule],
+    HttpClientModule, NgxDatatableModule, BrowserAnimationsModule,
+    MaterialModule,
+  ],
   providers: [{ 
     provide:  RouteReuseStrategy, 
     useClass: IonicRouteStrategy, 
-  },{
+  },
+  {
     provide: LOCALE_ID, useValue:'es_AR'
   },
     DatePipe],

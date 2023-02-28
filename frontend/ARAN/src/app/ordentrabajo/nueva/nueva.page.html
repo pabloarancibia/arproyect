@@ -14,13 +14,20 @@
     <ion-item>
       <ion-label>Tarjeta </ion-label>
       <ion-input formControlName="tarjeta"  readonly> </ion-input>  
+     
+      <ion-button id="addNumeroTarjeta" 
+      (click)="addNumeroTarjeta()">Buscar Tarjeta</ion-button>
+      
+      <ion-button id="cancelAddNumeroTarjeta" 
+      (click)="cancelAddNumeroTarjeta()" 
+      disabled color="danger" >Cancelar</ion-button>
+      
+      <ion-button id="limpiarTarjeta" (click)="limpiarTarjeta()" 
+      color="light">Limpiar</ion-button>
+
     </ion-item>
 
-    <ion-button id="addNumeroTarjeta" (click)="addNumeroTarjeta()">Buscar Tarjeta</ion-button>
-    <ion-button id="cancelAddNumeroTarjeta" 
-    (click)="cancelAddNumeroTarjeta()" disabled color="danger" >Cancelar</ion-button>
-    <ion-button id="limpiarTarjeta" (click)="limpiarTarjeta()" 
-    color="light">Limpiar</ion-button>
+    
 
 
     <ion-item>
@@ -28,6 +35,8 @@
       <ion-input formControlName="ordenPapel"></ion-input>  
     </ion-item>
 
+    <!-- TRABAJO -->
+    <br><br>
     <ion-item>
       <!-- <ion-label position="floating">Trabajo</ion-label>
       <ion-input formControlName="trabajo"></ion-input> -->
@@ -39,10 +48,13 @@
       
 
     </ion-item>
+   
+    <br><br>
 
     <!-- CLIENTES -->
+    <fieldset>
     <ion-item>
-      <ion-button (click)="openModalClientes()"> Agregar Cliente (*)</ion-button>
+      <ion-button (click)="openModalClientes()"> Cliente (*) </ion-button>
     </ion-item>
 
 
@@ -64,10 +76,14 @@
       </ion-item>
 
     </ion-list>
+  </fieldset>
+  
+  <br><br>
 
     <!-- MOTOS -->
+    <fieldset>
     <ion-item>
-      <ion-button (click)="openModalMotos()"> Agregar Moto (*) </ion-button>
+      <ion-button (click)="openModalMotos()"> Moto (*) </ion-button>
     </ion-item>
 
     <ion-list>
@@ -88,8 +104,8 @@
         <ion-label>{{moto.anio}}</ion-label>
         <ion-label class="ion-text-wrap">{{moto.observaciones}}</ion-label>
       </ion-item>
-
     </ion-list>
+    </fieldset>
 
     <!-- REPUESTOS -->
 
@@ -98,26 +114,37 @@
       <ion-input formControlName="repuestos"></ion-input>
     </ion-item> -->
 
-    <ion-item>
-      <ion-label position="floating">Detalle</ion-label>
-      <ion-textarea formControlName="detalle"></ion-textarea>
-    </ion-item>
+    <br><br>
 
-    <ion-item>
-      <ion-label position="floating">Precio $</ion-label>
-      <ion-input formControlName="precio" type="number"
-      (ionChange)="calcSaldo()"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Entrega $</ion-label>
-      <ion-input formControlName="entrega" type="number"
-      (ionChange)="calcSaldo()"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Saldo $</ion-label>
-      <ion-input readonly type="number" formControlName="saldo" > </ion-input>
+    <fieldset>
+      <legend>Detalles</legend>
+      <ion-item>
+        <ion-label position="floating"></ion-label>
+        <ion-textarea formControlName="detalle"></ion-textarea>
+      </ion-item>
+    </fieldset>
+    
+    <br><br>
 
-    </ion-item>
+    <fieldset>
+      <legend>Costos</legend>
+      <ion-item>
+        <ion-label position="floating">Precio $</ion-label>
+        <ion-input formControlName="precio" type="number"
+        (ionChange)="calcSaldo()"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Entrega $</ion-label>
+        <ion-input formControlName="entrega" type="number"
+        (ionChange)="calcSaldo()"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Saldo $</ion-label>
+        <ion-input readonly type="number" formControlName="saldo" > </ion-input>
+
+      </ion-item>
+
+    </fieldset>
 
     <ion-item>
     <ion-datetime-button
@@ -132,17 +159,30 @@
 
   
 
-  <ion-item>
-    <ion-button [disabled]="!formNuevaOT.valid" color="primary" (click)="onSubmit(limpiar)">Guardar y Limpiar</ion-button>
-  </ion-item>
-
-  <ion-item>
-    <ion-button [disabled]="!formNuevaOT.valid" color="primary" (click)="onSubmit(nolimpiar)">Guardar y Seguir Añadiendo</ion-button>
-  </ion-item>
-
-  <ion-item>
-    <ion-button color="primary" (click)="limpiarForm()">Limpiar formulario</ion-button>
-  </ion-item>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col>
+        <ion-item>
+          <ion-button [disabled]="!formNuevaOT.valid" color="primary" (click)="onSubmit(limpiar)">Guardar y Limpiar</ion-button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row justify-content-center>
+      <ion-col>
+        <ion-item>
+          <ion-button [disabled]="!formNuevaOT.valid" color="primary" (click)="onSubmit(nolimpiar)">Guardar y Seguir Añadiendo</ion-button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row justify-content-center>
+      <ion-col>
+        <ion-item>
+          <ion-button color="primary" (click)="limpiarForm()">Limpiar formulario</ion-button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
 
   </form>
 </ion-content>

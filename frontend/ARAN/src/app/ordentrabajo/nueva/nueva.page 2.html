@@ -1,0 +1,142 @@
+<mat-toolbar>
+  <button mat-icon-button aria-label="Side menu" color="primary" (click)="onMenuOpen()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <h1 class="mat-h1">NUEVA ORDEN DE TRABAJO</h1>
+</mat-toolbar>
+
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="formNuevaOT" (ngSubmit)="onSubmit(limpiar)">
+      <mat-form-field appearance="fill">
+        <mat-label>Tarjeta</mat-label>
+        <input matInput formControlName="tarjeta" readonly>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="addNumeroTarjeta()">Buscar Tarjeta</button>
+      <button mat-raised-button color="warn" (click)="cancelAddNumeroTarjeta()" [disabled]="!formNuevaOT.controls.tarjeta.value">Cancelar</button>
+      <button mat-raised-button color="basic" (click)="limpiarTarjeta()">Limpiar</button>
+
+      <mat-form-field appearance="fill">
+        <mat-label>N° Orden Papel</mat-label>
+        <input matInput formControlName="ordenPapel">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Trabajo (*)</mat-label>
+        <mat-select formControlName="TrabajoId">
+          <mat-option *ngFor="let trabajo of trabajos" [value]="trabajo.id">
+            {{ trabajo.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- CLIENTES -->
+      <button mat-raised-button color="primary" (click)="openModalClientes()">Agregar Cliente (*)</button>
+
+      <mat-list>
+        <mat-list-item>
+          <div>Name:</div>
+          <div>{{cliente.nombre}}</div>
+        </mat-list-item>
+        <mat-list-item>
+          <div>Apellido:</div>
+          <div>{{cliente.apellido}}</div>
+        </mat-list-item>
+        <mat-list-item>
+          <div>Celular:</div>
+          <div>{{cliente.celular}}</div>
+        </mat-list-item>
+        <mat-list-item>
+          <div>DNI:</div>
+          <div>{{cliente.dni}}</div>
+        </mat-list-item>
+      </mat-list>
+
+      <!-- MOTOS -->
+      <button mat-raised-button color="primary" (click)="openModalMotos()">Agregar Moto (*)</button>
+
+      <mat-list>
+        <mat-list-item>
+          <div>Marca:</div>
+          <div>{{moto.marca}}</div>
+        </mat-list-item>
+        <mat-list-item>
+          <div>Modelo:</div>
+          <div>{{moto.modelo}}</div>
+        </mat-list-item>
+        <mat-list-item>
+          <div>Cilindrada:</div>
+          <div>{{moto.cilidrada}}</div>
+        </mat-list-item>
+        <mat-list-item>
+          <div>Año:</div>
+          <div>{{moto.anio}}</div>
+        </mat-list-item>
+        <mat-list-item>
+          <div>Observaciones:</div>
+          <div>{{moto.observaciones}}</div>
+        </mat-list-item>
+      </mat-list>
+
+      <!-- REPUESTOS -->
+
+      <!--
+      <mat-form-field appearance="fill">
+        <mat-label>Repuestos</mat-label>
+        <input matInput formControlName="repuestos">
+      </mat-form-field>
+      -->
+
+     
+
+
+    <ion-item>
+      <ion-label position="floating">Detalle</ion-label>
+      <ion-textarea formControlName="detalle"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Precio $</ion-label>
+      <ion-input formControlName="precio" type="number"
+      (ionChange)="calcSaldo()"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Entrega $</ion-label>
+      <ion-input formControlName="entrega" type="number"
+      (ionChange)="calcSaldo()"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Saldo $</ion-label>
+      <ion-input readonly type="number" formControlName="saldo" > </ion-input>
+
+    </ion-item>
+
+    <ion-item>
+    <ion-datetime-button
+    datetime="id_fecha_entrega_estimada" 
+    ></ion-datetime-button>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="id_fecha_entrega_estimada" formControlName="fecha_entrega_estimada"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+  </ion-item>
+
+  
+
+  <ion-item>
+    <ion-button [disabled]="!formNuevaOT.valid" color="primary" (click)="onSubmit(limpiar)">Guardar y Limpiar</ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-button [disabled]="!formNuevaOT.valid" color="primary" (click)="onSubmit(nolimpiar)">Guardar y Seguir Añadiendo</ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-button color="primary" (click)="limpiarForm()">Limpiar formulario</ion-button>
+  </ion-item>
+
+  </form>
+</mat-card-content>
+</mat-card>

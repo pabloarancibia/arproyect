@@ -7,6 +7,8 @@ import { NuevaPage } from './nueva.page';
 import { NuevoComponent } from 'src/app/cliente/nuevo/nuevo.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
+import { MaterialModule } from 'src/app/material.module'; 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -14,7 +16,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     IonicModule,
     NuevaPageRoutingModule,
     ReactiveFormsModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+
+    MaterialModule,
   ],
   declarations: [
     NuevaPage,

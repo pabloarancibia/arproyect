@@ -10,6 +10,7 @@
   --ion-color-primary-contrast-rgb: 255, 255, 255;
   --ion-color-primary-shade: #3171e0;
   --ion-color-primary-tint: #4c8dff;
+  
 
   /** secondary **/
   --ion-color-secondary: #3dc2ff;
@@ -234,3 +235,67 @@
     --ion-card-background: #1e1e1e;
   }
 }
+
+/* Custom styles */
+:root {
+
+  --ion-toolbar-background: #c0eaf6;
+
+  ion-menu ion-header {
+    background-color: #c0eaf6;
+  }
+  ion-menu ion-header ion-toolbar ion-title{
+    font-size: 24px;
+    font-weight: bold;
+  }
+  ion-menu ion-content ion-list ion-item ion-menu-toggle ion-router-link{//ion-list ion-item ion-menu-toggle ion-router-link {
+    color: #333;
+    font-size: 20px;
+  }
+
+  
+  /* Style for all ion-buttons */
+ion-button {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 16px;
+  //padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  margin-right: 16px;
+}
+
+/* Style for primary ion-buttons */
+ion-button[color="primary"] {
+  background-color: #007aff;
+  color: #fff;
+}
+
+/* Style for secondary ion-buttons */
+ion-button[color="secondary"] {
+  background-color: #5856d6;
+  color: #fff;
+}
+
+/* Style for danger ion-buttons */
+ion-button[color="danger"] {
+  background-color: #ff3b30;
+  color: #fff;
+}
+
+/* Style for light ion-buttons */
+ion-button[color="light"] {
+  background-color: #f2f2f2;
+  color: #000;
+}
+
+/* Style for dark ion-buttons */
+ion-button[color="dark"] {
+  background-color: #333;
+  color: #fff;
+}
+
+}//end root
+
+
