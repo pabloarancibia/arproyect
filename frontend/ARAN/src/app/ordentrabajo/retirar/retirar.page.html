@@ -8,96 +8,114 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="formRetirarOT">
   <form [formGroup]="formRetirarOT" (ngSubmit)="onSubmit()">
-  
-  <ion-item>
-    <ion-label>(*) Tarjeta N°</ion-label>
+   <br>
+   <div class="button-center">
+    <ion-button color="success" id="addNumeroTarjeta" (click)="addNumeroTarjeta()">Leer Tarjeta</ion-button>
+    <ion-button color="danger" id="stopSearch" (click)="stopSearch()">Cancelar</ion-button>
+  </div>
+  <br>
+    <ion-item>
+    <ion-label class="custom">Tarjeta N°</ion-label>
     <ion-input formControlName="tarjeta" readonly></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label>Orden Papel N°</ion-label>
+    <ion-label class="custom">Orden Papel N°</ion-label>
     <ion-label *ngIf="OTaRetirar">{{OTaRetirar.OrdenTrabajo.ordenPapel}}</ion-label>
   </ion-item>
 
-  <ion-button id="addNumeroTarjeta" (click)="addNumeroTarjeta()">Buscar Tarjeta</ion-button>
-  <ion-button id="stopSearch" (click)="stopSearch()">Cancelar</ion-button>
-
+  
   <!-- DATOS CLIENTE -->
-  <ion-list>
-    <ion-label>DATOS CLIENTE</ion-label>
-    <ion-item>
-      <ion-label>Nombre</ion-label>
-      <ion-label>DNI</ion-label>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-item *ngIf="OTaRetirar">
-      <ion-label >{{OTaRetirar.OrdenTrabajo.Cliente.nombre}} {{OTaRetirar.OrdenTrabajo.Cliente.apellido}}</ion-label>
-      <ion-label >{{OTaRetirar.OrdenTrabajo.Cliente.dni}}</ion-label>
-    </ion-item>
-  </ion-list>
+  <br>
+  <fieldset>
+    <legend>DATOS CLIENTE</legend>
+    <ion-list>
+      <ion-item>
+        <ion-label>Nombre</ion-label>
+        <ion-label>DNI</ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item *ngIf="OTaRetirar">
+        <ion-label >{{OTaRetirar.OrdenTrabajo.Cliente.nombre}} {{OTaRetirar.OrdenTrabajo.Cliente.apellido}}</ion-label>
+        <ion-label >{{OTaRetirar.OrdenTrabajo.Cliente.dni}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </fieldset>
+  
   <!-- DATOS TRABAJO -->
-  <ion-list>
+  <fieldset>
+    <legend>TRABAJO</legend>
+    <!-- <ion-list>
     <ion-item>
       <ion-label>TRABAJO</ion-label>
     </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-item *ngIf="OTaRetirar">
-      <ion-label >{{OTaRetirar.OrdenTrabajo.Trabajo.nombre}} </ion-label>
-    </ion-item>
-  </ion-list>
-  <!-- DATOS REPUESTOS -->
-  <ion-list>
-    <ion-label>DATOS REPUESTOS</ion-label>
-    <ion-item>
-      <ion-label>Nombre</ion-label>
-      <ion-label>Marca</ion-label>
-      <ion-label>Medida</ion-label>
-      <ion-label>Origen</ion-label>
-    </ion-item>
-  </ion-list>
+    </ion-list> -->
+    <ion-list>
+      <ion-item *ngIf="OTaRetirar">
+        <ion-label >{{OTaRetirar.OrdenTrabajo.Trabajo.nombre}} </ion-label>
+      </ion-item>
+    </ion-list>
+  </fieldset>
   
-  <ion-list *ngFor="let repuesto of Repuestos">
-    <ion-item *ngIf="Repuestos">
-      <ion-label >{{repuesto.nombre}}</ion-label>
-      <ion-label >{{repuesto.marca}}</ion-label>
-      <ion-label >{{repuesto.medida}}</ion-label>
-      <ion-label >{{repuesto.Origen.pais}}</ion-label>
-    </ion-item>
-  </ion-list>
+  <!-- DATOS REPUESTOS -->
+  <fieldset *ngIf="Repuestos">
+    <legend>DATOS REPUESTOS</legend>
+    <ion-list>
+      <ion-item>
+        <ion-label>Nombre</ion-label>
+        <ion-label>Marca</ion-label>
+        <ion-label>Medida</ion-label>
+        <ion-label>Origen</ion-label>
+      </ion-item>
+    </ion-list>
+    
+    <ion-list *ngFor="let repuesto of Repuestos">
+      <ion-item *ngIf="Repuestos">
+        <ion-label >{{repuesto.nombre}}</ion-label>
+        <ion-label >{{repuesto.marca}}</ion-label>
+        <ion-label >{{repuesto.medida}}</ion-label>
+        <ion-label >{{repuesto.Origen.pais}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </fieldset>
+  
 
   <!-- DATOS MOTO -->
-  <ion-list>
-    <ion-label>MOTO</ion-label>
-    <ion-item>
-      <ion-label>Marca</ion-label>
-      <ion-label>Modelo</ion-label>
-      <ion-label>Cilindrada</ion-label>
-      <ion-label>Año</ion-label>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-item *ngIf="OTaRetirar">
-      <ion-label >{{OTaRetirar.OrdenTrabajo.Moto.marca}} </ion-label>
-      <ion-label >{{OTaRetirar.OrdenTrabajo.Moto.modelo}} </ion-label>
-      <ion-label >{{OTaRetirar.OrdenTrabajo.Moto.cilindrada}} </ion-label>
-      <ion-label >{{OTaRetirar.OrdenTrabajo.Moto.anio}} </ion-label>
-    </ion-item>
-  </ion-list>
+  <fieldset>
+    <legend>MOTO</legend>
+    <ion-list>
+      <ion-item>
+        <ion-label>Marca</ion-label>
+        <ion-label>Modelo</ion-label>
+        <ion-label>Cilindrada</ion-label>
+        <ion-label>Año</ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item *ngIf="OTaRetirar">
+        <ion-label >{{OTaRetirar.OrdenTrabajo.Moto.marca}} </ion-label>
+        <ion-label >{{OTaRetirar.OrdenTrabajo.Moto.modelo}} </ion-label>
+        <ion-label >{{OTaRetirar.OrdenTrabajo.Moto.cilindrada}} </ion-label>
+        <ion-label >{{OTaRetirar.OrdenTrabajo.Moto.anio}} </ion-label>
+      </ion-item>
+    </ion-list>
+  </fieldset>
+  
 
 
   <!-- DATOS PRECIO/SALDO/ENTREGA/CANCELA -->
-  <ion-label>PRECIOS </ion-label>
-  <ion-item>
-    <ion-label>Precio: </ion-label>
-    <ion-input formControlName="precio" type="number" readonly="{{isPrecioReadOnly}}"
-    (ionChange)="calcSaldo()"></ion-input>  
-  </ion-item>
-  <ion-button id="modificarPrecio" (click)="modificarPrecio()">Modificar Precio</ion-button>
-
+  <fieldset>
+    <legend>PRECIOS</legend>
+    <ion-item>
+      <ion-label>Precio: </ion-label>
+      <ion-input formControlName="precio" type="number" readonly="{{isPrecioReadOnly}}"
+      (ionChange)="calcSaldo()"></ion-input>  
+    </ion-item>
+    <ion-button color="secondary" id="modificarPrecio" (click)="modificarPrecio()">Modificar Precio</ion-button>
+  
 
 
   <ion-item>
@@ -106,7 +124,7 @@
   <!-- </ion-item>
 
   <ion-item> -->
-    <ion-label>Saldo Pendiente: </ion-label>
+    <ion-label class="custom">Saldo Pendiente: </ion-label>
     <ion-input formControlName="saldo" readonly></ion-input>  
   </ion-item>
 
@@ -117,8 +135,9 @@
     <ion-input formControlName="cancela" type="number" 
     (ionChange)="calcSaldo()"></ion-input>  
   </ion-item>
-  <ion-button color="success" id="cantelaTotalSaldo" (click)="cantelaTotalSaldo()">Cancelar Total</ion-button>
-
+  <ion-button color="secondary" id="cantelaTotalSaldo" (click)="cantelaTotalSaldo()">Cancelar Total</ion-button>
+</fieldset>
+<br><br>
   <ion-item>
     <ion-label>Detalles de la Orden de Trabajo: </ion-label>
     <ion-label *ngIf="OTaRetirar">{{OTaRetirar.OrdenTrabajo.detalle}}</ion-label>  
@@ -128,14 +147,17 @@
     <ion-label>Observaciones: </ion-label>
     <ion-input formControlName="observaciones" ></ion-input>  
   </ion-item>
-
-  <ion-item>
-    <ion-button [disabled]="!formRetirarOT.valid" type="submit" color="primary">Retirar Trabajo</ion-button>
-  </ion-item>
-
-  <ion-button color="primary" (click)="limpiarForm()">Limpiar formulario</ion-button>
-
-
+<br>
+  <div class="button-center">
+      <ion-button 
+        color="primary"
+        [disabled]="!formRetirarOT.valid" 
+        type="submit" 
+        >Retirar Trabajo
+      </ion-button>
+    <ion-button color="light" (click)="limpiarForm()">Limpiar formulario</ion-button>
+  </div>
+<br>
   </form>
 
 </ion-content>

@@ -1,0 +1,33 @@
+.formRetirarOT {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    line-height: 1.4;
+  }
+  
+  .formRetirarOT ion-item ion-label.custom{
+    font-weight: bold;
+    font-size: 22px;
+
+  }
+  
+  .formRetirarOT ion-item ion-input,
+  .formRetirarOT ion-item ion-select {
+    font-size: 18px;
+  }
+  
+  .formRetirarOT ion-item ion-textarea {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+  
+  .formRetirarOT fieldset legend {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .button-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
