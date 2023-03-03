@@ -30,4 +30,18 @@
 // }
 
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons';
-@import '~@angular/material/prebuilt-themes/indigo-pink.css'; 
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+
+/* You can add global styles to this file, and also import other style files */
+// @import '~@swimlane/ngx-datatable/index.css';
+// @import '~@swimlane/ngx-datatable/themes/material.css';
+// @import '~@swimlane/ngx-datatable/themes/bootstrap.css';
+// @import '~@swimlane/ngx-datatable/themes/dark.css';
+// @import '~@swimlane/ngx-datatable/assets/icons.css';
+@import '../node_modules/@swimlane/ngx-datatable/index.css';
+@import '../node_modules/@swimlane/ngx-datatable/themes/material.scss';
+@import '../node_modules/@swimlane/ngx-datatable/themes/bootstrap.css';
+@import '../node_modules/@swimlane/ngx-datatable/themes/dark.css';
+@import '../node_modules/@swimlane/ngx-datatable/assets/icons.css';
+

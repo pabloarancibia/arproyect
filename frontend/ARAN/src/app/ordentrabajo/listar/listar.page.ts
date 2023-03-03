@@ -1,13 +1,15 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { OTService } from 'src/app/services/ordenTrabajoServices/ordentrabajo.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
   selector: 'app-listar',
   templateUrl: './listar.page.html',
   styleUrls: ['./listar.page.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ListarPage implements OnInit {
   
@@ -44,7 +46,8 @@ export class ListarPage implements OnInit {
     */
     this.columns = [
       // { prop: 'Estado.nombre', name: 'Estado', summaryFunc: cells => this.summaryForEstado(cells) },
-      { prop: 'Estado.nombre', name: 'Estado', summaryFunc: () => null },
+      { prop: 'Estado.nombre', name: 'Estado', 
+        summaryFunc: () => null },
       { prop: 'Cliente.apellido', name: 'Cliente', summaryFunc: () => null },
       { prop: 'Trabajo.nombre', name: 'Trabajo', summaryFunc: () => null },
       { prop: 'Moto.nombre', name: 'Moto', summaryFunc: () => null },
@@ -64,6 +67,17 @@ export class ListarPage implements OnInit {
     this.rows = res
     this.temp = res
     })
+
+
+  }
+
+  getRowClass = (row) => {    
+    return {
+      'row-color-espera': row.Estado.nombre == environment.ESTADO_ESPERA,
+      'row-color-retirado': row.Estado.nombre == environment.ESTADO_RETIRAR,
+      'row-color-finalizado': row.Estado.nombre == environment.ESTADO_FINALIZADO,
+      'row-color-proceso': row.Estado.nombre == environment.ESTADO_PROCESO,
+    };
   }
 
   datePipe () {
