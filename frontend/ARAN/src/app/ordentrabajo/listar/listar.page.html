@@ -37,6 +37,8 @@
       [reorderable]="reorderable"
       [selected]="selected"
       [rowClass]="getRowClass"
+      (activate)="onActivate($event)"
+
     >
     </ngx-datatable>
   </div>

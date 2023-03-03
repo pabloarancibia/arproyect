@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { OTService } from 'src/app/services/ordenTrabajoServices/ordentrabajo.service';
 import { environment } from 'src/environments/environment';
@@ -33,7 +34,8 @@ export class ListarPage implements OnInit {
 
   constructor(
     private OTService: OTService,
-    private _datePipe: DatePipe
+    private _datePipe: DatePipe,
+    private alertController: AlertController,
 
   ) {
  
@@ -50,7 +52,7 @@ export class ListarPage implements OnInit {
         summaryFunc: () => null },
       { prop: 'Cliente.apellido', name: 'Cliente', summaryFunc: () => null },
       { prop: 'Trabajo.nombre', name: 'Trabajo', summaryFunc: () => null },
-      { prop: 'Moto.nombre', name: 'Moto', summaryFunc: () => null },
+      { prop: 'Moto.modelo', name: 'Moto', summaryFunc: () => null },
       { prop: 'fecha_entrega_estimada', 
         name: 'Fecha Entrega', 
         pipe:this.datePipe(), summaryFunc: () => null },
@@ -140,5 +142,83 @@ export class ListarPage implements OnInit {
   //   // Whenever the filter changes, always go back to the first page
   //    this.table.offset = 0;
    }
+
+   onActivate(event) {
+    if(event.type == 'click') {
+        //this.selected = []
+        console.log('event.row ',event.row);
+        this.selected = event.row
+        console.log('this.selected ',this.selected)
+        //let text = (JSON.stringify(this.selected));
+        //let obj = JSON.parse(text);
+        //console.log(obj.Cliente.nombre)
+        //this.presentAlertConfirm(obj)
+        
+    }
+  }
+
+  // async presentAlertConfirm(obj) {
+  //   const alert = await this.alertController.create({
+  //     header: 'Datos',
+  //     //message: JSON.stringify(this.selected),
+  //     inputs:[
+  //       {
+  //         name: 'Cliente',
+  //         type: 'text',
+  //         value: obj.Cliente.nombre,
+  //       },
+  //       {
+  //         name: 'name2',
+  //         type: 'text',
+  //         id: 'name2-id',
+  //         value: 'hello',
+  //         placeholder: 'Placeholder 2'
+  //       },
+  //       {
+  //         name: 'name3',
+  //         value: 'http://ionicframework.com',
+  //         type: 'url',
+  //         placeholder: 'Favorite site ever'
+  //       },
+  //       // input date with min & max
+  //       {
+  //         name: 'name4',
+  //         type: 'date',
+  //         min: '2017-03-01',
+  //         max: '2018-01-12'
+  //       },
+  //       // input date without min nor max
+  //       {
+  //         name: 'name5',
+  //         type: 'date'
+  //       },
+  //       {
+  //         name: 'name6',
+  //         type: 'number',
+  //         min: -5,
+  //         max: 10
+  //       },
+  //       {
+  //         name: 'name7',
+  //         type: 'number'
+  //       }
+  //     ],
+  //     buttons: [
+  //       {
+  //         text: 'Cerrar',
+  //         role: 'cancel',
+  //         cssClass: 'secondary',
+  //         handler: (blah) => {
+  //           console.log('Cerrar');
+            
+  //         }
+  //       }
+  //     ]
+  //   });
+
+  //   await alert.present();
+
+
+  // }
 
 }
