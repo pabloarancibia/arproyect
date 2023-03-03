@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { DatatableComponent, SelectionType } from '@swimlane/ngx-datatable';
@@ -8,6 +8,8 @@ import { MotosService } from 'src/app/services/motos/motos.service';
   selector: 'app-buscaragregarmoto',
   templateUrl: './buscaragregarmoto.component.html',
   styleUrls: ['./buscaragregarmoto.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+
 })
 export class BuscaragregarmotoComponent implements OnInit {
   formMoto: FormGroup

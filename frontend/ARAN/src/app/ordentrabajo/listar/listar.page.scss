@@ -109,23 +109,23 @@
 
 
 /* Mouse Hover*/
-  .ngx-datatable.bootstrap:not(.cell-selection) .datatable-body-row:hover,
-  .ngx-datatable.material:not(.cell-selection) .datatable-body-row:hover .datatable-row-group
-  { 
-    background: rgb(102, 99, 99);
-  }
+  // .ngx-datatable.bootstrap:not(.cell-selection) .datatable-body-row:hover,
+  // .ngx-datatable.material:not(.cell-selection) .datatable-body-row:hover .datatable-row-group
+  // { 
+  //   background: rgb(102, 99, 99);
+  // }
 
-  .ngx-datatable.bootstrap:not(.cell-selection) .datatable-body-row.datatable-row-even:hover,
-  .ngx-datatable.material:not(.cell-selection) .datatable-body-row.datatable-row-even:hover .datatable-row-group
-  { 
-    background: rgb(102, 99, 99);
-  }
+  // .ngx-datatable.bootstrap:not(.cell-selection) .datatable-body-row.datatable-row-even:hover,
+  // .ngx-datatable.material:not(.cell-selection) .datatable-body-row.datatable-row-even:hover .datatable-row-group
+  // { 
+  //   background: rgb(102, 99, 99);
+  // }
 
-  .ngx-datatable.bootstrap:not(.cell-selection) .datatable-body-row.datatable-row-odd:hover,
-  .ngx-datatable.material:not(.cell-selection) .datatable-body-row.datatable-row-odd:hover .datatable-row-group
-  { 
-    background: rgb(102, 99, 99);
-  }
+  // .ngx-datatable.bootstrap:not(.cell-selection) .datatable-body-row.datatable-row-odd:hover,
+  // .ngx-datatable.material:not(.cell-selection) .datatable-body-row.datatable-row-odd:hover .datatable-row-group
+  // { 
+  //   background: rgb(102, 99, 99);
+  // }
 
   /* Custom color row based on data */
   .ngx-datatable.bootstrap .datatable-body-row.row-color-espera {

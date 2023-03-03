@@ -1,0 +1,6 @@
+/* Mouse Hover*/
+.ngx-datatable.bootstrap:not(.cell-selection) .datatable-body-row:hover,
+.ngx-datatable.material:not(.cell-selection) .datatable-body-row:hover .datatable-row-group
+{ 
+  background: rgb(102, 99, 99);
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { DatatableComponent, SelectionType } from '@swimlane/ngx-datatable';
@@ -8,6 +8,8 @@ import { ClientesService } from 'src/app/services/clientes/clientes.service';
   selector: 'app-nuevo',
   templateUrl: './nuevo.component.html',
   styleUrls: ['./nuevo.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+
 })
 export class NuevoComponent implements OnInit {
 
