@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:3000',
+  apiMessengerUrl:'http://localhost:3001',
 
   // ESTADOS PARA OT
   ESTADO_ESPERA: 'espera',// estado de una nueva OT

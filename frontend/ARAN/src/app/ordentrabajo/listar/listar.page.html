@@ -40,7 +40,38 @@
       (activate)="onActivate($event)"
 
     >
+
+    <ngx-datatable-column name="Mensaje" prop="Cliente.celular">
+      <ng-template ngx-datatable-cell-template 
+        let-rowIndex="rowIndex" 
+        let-value="value"                        
+        let-row="row">
+        <ion-button type="button" class="success button"
+            (click)='handleSendSms(value)'>Wpp!
+        </ion-button>
+                 </ng-template>
+             </ngx-datatable-column>
+    <ngx-datatable-column name="Estado" prop='Estado.nombre' >
+    </ngx-datatable-column>  // need to define each column with empty body
+    <ngx-datatable-column name="Apellido" prop='Cliente.apellido' >
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Nombre" prop='Cliente.nombre' >
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Trabajo" prop='Trabajo.nombre' >
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Moto" prop='Moto.modelo' >
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Entrega" prop='fecha_entrega_estimada' >
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Ingreso" prop='createdAt' >
+    </ngx-datatable-column>
+   
+
+    
+
+
     </ngx-datatable>
+  
   </div>
   <!-- END NGX DATATABLE -->
 

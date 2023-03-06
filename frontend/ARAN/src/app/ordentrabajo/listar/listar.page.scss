@@ -129,19 +129,36 @@
 
   /* Custom color row based on data */
   .ngx-datatable.bootstrap .datatable-body-row.row-color-espera {
-    background-color: #c8e5aa; 
+    background-color: #c8e5aa;
+    .button{
+      border-radius: 10px;
+      display: none;
+    } 
   }
   .ngx-datatable.bootstrap .datatable-body .datatable-body-row.datatable-row-even.row-color-espera{
 
     background-color: #c8e5aa;
+    .button{
+      border-radius: 10px;
+      display: none;
+
+    } 
   }
 
   .ngx-datatable.bootstrap .datatable-body-row.row-color-retirado {
     background-color: #c5c5c5; 
+    .button{
+      border-radius: 10px;
+      display: none;
+    } 
   }
   .ngx-datatable.bootstrap .datatable-body .datatable-body-row.datatable-row-even.row-color-retirado{
 
     background-color: #c5c5c5;
+    .button{
+      border-radius: 10px;
+      display: none;
+    } 
   }
 
   .ngx-datatable.bootstrap .datatable-body-row.row-color-finalizado {
@@ -154,9 +171,17 @@
 
   .ngx-datatable.bootstrap .datatable-body-row.row-color-proceso {
     background-color: #f0df86; 
+    .button{
+      border-radius: 10px;
+      display: none;
+    } 
   }
   .ngx-datatable.bootstrap .datatable-body .datatable-body-row.datatable-row-even.row-color-proceso{
 
     background-color: #f0df86;
+    .button{
+      border-radius: 10px;
+      display: none;
+    } 
   }
 }

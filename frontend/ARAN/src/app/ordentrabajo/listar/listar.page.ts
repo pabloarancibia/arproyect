@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { OTService } from 'src/app/services/ordenTrabajoServices/ordentrabajo.service';
+import { MessangerService } from 'src/app/services/messanger/messanger.service';
 import { environment } from 'src/environments/environment';
 
 
@@ -36,6 +37,7 @@ export class ListarPage implements OnInit {
     private OTService: OTService,
     private _datePipe: DatePipe,
     private alertController: AlertController,
+    private messangerService: MessangerService
 
   ) {
  
@@ -48,6 +50,8 @@ export class ListarPage implements OnInit {
     */
     this.columns = [
       // { prop: 'Estado.nombre', name: 'Estado', summaryFunc: cells => this.summaryForEstado(cells) },
+      { prop: 'Cliente.celular', name: 'Mensaje', 
+        summaryFunc: () => null },
       { prop: 'Estado.nombre', name: 'Estado', 
         summaryFunc: () => null },
       { prop: 'Cliente.apellido', name: 'Cliente', summaryFunc: () => null },
@@ -72,6 +76,45 @@ export class ListarPage implements OnInit {
 
 
   }
+
+  /**
+   * Handle Send sms
+   * @param value 
+   * @returns 
+   */
+  handleSendSms(value){
+    console.log('value sms: ',value);
+
+    if (!value){
+      return false
+    }
+    this.alertConfirmSms(value)
+  }
+
+   /**
+   * Send sms from whatsapp messanger api service
+   * @param value 
+   * @returns 
+   */
+   sendSms(cel){
+    console.log('send sms: ',cel); 
+    let data = {
+      "phone": '549'+cel,
+      "message":'Su trabajo en Arancibia Rectificaciones ya está listo para retirar'
+
+    }
+    console.log(data)
+    this.messangerService.postSendSms(data).then(res=>{
+      console.log(res)
+      if(res['responseExSave']['id']){
+        console.log('Mensaje Enviado Correctamente')
+      }
+    })
+
+  }
+
+
+
 
   getRowClass = (row) => {    
     return {
@@ -155,6 +198,36 @@ export class ListarPage implements OnInit {
         //this.presentAlertConfirm(obj)
         
     }
+  }
+
+  async alertConfirmSms(cel) {
+    const alert = await this.alertController.create({
+      header: 'Confirmar',
+      message: ('Desea enviar mensaje informando trabajo finalizado al número: '+cel+' ?'),
+    
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Cerrar');
+            
+          }
+        },
+        {
+          text: 'Enviar SMS',
+          handler: () => {
+            console.log('Cerrar');
+            this.sendSms(cel)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+
+
   }
 
   // async presentAlertConfirm(obj) {
