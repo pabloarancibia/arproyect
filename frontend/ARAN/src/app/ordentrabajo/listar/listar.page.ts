@@ -73,8 +73,6 @@ export class ListarPage implements OnInit {
     this.rows = res
     this.temp = res
     })
-
-
   }
 
   /**
@@ -82,13 +80,17 @@ export class ListarPage implements OnInit {
    * @param value 
    * @returns 
    */
-  handleSendSms(value){
-    console.log('value sms: ',value);
+  handleSendSms(row){
+    console.log('row sms: ',row);
 
-    if (!value){
+    if (!row.Cliente.celular){
+      alert('El cliente no posee número de celular registrado')
       return false
     }
-    this.alertConfirmSms(value)
+    let cel = row.Cliente.celular
+    let id_orden = row.id
+    let informado = row.informado
+    this.alertConfirmSms(cel, id_orden, informado)
   }
 
    /**
@@ -96,18 +98,31 @@ export class ListarPage implements OnInit {
    * @param value 
    * @returns 
    */
-   sendSms(cel){
+   private sendSms(cel, id_orden){
     console.log('send sms: ',cel); 
     let data = {
       "phone": '549'+cel,
       "message":'Su trabajo en Arancibia Rectificaciones ya está listo para retirar'
-
     }
     console.log(data)
     this.messangerService.postSendSms(data).then(res=>{
-      console.log(res)
+      console.log('res messageService',res)
       if(res['responseExSave']['id']){
-        console.log('Mensaje Enviado Correctamente')
+        console.log('Mensaje Enviado Correctamente')        
+        // registrar envío correcto de msj
+        let changes = {
+          id_orden: id_orden
+        }
+        this.OTService.putRegistrarInformado(id_orden, changes).then(res=>{
+          console.log('res informado ot a cliente: ', res);
+          alert('Mensaje enviado correctamente al número: '+cel);
+          
+          // Actualizar vista planilla
+
+        })
+      }else{
+        console.log('error enviando msj')
+        alert('Error enviando mensaje');
       }
     })
 
@@ -120,7 +135,8 @@ export class ListarPage implements OnInit {
     return {
       'row-color-espera': row.Estado.nombre == environment.ESTADO_ESPERA,
       'row-color-retirado': row.Estado.nombre == environment.ESTADO_RETIRAR,
-      'row-color-finalizado': row.Estado.nombre == environment.ESTADO_FINALIZADO,
+      'row-color-finalizado': row.Estado.nombre == environment.ESTADO_FINALIZADO && row.informado == false,
+      'row-color-finalizado-informado': row.Estado.nombre == environment.ESTADO_FINALIZADO && row.informado == true,
       'row-color-proceso': row.Estado.nombre == environment.ESTADO_PROCESO,
     };
   }
@@ -200,10 +216,20 @@ export class ListarPage implements OnInit {
     }
   }
 
-  async alertConfirmSms(cel) {
+  async alertConfirmSms(cel, id_orden, informado) {
+    let header = 'Confirmar';
+    let text = 'Enviar SMS';
+    let message = 'Desea enviar mensaje informando trabajo finalizado al número: '+cel+' ?'
+
+    if (informado == true){
+      header = 'Reenviar';
+      text = 'Reenviar SMS';
+      message = 'Seguro desea volver a enviar mensaje al número: '+cel+' ?'
+
+    }
     const alert = await this.alertController.create({
-      header: 'Confirmar',
-      message: ('Desea enviar mensaje informando trabajo finalizado al número: '+cel+' ?'),
+      header: header,
+      message: message,
     
       buttons: [
         {
@@ -216,10 +242,10 @@ export class ListarPage implements OnInit {
           }
         },
         {
-          text: 'Enviar SMS',
+          text: text,
           handler: () => {
             console.log('Cerrar');
-            this.sendSms(cel)
+            this.sendSms(cel, id_orden)
           }
         }
       ]

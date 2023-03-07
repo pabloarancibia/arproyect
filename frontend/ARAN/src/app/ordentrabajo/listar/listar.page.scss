@@ -2,6 +2,8 @@
 // @import '~@swimlane/ngx-datatable/themes/bootstrap.scss';
 //@import '~@swimlane/ngx-datatable/assets/icons.css';
 
+
+
   
   input[type="text"] {
     //border: none;
@@ -128,8 +130,10 @@
   // }
 
   /* Custom color row based on data */
+  
+  // Espera
   .ngx-datatable.bootstrap .datatable-body-row.row-color-espera {
-    background-color: #c8e5aa;
+    background-color: whitesmoke;
     .button{
       border-radius: 10px;
       display: none;
@@ -137,7 +141,7 @@
   }
   .ngx-datatable.bootstrap .datatable-body .datatable-body-row.datatable-row-even.row-color-espera{
 
-    background-color: #c8e5aa;
+    background-color: whitesmoke;
     .button{
       border-radius: 10px;
       display: none;
@@ -145,6 +149,7 @@
     } 
   }
 
+  // Retirado
   .ngx-datatable.bootstrap .datatable-body-row.row-color-retirado {
     background-color: #c5c5c5; 
     .button{
@@ -161,6 +166,7 @@
     } 
   }
 
+  // Finalizado
   .ngx-datatable.bootstrap .datatable-body-row.row-color-finalizado {
     background-color: #8bf41b; 
   }
@@ -169,8 +175,32 @@
     background-color: #8bf41b;
   }
 
+  // finalizado && informado
+.ngx-datatable.bootstrap .datatable-body-row.row-color-finalizado-informado {
+  background-color: #b3d68d;
+  .button{
+    border-radius: 10px;
+    background-color: #555555;
+    background: #555555;
+    border: #555555
+
+  }  
+}
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row.datatable-row-even.row-color-finalizado-informado{
+
+  background-color: #b3d68d;
+  .button{
+    border-radius: 10px;
+    background-color: #555555;
+    background: #555555;
+    border: #555555
+
+  } 
+}
+  
+// Proceso
   .ngx-datatable.bootstrap .datatable-body-row.row-color-proceso {
-    background-color: #f0df86; 
+    background-color: rgb(101, 108, 161); 
     .button{
       border-radius: 10px;
       display: none;
@@ -178,7 +208,7 @@
   }
   .ngx-datatable.bootstrap .datatable-body .datatable-body-row.datatable-row-even.row-color-proceso{
 
-    background-color: #f0df86;
+    background-color: rgb(101, 108, 161);
     .button{
       border-radius: 10px;
       display: none;

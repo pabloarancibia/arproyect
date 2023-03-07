@@ -59,6 +59,9 @@ module.exports = (sequelize, DataTypes) => {
     ordenPapel:{
       type: DataTypes.STRING
     },
+    informado:{
+      type: DataTypes.BOOLEAN
+    },
     is_active: {
       type: DataTypes.BOOLEAN
     },

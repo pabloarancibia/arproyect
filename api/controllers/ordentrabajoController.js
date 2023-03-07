@@ -1,7 +1,7 @@
 const {OrdenTrabajo,Cliente, Estado, Moto, Trabajo, Usuario,
     Registro_Cambios_Estado, Tarjeta} = require('../database/models/index');
 
-const { Op, Sequelize } = require("sequelize");
+const { Op, Sequelize, where } = require("sequelize");
 const { response } = require('express');
 
 /**
@@ -328,5 +328,34 @@ const retirarOrdenTrabajo = async (req, res) => {
     }
 }
 
+/**
+ * Indica que ya se informó al cliente que la ot finalizo
+ * y está lista para retirarse
+ * @param {*} req id_orden en params
+ * @param {*} res 
+ * @returns 
+ */
+const registrarClienteInformado = async (req,res) => {
+    try {
+        let otId = req.params.id_orden;
+        await OrdenTrabajo.update(
+            {informado : true},
+            {where: {
+                id: otId
+            }}
+        );
+        return res.status(200).json({
+            message: 'Registro -informado- actualizado correctamente'
+        });
+        
+    } catch (error) {
+        return res.status(400).json({
+            error: error.message, 
+            message:'Error en actualizando registro ot informado'
+        })
+    }
+}
+
 module.exports = {getOrdenesTrabajo, getOrdenTrabajoBy, 
-    getOrdenTrabajoByCliente,nuevaOrdenTrabajo, retirarOrdenTrabajo};
+    getOrdenTrabajoByCliente,nuevaOrdenTrabajo, retirarOrdenTrabajo,
+    registrarClienteInformado};

@@ -29,6 +29,10 @@ module.exports = {
       ordenPapel:{
         type: Sequelize.STRING
       },
+      informado:{
+        type: Sequelize.BOOLEAN,
+        defaultValue:false
+      },
       TrabajoId:{
         type: Sequelize.INTEGER,
         references:{model:'Trabajo', key:'id'}

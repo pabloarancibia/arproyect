@@ -44,15 +44,21 @@
     <ngx-datatable-column name="Mensaje" prop="Cliente.celular">
       <ng-template ngx-datatable-cell-template 
         let-rowIndex="rowIndex" 
-        let-value="value"                        
+        let-value="row"                        
         let-row="row">
-        <ion-button type="button" class="success button"
-            (click)='handleSendSms(value)'>Wpp!
+        <ion-button type="button" class="button"
+            (click)='handleSendSms(row)'>Wpp!
         </ion-button>
                  </ng-template>
-             </ngx-datatable-column>
-    <ngx-datatable-column name="Estado" prop='Estado.nombre' >
-    </ngx-datatable-column>  // need to define each column with empty body
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Estado" prop='Estado.nombre'>
+      <ng-template let-column="column" ngx-datatable-header-template>
+          <span>Estado</span>
+      </ng-template>
+      <ng-template let-value="value" ngx-datatable-cell-template>
+          {{value | uppercase}}
+      </ng-template>
+    </ngx-datatable-column>
     <ngx-datatable-column name="Apellido" prop='Cliente.apellido' >
     </ngx-datatable-column>
     <ngx-datatable-column name="Nombre" prop='Cliente.nombre' >
@@ -61,14 +67,26 @@
     </ngx-datatable-column>
     <ngx-datatable-column name="Moto" prop='Moto.modelo' >
     </ngx-datatable-column>
-    <ngx-datatable-column name="Entrega" prop='fecha_entrega_estimada' >
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Ingreso" prop='createdAt' >
-    </ngx-datatable-column>
-   
+    <!-- <ngx-datatable-column name="Entrega" prop='fecha_entrega_estimada'>
+    </ngx-datatable-column> -->
 
-    
+        <ngx-datatable-column name="Entrega" prop='fecha_entrega_estimada'>
+          <ng-template let-column="column" ngx-datatable-header-template>
+              <span>Entrega</span>
+          </ng-template>
+          <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value | date: 'EE dd/MM'}}
+          </ng-template>
+        </ngx-datatable-column>
 
+        <ngx-datatable-column name="Ingreso" prop='createdAt'>
+          <ng-template let-column="column" ngx-datatable-header-template>
+              <span>Ingreso</span>
+          </ng-template>
+          <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value | date: 'EE dd/MM'}}
+          </ng-template>
+        </ngx-datatable-column>
 
     </ngx-datatable>
   

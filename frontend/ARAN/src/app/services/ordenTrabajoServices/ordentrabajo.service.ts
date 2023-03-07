@@ -59,6 +59,21 @@ export class OTService {
       return res
     });
   }
+
+  /**
+   * Registrar que la finalización de la OT ya fue informada al cliente.
+   * @param id_orden 
+   * @returns 
+   */
+  putRegistrarInformado(
+    id_orden, changes: Partial<any>
+  ){
+    return this._http.put(this.URL + '/ordentrabajo/informado/' + id_orden,changes)
+    .toPromise()
+    .then(res=>{
+      return res
+    });
+  }
   
 
 

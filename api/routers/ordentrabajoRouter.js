@@ -57,5 +57,14 @@
      */
      ordentrabajoRouter.put('/retirar/:id_orden',
         ordentrabajoCtrl.retirarOrdenTrabajo);
+
+    /**
+     * Actualiza el registro informado a true
+     * Indica que la finalización de la OT ya 
+     * fue informada al cliente.
+     * @params id_orden en params
+     */
+    ordentrabajoRouter.put('/informado/:id_orden',
+        ordentrabajoCtrl.registrarClienteInformado);
  
  module.exports = ordentrabajoRouter;
