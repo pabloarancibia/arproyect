@@ -207,7 +207,7 @@ export class RetirarPage implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.subscription){
       this.subscription.unsubscribe()
-      console.log('unsubscribe onDestroy')
+      console.log('unsubscribe retirarOT onDestroy')
     }
     
   }

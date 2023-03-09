@@ -1,10 +1,12 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { OTService } from 'src/app/services/ordenTrabajoServices/ordentrabajo.service';
 import { MessangerService } from 'src/app/services/messanger/messanger.service';
 import { environment } from 'src/environments/environment';
+import { interval, Subscription } from 'rxjs';
+
 
 
 @Component({
@@ -13,7 +15,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./listar.page.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ListarPage implements OnInit {
+export class ListarPage implements OnInit, OnDestroy {
   
   now = new Date();
   lessWeek = new Date();
@@ -32,6 +34,9 @@ export class ListarPage implements OnInit {
   temp: any;
   @ViewChild(DatatableComponent) table: DatatableComponent;
   selected = [];
+
+  $subscription: Subscription
+
 
   constructor(
     private OTService: OTService,
@@ -66,13 +71,57 @@ export class ListarPage implements OnInit {
     this.OTService.getOTBy(this.lessWeek,this.now,'')
     .then(res=>{
       // this.listadoOT = res
-      console.log(res)
+      //console.log(res)
     /**
     * ngx datatable
     */
-    this.rows = res
-    this.temp = res
+    this.rows = res;
+    //this.rows = [...this.rows];
+    this.temp = res;
+    //this.temp = [...this.temp];
+
+
+    });
+
+    // // In your code after loading rows data
+    // // simulate client click to reload table
+    // setTimeout(() => {
+    //   this.table.element.click();
+    //   //console.log('timeout')
+    // }, 500);
+
+    this.refreshTable();
+
+  }
+
+  async refreshTable(){
+    const intervalo = interval(3500);
+    this.$subscription =  intervalo.subscribe(n=>{
+      this.OTService.getOTBy(this.lessWeek,this.now,'')
+      .then(res=>{
+        this.rows = res;
+        this.temp = res;
+        //console.log('_subscribe')
+
+        // if in this moment the user is filter data of table
+        let val = (<HTMLInputElement>document.getElementById('filterByCliente')).value;
+        if (val && val != ''){
+          //console.log('val en refreshtable true',val)
+          //console.log('in refresh table is filtering.. call update filter.')
+          this.updateFilter(null, val);
+        }else{
+          //console.log('val en refreshtable false',val)
+        }
+      });
     })
+  }
+
+  ngOnDestroy() {
+    //console.log('ngOnDestroy')
+    if (this.$subscription){
+      this.$subscription.unsubscribe()
+      //console.log('unsubscribe list onDestroy')
+    }
   }
 
   /**
@@ -81,7 +130,7 @@ export class ListarPage implements OnInit {
    * @returns 
    */
   handleSendSms(row){
-    console.log('row sms: ',row);
+    //console.log('row sms: ',row);
 
     if (!row.Cliente.celular){
       alert('El cliente no posee número de celular registrado')
@@ -99,29 +148,29 @@ export class ListarPage implements OnInit {
    * @returns 
    */
    private sendSms(cel, id_orden){
-    console.log('send sms: ',cel); 
+    //console.log('send sms: ',cel); 
     let data = {
       "phone": '549'+cel,
       "message":'Su trabajo en Arancibia Rectificaciones ya está listo para retirar'
     }
-    console.log(data)
+    //console.log(data)
     this.messangerService.postSendSms(data).then(res=>{
-      console.log('res messageService',res)
+      //console.log('res messageService',res)
       if(res['responseExSave']['id']){
-        console.log('Mensaje Enviado Correctamente')        
+        //console.log('Mensaje Enviado Correctamente')        
         // registrar envío correcto de msj
         let changes = {
           id_orden: id_orden
         }
         this.OTService.putRegistrarInformado(id_orden, changes).then(res=>{
-          console.log('res informado ot a cliente: ', res);
+          //console.log('res informado ot a cliente: ', res);
           alert('Mensaje enviado correctamente al número: '+cel);
           
           // Actualizar vista planilla
 
         })
       }else{
-        console.log('error enviando msj')
+        //console.log('error enviando msj')
         alert('Error enviando mensaje');
       }
     })
@@ -155,8 +204,19 @@ export class ListarPage implements OnInit {
     // return `espera: ${esperas}, proceso: ${procesos},finalizado: ${finalizados},retirado: ${retirados} `;
   }
 
-  updateFilter(event) {
-    const val = event.target.value.toLowerCase();
+  updateFilter(event, val='') {
+        
+    if (event == null){
+      let val = (<HTMLInputElement>document.getElementById('filterByCliente')).value;
+      //console.log('val event null: (esta filtrando)',val)
+      if (val = ''){
+        
+      }
+    }else{
+      val = event.target.value.toLowerCase();
+      //console.log('val event != null: (no hay nada escrito en filter)',val)
+    }
+    
 
     // filter our data
     const temp = this.temp.filter(function (d) {
@@ -205,12 +265,12 @@ export class ListarPage implements OnInit {
    onActivate(event) {
     if(event.type == 'click') {
         //this.selected = []
-        console.log('event.row ',event.row);
+        //console.log('event.row ',event.row);
         this.selected = event.row
-        console.log('this.selected ',this.selected)
+        //console.log('this.selected ',this.selected)
         //let text = (JSON.stringify(this.selected));
         //let obj = JSON.parse(text);
-        //console.log(obj.Cliente.nombre)
+        ////console.log(obj.Cliente.nombre)
         //this.presentAlertConfirm(obj)
         
     }
@@ -237,14 +297,14 @@ export class ListarPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-            console.log('Cerrar');
+            //console.log('Cerrar');
             
           }
         },
         {
           text: text,
           handler: () => {
-            console.log('Cerrar');
+            //console.log('Cerrar');
             this.sendSms(cel, id_orden)
           }
         }
@@ -308,7 +368,7 @@ export class ListarPage implements OnInit {
   //         role: 'cancel',
   //         cssClass: 'secondary',
   //         handler: (blah) => {
-  //           console.log('Cerrar');
+  //           //console.log('Cerrar');
             
   //         }
   //       }
