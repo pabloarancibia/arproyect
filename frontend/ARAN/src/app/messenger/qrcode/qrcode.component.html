@@ -1,0 +1,17 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title size="large">Código QR</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button color="primary" menuId="sideMenu">
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="refreshQr()">Actualizar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="image-container">
+    <img src="{{svgQrImage}}" alt="qr code" />
+  </div>
+</ion-content>

@@ -15,11 +15,37 @@ export class MessangerService {
 
   ) { }
 
+  /**
+   * Send message whatsapp
+   * @param data cel & message
+   * @returns 
+   */
   postSendSms(data){
     return this._http.post(this.URL + '/lead', data).toPromise()
     .then(res=>{
       return res;
     });
   }
+
+  /**
+   * get qr code to login whatsapp
+   * @returns svg qr code image
+   */
+  getSvgQrCode(){
+    return this._http.get(this.URL + '/lead', { responseType: 'blob' }).toPromise()
+    .then(res=>{
+      return res;
+    });
+  }
+
+  regenerateSvgQrCode(){
+    return this._http.get(this.URL + '/lead/regenerateqr').toPromise()
+    .then(res=>{
+      console.log('regenerateSvgQrCode: ', res)
+      return res;
+    });
+  }
+
+  
 
 }

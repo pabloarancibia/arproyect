@@ -19,6 +19,38 @@
         (keyup)="updateFilter($event)"
       />
 
+  <ion-button (click)="setDateFrom(30)"
+    color="light"
+    size="small">
+    <ion-icon name="calendar-outline"></ion-icon>
+    <ion-label> - 30 </ion-label>
+  </ion-button>
+
+  <ion-button (click)="setDateFrom(60)"
+  color="light"
+  size="small">
+    <!-- <ion-icon name="calendar-outline"></ion-icon> -->
+    <ion-label> - 60 </ion-label>
+  </ion-button>
+  <ion-button (click)="setDateFrom(90)"
+  color="light"
+  size="small">
+    <!-- <ion-icon name="calendar-outline"></ion-icon> -->
+    <ion-label> - 90 </ion-label>
+  </ion-button>
+  <ion-button (click)="setDateFrom(120)"
+  color="light"
+  size="small">
+    <!-- <ion-icon name="calendar-outline"></ion-icon> -->
+    <ion-label> - 120 </ion-label>
+  </ion-button>
+  <ion-button (click)="setDateFrom(3650)"
+  color="light"
+  size="small">
+    <!-- <ion-icon name="calendar-outline"></ion-icon> -->
+    <ion-label> - ... </ion-label>
+  </ion-button>
+
   <div class="ion-padding">
     <!-- Theme classes dark, material, bootstrap -->
     <ngx-datatable 
@@ -48,7 +80,8 @@
         let-value="row"                        
         let-row="row">
         <ion-button type="button" class="button"
-            (click)='handleSendSms(row)'>Wpp!
+            (click)='handleSendSms(row)'> 
+            <ion-icon name="logo-whatsapp"></ion-icon>
         </ion-button>
                  </ng-template>
     </ngx-datatable-column>

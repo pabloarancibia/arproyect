@@ -18,8 +18,10 @@ import { interval, Subscription } from 'rxjs';
 export class ListarPage implements OnInit, OnDestroy {
   
   now = new Date();
-  lessWeek = new Date();
-  l = this.lessWeek.setDate(this.lessWeek.getDate()-365);
+  fromDate = new Date();
+
+  // set por defecto últimos N días
+  l = this.fromDate.setDate(this.fromDate.getDate()-30);
 
   listadoOT;
 
@@ -68,10 +70,10 @@ export class ListarPage implements OnInit, OnDestroy {
       {prop: 'createdAt', name:'Fecha Ingreso', pipe: this.datePipe(), summaryFunc: () => null}
     ];
 
-    this.OTService.getOTBy(this.lessWeek,this.now,'')
+    this.OTService.getOTBy(this.fromDate,this.now,'')
     .then(res=>{
       // this.listadoOT = res
-      //console.log(res)
+      console.log(res)
     /**
     * ngx datatable
     */
@@ -87,7 +89,7 @@ export class ListarPage implements OnInit, OnDestroy {
     // // simulate client click to reload table
     // setTimeout(() => {
     //   this.table.element.click();
-    //   //console.log('timeout')
+    //   console.log('timeout')
     // }, 500);
 
     this.refreshTable();
@@ -97,30 +99,30 @@ export class ListarPage implements OnInit, OnDestroy {
   async refreshTable(){
     const intervalo = interval(3500);
     this.$subscription =  intervalo.subscribe(n=>{
-      this.OTService.getOTBy(this.lessWeek,this.now,'')
+      this.OTService.getOTBy(this.fromDate,this.now,'')
       .then(res=>{
         this.rows = res;
         this.temp = res;
-        //console.log('_subscribe')
+        console.log('_subscribe')
 
         // if in this moment the user is filter data of table
         let val = (<HTMLInputElement>document.getElementById('filterByCliente')).value;
         if (val && val != ''){
-          //console.log('val en refreshtable true',val)
-          //console.log('in refresh table is filtering.. call update filter.')
+          console.log('val en refreshtable true',val)
+          console.log('in refresh table is filtering.. call update filter.')
           this.updateFilter(null, val);
         }else{
-          //console.log('val en refreshtable false',val)
+          console.log('val en refreshtable false',val)
         }
       });
     })
   }
 
   ngOnDestroy() {
-    //console.log('ngOnDestroy')
+    console.log('ngOnDestroy')
     if (this.$subscription){
       this.$subscription.unsubscribe()
-      //console.log('unsubscribe list onDestroy')
+      console.log('unsubscribe list onDestroy')
     }
   }
 
@@ -130,7 +132,7 @@ export class ListarPage implements OnInit, OnDestroy {
    * @returns 
    */
   handleSendSms(row){
-    //console.log('row sms: ',row);
+    console.log('row sms: ',row);
 
     if (!row.Cliente.celular){
       alert('El cliente no posee número de celular registrado')
@@ -148,29 +150,29 @@ export class ListarPage implements OnInit, OnDestroy {
    * @returns 
    */
    private sendSms(cel, id_orden){
-    //console.log('send sms: ',cel); 
+    console.log('send sms: ',cel); 
     let data = {
       "phone": '549'+cel,
       "message":'Su trabajo en Arancibia Rectificaciones ya está listo para retirar'
     }
-    //console.log(data)
+    console.log(data)
     this.messangerService.postSendSms(data).then(res=>{
-      //console.log('res messageService',res)
+      console.log('res messageService',res)
       if(res['responseExSave']['id']){
-        //console.log('Mensaje Enviado Correctamente')        
+        console.log('Mensaje Enviado Correctamente')        
         // registrar envío correcto de msj
         let changes = {
           id_orden: id_orden
         }
         this.OTService.putRegistrarInformado(id_orden, changes).then(res=>{
-          //console.log('res informado ot a cliente: ', res);
+          console.log('res informado ot a cliente: ', res);
           alert('Mensaje enviado correctamente al número: '+cel);
           
           // Actualizar vista planilla
 
         })
       }else{
-        //console.log('error enviando msj')
+        console.log('error enviando msj')
         alert('Error enviando mensaje');
       }
     })
@@ -208,13 +210,13 @@ export class ListarPage implements OnInit, OnDestroy {
         
     if (event == null){
       let val = (<HTMLInputElement>document.getElementById('filterByCliente')).value;
-      //console.log('val event null: (esta filtrando)',val)
+      console.log('val event null: (esta filtrando)',val)
       if (val = ''){
         
       }
     }else{
       val = event.target.value.toLowerCase();
-      //console.log('val event != null: (no hay nada escrito en filter)',val)
+      console.log('val event != null: (no hay nada escrito en filter)',val)
     }
     
 
@@ -265,12 +267,12 @@ export class ListarPage implements OnInit, OnDestroy {
    onActivate(event) {
     if(event.type == 'click') {
         //this.selected = []
-        //console.log('event.row ',event.row);
+        console.log('event.row ',event.row);
         this.selected = event.row
-        //console.log('this.selected ',this.selected)
+        console.log('this.selected ',this.selected)
         //let text = (JSON.stringify(this.selected));
         //let obj = JSON.parse(text);
-        ////console.log(obj.Cliente.nombre)
+        //console.log(obj.Cliente.nombre)
         //this.presentAlertConfirm(obj)
         
     }
@@ -297,14 +299,14 @@ export class ListarPage implements OnInit, OnDestroy {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-            //console.log('Cerrar');
+            console.log('Cerrar');
             
           }
         },
         {
           text: text,
           handler: () => {
-            //console.log('Cerrar');
+            console.log('Cerrar');
             this.sendSms(cel, id_orden)
           }
         }
@@ -314,6 +316,17 @@ export class ListarPage implements OnInit, OnDestroy {
     await alert.present();
 
 
+  }
+
+  /**
+   * Set fecha desde para búsqueda de OTs
+   * resta a la fecha actual n cantidad de días.
+   */
+  setDateFrom(n: number){ 
+    this.fromDate = new Date();
+    this.fromDate.setDate(this.fromDate.getDate() - n);
+    console.log('n',n)
+    console.log('setDateFrom',this.fromDate)
   }
 
   // async presentAlertConfirm(obj) {
@@ -368,7 +381,7 @@ export class ListarPage implements OnInit, OnDestroy {
   //         role: 'cancel',
   //         cssClass: 'secondary',
   //         handler: (blah) => {
-  //           //console.log('Cerrar');
+  //           console.log('Cerrar');
             
   //         }
   //       }
