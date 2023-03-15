@@ -5,9 +5,6 @@
 sql-data
 
 # Mosquitto
-mosquitto/data
-mosquitto/log
-mosquitto/config
-config/
-log/
-data/
+mqtt/data/mosquitto.db
+mqtt/log/mosquitto.log
+mqtt/etc/mqttusers

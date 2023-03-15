@@ -1,0 +1,7 @@
+- renombrar a este fichero por mqttusers
+- dejarlo vacío
+
+- siguiendo la documentacion crear los usuarios para mqtt: 
+docker exec -it <nombre_container_mosquitto> /bin/sh
+cd /mosquitto/config
+mosquitto_passwd -b mqttusers <username> <password>
