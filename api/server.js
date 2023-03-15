@@ -47,7 +47,7 @@
     const mqtt = require('mqtt')
     const host = process.env.MQTT_SERVER
     const port = process.env.MQTT_PORT
-    const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
+    const clientId = `api_mqtt_${Math.random().toString(16).slice(3)}`
     
     // mqtt connect function
     const connectUrl = `mqtt://${host}:${port}`

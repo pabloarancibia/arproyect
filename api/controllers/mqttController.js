@@ -48,6 +48,7 @@ const Sequelize = require('sequelize');
             
             console.log('estado recibido: ', payload_json.estado);
             console.log('tarjeta recibida: ', payload_json.tarjeta);
+            console.log('nodo recibido: ', payload_json.nodo);
 
             // Busco la tarjeta en la db
             const tarjeta = await Tarjeta.findOne({
@@ -134,7 +135,11 @@ const Sequelize = require('sequelize');
                 }
                 )
 
-                }
+                // Si llegó hasta acá es porque se realizó el cambio de estado
+                pubConfirmMqtt(payload_json.nodo, mqtt_client, 'se cambió estado correctamente');
+
+
+            }
 
         }
         // DISCRIMINAR
@@ -187,11 +192,13 @@ const Sequelize = require('sequelize');
                     });
                     console.log('Evento nuevo: ', newEvent);
                     console.log('tarjeta: ',tarjeta);
+                    // confirmo al nodo emisor el ok
+                    pubConfirmMqtt(payload_json.nodo, mqtt_client, 'se creó nueva tarjeta y evento');
+
                 } catch (error) {
                     console.log('Error: problema creando evento mqtt para tarjeta nueva')
                     console.log(error);
-                    
-
+                    pubErrorMqtt(payload_json.nodo, mqtt_client, 'error al crear nueva tarjeta y evento');  
                     return;
                 }
                 
@@ -204,14 +211,18 @@ const Sequelize = require('sequelize');
                     await Eventos_mqtt.create({
                         TarjetaId:tarjeta.id,
                         OrdenTrabajoId: tarjeta.OrdenTrabajoId,
-                        accion:process.env.ACCION_ENUSO,
+                        accion:process.env.ACCION_EN_USO,
                         nodo:payload_json.nodo,
                         observaciones:'en api para tarjeta en uso',
                         is_active:true
                     });
+                    // confirmacion ok al nodo
+                    pubConfirmMqtt(payload_json.nodo, mqtt_client, 'se asignó evento accion en uso ');
+
                 } catch (error) {
                     console.log('Error: problema creando evento mqtt para tarjeta en uso')
                     console.log(error)
+                    pubErrorMqtt(payload_json.nodo, mqtt_client, 'error creando evento mqtt para tarjeta en uso');  
                     
                     return;
                 }
@@ -234,7 +245,9 @@ const receiveMessage = async (topic, message, res) => {
 }
 
 /**
- * Publicar un error por mqtt
+ * Publicar un error por mqtt (para el nodo emisor)
+ * 
+ * ej: topic: api/error/mostrador
  * @param {*} node nodo emisor a quien enviar el pub error
  * @param mqtt_client conexion mqtt
  * @param payload mensaje opcional
@@ -254,5 +267,28 @@ const pubErrorMqtt = async (node, mqtt_client, payload = 'error_gral' ) => {
 
 }
 
-module.exports = {mqtt_coordinator, pubErrorMqtt};
+/**
+ * Publicar una confirmacion por mqtt (para el nodo emisor)
+ * 
+ * ej: topic: api/confirm/mostrador
+ * @param {*} node nodo emisor a quien enviar la confirmación
+ * @param mqtt_client conexion mqtt
+ * @param payload mensaje opcional
+ */
+const pubConfirmMqtt = async (node, mqtt_client, payload = 'confirmacion_ok' ) => {
+
+    // armo el topic
+    const topic_confirm = `${process.env.MQTT_TOPIC_PUB_CONFIRM}${node}`;
+    console.log('topic confirm: ',topic_confirm);
+
+    // envio el pub
+    mqtt_client.publish(topic_confirm, payload, { qos: 0, retain: false }, (error) => {
+    if (error) {
+        console.error(error)
+    }
+    });
+
+}
+
+module.exports = {mqtt_coordinator, pubErrorMqtt, pubConfirmMqtt};
 
