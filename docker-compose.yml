@@ -30,11 +30,10 @@ services:
         container_name: mosquittobroker
         ports:
             - '1883:1883'
-        network_mode: host
+        #network_mode: host
         volumes:
         - './mqtt/etc/mosquitto.conf:/mosquitto/config/mosquitto.conf'
         - './mqtt/etc/mqttusers:/mosquitto/config/mqttusers'
         - './mqtt/data:/mosquitto/data'
         - './mqtt/log:/mosquitto/log'
-        #command: bash -c 'killall mosquitto'
         restart: unless-stopped
