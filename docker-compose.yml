@@ -10,21 +10,21 @@ services:
             - ./sql-data/db:/var/lib/mysql
         ports: 
             - "3307:3306"
-    # api:
-    #     depends_on: 
-    #         - db 
-    #     container_name: backendapi
-    #     restart: always
-    #     build:
-    #         context: .
-    #         dockerfile: Dockerfile
-    #     command: bash -c 'while !</dev/tcp/db/3306; do sleep 1; done; npm run dev'
-    #     ports:
-    #         - "3001:3000"
-    #     env_file:
-    #     - ./api/.env
-    #     volumes:
-    #         - ./:/app
+    api:
+         depends_on: 
+             - db 
+         container_name: backendapi
+         restart: always
+         build:
+             context: .
+             dockerfile: Dockerfile
+         command: bash -c 'while !</dev/tcp/db/3306; do sleep 1; done; npm run dev'
+         ports:
+             - "3001:3000"
+         env_file:
+         - ./api/.env
+         volumes:
+             - ./:/app
     mosquitto:
         image: eclipse-mosquitto
         container_name: mosquittobroker

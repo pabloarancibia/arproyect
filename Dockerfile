@@ -1,6 +1,6 @@
-FROM node:latest
+FROM node:18
 
-# ENV NODE_ENV=development
+# ENV NODE_ENV=development#production
 
 RUN mkdir -p /usr/src/app
 
