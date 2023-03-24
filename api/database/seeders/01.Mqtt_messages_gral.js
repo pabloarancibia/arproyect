@@ -1,37 +1,51 @@
 'use strict';
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-     await queryInterface.bulkInsert('Mqtt_messages_gral', [
-        {
-            id:1,
-            topic: 'esp32/espera',
-            message: 'tarjeta:1, estado:espera',
-            createdAt: new Date(),
-            updatedAt: new Date()
-        },
-        {
-            id:2,
-            topic: 'esp32/en_proceso',
-            message: 'tarjeta:1, estado:en_proceso',
-            createdAt: new Date(),
-            updatedAt: new Date()
-        },
-        {
-            id:3,
-            topic: 'esp32/finalizado',
-            message: 'tarjeta:1, estado:finalizado',
-            createdAt: new Date(),
-            updatedAt: new Date()
-        }
-    ], {});
-  },
+up: async (queryInterface, Sequelize) => {
+let mqttMessages = [];
+let tarjetaNumber = 1;
+for (let i = 1; i <= 20; i++) {
+mqttMessages.push({
+id: i,
+topic: 'nodo/discriminar',
+message: `tarjeta:${tarjetaNumber}, nodo:mostrador, estado:discriminar`,
+createdAt: new Date(),
+updatedAt: new Date()
+});
+i++;
+mqttMessages.push({
+id: i,
+topic: 'nodo/cambiarestado',
+message: `tarjeta:${tarjetaNumber}, nodo:proceso, estado:proceso`,
+createdAt: new Date(),
+updatedAt: new Date()
+});
+i++;
+mqttMessages.push({
+id: i,
+topic: 'nodo/cambiarestado',
+message: `tarjeta:${tarjetaNumber}, nodo:finalizado, estado:finalizado`,
+createdAt: new Date(),
+updatedAt: new Date()
+});
+i++;
+mqttMessages.push({
+id: i,
+topic: 'nodo/discriminar',
+message: `tarjeta:${tarjetaNumber}, nodo:mostrador, estado:discriminar`,
+createdAt: new Date(),
+updatedAt: new Date()
+});
+tarjetaNumber++;
+}
+await queryInterface.bulkInsert('Mqtt_messages_gral', mqttMessages, {});
+},
 
-  down: async (queryInterface, Sequelize) => {
-     await queryInterface.bulkDelete('Mqtt_messages_gral', [
-        {
-            id: [1,2,3],
-        }
-    ], {});
-  }
+down: async (queryInterface, Sequelize) => {
+await queryInterface.bulkDelete('Mqtt_messages_gral', {
+id: {
+[Sequelize.Op.between]: [1, 20]
+}
+});
+}
 };

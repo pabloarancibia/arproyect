@@ -23,6 +23,20 @@ module.exports = {
             descripcion: 'Cambio de biela y centrado de cigüenial',
             createdAt: new Date(),
             updatedAt: new Date() 
+        },
+        {
+          id: 4,
+            nombre: 'Tornería',
+            descripcion: 'Tornería general',
+            createdAt: new Date(),
+            updatedAt: new Date() 
+        },
+        {
+          id: 5,
+            nombre: 'Otros',
+            descripcion: 'Otros no especificados',
+            createdAt: new Date(),
+            updatedAt: new Date() 
         }
     ], {});
   },
@@ -34,7 +48,9 @@ module.exports = {
         nombre: [
           'Rectificación',
           'Encamisado',
-          'Cambio de Biela'
+          'Cambio de Biela',
+          'Tornería',
+          'Otros'
         ]
        });
   }

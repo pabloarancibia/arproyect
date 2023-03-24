@@ -37,6 +37,13 @@ module.exports = {
             detalle: 'Tarjeta libre para uso',
             createdAt: new Date(),
             updatedAt: new Date() 
+        },
+        {
+            id: 6,
+            nombre: 'no_asignada',
+            detalle: 'Tarjeta no asignada',
+            createdAt: new Date(),
+            updatedAt: new Date() 
         }
     ], {});
   },
@@ -44,7 +51,7 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
      await queryInterface.bulkDelete('Estado', [
         {
-            id: [1,2,3,4,5],
+            id: [1,2,3,4,5,6],
         }
     ], {});
   }
