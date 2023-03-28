@@ -1,0 +1,43 @@
+server {
+    listen 80;
+    server_name arancibiarectificaciones.app;
+    root /usr/share/nginx/html;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
+
+server {
+    listen 80;
+    server_name backendapi.service;
+
+    location / {
+        proxy_pass http://api:3000/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+
+server {
+    listen 80;
+    server_name database.service;
+
+    location / {
+        proxy_pass http://db:3306/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+
+server {
+    listen 80;
+    server_name mosquitto.service;
+
+    location / {
+        proxy_pass http://mosquitto:1883/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
