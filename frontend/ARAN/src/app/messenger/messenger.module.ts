@@ -2,13 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MessengerRoutingModule } from './messenger-routing.module';
+import { IonicModule } from '@ionic/angular';
+import { QrcodeComponent } from './qrcode/qrcode.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [QrcodeComponent],
   imports: [
     CommonModule,
-    MessengerRoutingModule
+    MessengerRoutingModule,
+    IonicModule
   ]
 })
 export class MessengerModule { }

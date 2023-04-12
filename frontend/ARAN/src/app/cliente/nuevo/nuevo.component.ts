@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
-import { DatatableComponent, SelectionType } from '@swimlane/ngx-datatable';
+import { DatatableComponent, SelectionType, SortType } from '@swimlane/ngx-datatable';
 import { ClientesService } from 'src/app/services/clientes/clientes.service';
+
 
 @Component({
   selector: 'app-nuevo',
@@ -25,8 +26,11 @@ export class NuevoComponent implements OnInit {
   reorderable = true;
   temp: any;
   @ViewChild(DatatableComponent) table: DatatableComponent;
-  selected = [];
+  // selected = [];
+  selected = {nombre: '', apellido:'', celular:'', dni:''};
   SelectionType = SelectionType;
+
+  SortType = SortType;
 
 
 

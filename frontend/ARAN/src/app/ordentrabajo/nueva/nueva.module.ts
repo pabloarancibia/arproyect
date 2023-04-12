@@ -17,12 +17,12 @@ import { MaterialModule } from 'src/app/material.module';
     NuevaPageRoutingModule,
     ReactiveFormsModule,
     NgxDatatableModule,
-
     MaterialModule,
+    NuevoComponent,
   ],
   declarations: [
     NuevaPage,
-    NuevoComponent,
+    // NuevoComponent,
   ]
 })
 export class NuevaPageModule {}

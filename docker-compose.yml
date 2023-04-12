@@ -59,7 +59,7 @@ services:
         - ./nginx.conf:/etc/nginx/conf.d/default.conf
     # Enlazar el servicio de Nginx con el servicio de la aplicación Ionic
         depends_on:
-        - ionic-app
+        - frontend-app
     # Mapear el puerto 80 del contenedor al puerto 80 del host
         ports:
         - "80:80"

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
-import { DatatableComponent, SelectionType } from '@swimlane/ngx-datatable';
+import { DatatableComponent, SelectionType, SortType } from '@swimlane/ngx-datatable';
 import { MotosService } from 'src/app/services/motos/motos.service';
 
 @Component({
@@ -24,8 +24,10 @@ export class BuscaragregarmotoComponent implements OnInit {
   reorderable = true;
   temp: any;
   @ViewChild(DatatableComponent) table: DatatableComponent;
-  selected = [];
+  // selected = [];
+  selected = {marca:'', modelo:'', cilindrada:'', anio:''};
   SelectionType = SelectionType;
+  SortType = SortType;
 
 
   constructor(

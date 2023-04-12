@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { DatatableComponent, SortType } from '@swimlane/ngx-datatable';
 import { OTService } from 'src/app/services/ordenTrabajoServices/ordentrabajo.service';
 import { MessangerService } from 'src/app/services/messanger/messanger.service';
 import { environment } from 'src/environments/environment';
@@ -36,6 +36,7 @@ export class ListarPage implements OnInit, OnDestroy {
   temp: any;
   @ViewChild(DatatableComponent) table: DatatableComponent;
   selected = [];
+  SortType = SortType;
 
   $subscription: Subscription
 
