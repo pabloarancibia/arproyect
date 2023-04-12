@@ -14,9 +14,17 @@ import { MaterialModule } from './material.module';
 
 registerLocaleData(localEs,'es-AR')
 @NgModule({
-  declarations: [AppComponent, SidenavComponent,],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
-    HttpClientModule, NgxDatatableModule, BrowserAnimationsModule,
+  declarations: [
+    AppComponent, 
+    SidenavComponent,
+  ],
+  imports: [
+    BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule,
+    HttpClientModule, 
+    NgxDatatableModule, 
+    BrowserAnimationsModule,
     MaterialModule,
   ],
   providers: [{ 

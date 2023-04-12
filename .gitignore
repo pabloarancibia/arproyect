@@ -2,6 +2,7 @@
 /api/node_modules
 /api/.env
 .env
+.env_mysql
 sql-data
 
 # Mosquitto

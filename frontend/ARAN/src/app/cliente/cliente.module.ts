@@ -19,5 +19,6 @@ import { NuevoComponent } from './nuevo/nuevo.component';
     NgxDatatableModule
   ],
   declarations: [NuevoComponent],
+  exports:[NuevoComponent],
 })
 export class ClientePageModule {}

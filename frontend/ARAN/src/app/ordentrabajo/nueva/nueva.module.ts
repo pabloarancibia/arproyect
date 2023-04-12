@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NuevaPageRoutingModule } from './nueva-routing.module';
 import { NuevaPage } from './nueva.page';
-import { NuevoComponent } from 'src/app/cliente/nuevo/nuevo.component';
+import { ClientePageModule } from 'src/app/cliente/cliente.module';
+//import { NuevoComponent } from 'src/app/cliente/nuevo/nuevo.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-
 import { MaterialModule } from 'src/app/material.module'; 
 
 @NgModule({
@@ -18,7 +18,8 @@ import { MaterialModule } from 'src/app/material.module';
     ReactiveFormsModule,
     NgxDatatableModule,
     MaterialModule,
-    NuevoComponent,
+    ClientePageModule,
+    //NuevoComponent,
   ],
   declarations: [
     NuevaPage,
