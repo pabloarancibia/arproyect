@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
 
 import { RepuestoRoutingModule } from './repuesto-routing.module';
 import { NuevoRepuestoComponent } from './nuevo-repuesto/nuevo-repuesto.component';
@@ -9,6 +10,7 @@ import { NuevoRepuestoComponent } from './nuevo-repuesto/nuevo-repuesto.componen
   declarations: [NuevoRepuestoComponent],
   imports: [
     CommonModule,
+    IonicModule,
     RepuestoRoutingModule
   ]
 })

@@ -69,7 +69,7 @@
 
     <ion-list>
       <ion-item>
-        <ion-label>{{cliente.nombre}}</ion-label>
+        <ion-label *ngIf="cliente.nombre">{{cliente.nombre}}</ion-label>
         <ion-label>{{cliente.apellido}}</ion-label>
         <ion-label>{{cliente.celular}}</ion-label>
         <ion-label>{{cliente.dni}}</ion-label>
@@ -173,12 +173,12 @@
     <div class="button-center">
   
         <ion-item>
-          <ion-button [disabled]="!formNuevaOT.valid" color="primary" (click)="onSubmit(limpiar)">Guardar y Limpiar</ion-button>
+          <ion-button [disabled]="!formNuevaOT.valid" color="primary" (click)="onSubmit('limpiar')">Guardar y Limpiar</ion-button>
         </ion-item>
       </div>
       <div class="button-center">
         <ion-item>
-          <ion-button [disabled]="!formNuevaOT.valid" color="primary" (click)="onSubmit(nolimpiar)">Guardar y Seguir Añadiendo</ion-button>
+          <ion-button [disabled]="!formNuevaOT.valid" color="primary" (click)="onSubmit('nolimpiar')">Guardar y Seguir Añadiendo</ion-button>
         </ion-item>
       
         <ion-item>

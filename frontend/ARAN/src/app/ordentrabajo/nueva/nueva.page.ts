@@ -21,9 +21,9 @@ export class NuevaPage implements OnInit, OnDestroy {
   isAddMode: boolean =  true;
   now = new Date();
   nueva = {}
-  cliente = [];
-  moto = [];
-  trabajos = [];
+  cliente: any = [];
+  moto: any = [];
+  trabajos: any = [];
 
   subscription: Subscription 
 

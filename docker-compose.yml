@@ -31,6 +31,8 @@ services:
         ports:
             - '1883:1883'
         #network_mode: host
+        command: >
+            bash -c "kill $(lsof -t -i:1883) || true && /usr/sbin/mosquitto -c /mosquitto/config/mosquitto.conf"
         volumes:
         - './mqtt/etc/mosquitto.conf:/mosquitto/config/mosquitto.conf'
         - './mqtt/etc/mqttusers:/mosquitto/config/mqttusers'
