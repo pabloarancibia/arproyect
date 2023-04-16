@@ -39,32 +39,10 @@ services:
     #     - './mqtt/data:/mosquitto/data'
     #     - './mqtt/log:/mosquitto/log'
     #     restart: unless-stopped
-    
-    # Definir el servicio de la aplicación Ionic
-    frontend-app:
-        # Utilizar la imagen construida a partir del archivo Dockerfile
-        # build: .
-        container_name: frontend-app
+    web:
         build:
-             context: .
-             dockerfile: Dockerfile-frontend
-        # Mapear el puerto 80 del contenedor al puerto 80 del host
+            context: .
+            dockerfile: Dockerfile-frontend
         ports:
-        - "8080:80"
-        - "8888:4200"
-
-  # Definir el servicio de Nginx
-    nginx:
-        container_name: nginx
-    # Utilizar la imagen oficial de Nginx
-        image: nginx
-    # Copiar la configuración de Nginx al contenedor
-        volumes:
-        - ./nginx.conf:/etc/nginx/conf.d/default.conf
-    # Enlazar el servicio de Nginx con el servicio de la aplicación Ionic
-        depends_on:
-        - frontend-app
-    # Mapear el puerto 80 del contenedor al puerto 80 del host
-        ports:
-        - "80:80"
+            - "80:80"
 
