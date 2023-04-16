@@ -48,12 +48,14 @@ services:
         build:
              context: .
              dockerfile: Dockerfile-frontend
-        # Mapear el puerto 80 del contenedor al puerto 8080 del host
+        # Mapear el puerto 80 del contenedor al puerto 80 del host
         ports:
         - "8080:80"
+        - "8080:4200"
 
   # Definir el servicio de Nginx
     nginx:
+        container_name: nginx
     # Utilizar la imagen oficial de Nginx
         image: nginx
     # Copiar la configuración de Nginx al contenedor

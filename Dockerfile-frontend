@@ -21,7 +21,7 @@ RUN npm install
 RUN ionic build --prod
 
 # Exponer el puerto 80 para que pueda ser utilizado por Nginx
-EXPOSE 80
+EXPOSE 80 4200
 
 # Ejecutar el comando para iniciar la aplicación
 CMD ["npm", "start"]
