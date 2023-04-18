@@ -1,44 +1,45 @@
 version: '3'
 
 services:
-    # db:
-    #     container_name: mysqldb
-    #     image: mysql
-    #     env_file:
-    #     - .env_mysql/.mysql.env
-    #     volumes:
-    #         - ./sql-data/db:/var/lib/mysql
-    #     ports: 
-    #         - "3307:3306"
-    # api:
-    #      depends_on: 
-    #          - db 
-    #      container_name: backendapi
-    #      restart: always
-    #      build:
-    #          context: .
-    #          dockerfile: Dockerfile
-    #      command: bash -c 'while !</dev/tcp/db/3306; do sleep 1; done; npm run dev'
-    #      ports:
-    #          - "3001:3000"
-    #      env_file:
-    #      - ./api/.env
-    #      volumes:
-    #          - ./:/app
-    # mosquitto:
-    #     image: eclipse-mosquitto
-    #     container_name: mosquittobroker
-    #     ports:
-    #         - '1883:1883'
-    #     #network_mode: host
-    #     command: >
-    #         bash -c "kill $(lsof -t -i:1883) || true && /usr/sbin/mosquitto -c /mosquitto/config/mosquitto.conf"
-    #     volumes:
-    #     - './mqtt/etc/mosquitto.conf:/mosquitto/config/mosquitto.conf'
-    #     - './mqtt/etc/mqttusers:/mosquitto/config/mqttusers'
-    #     - './mqtt/data:/mosquitto/data'
-    #     - './mqtt/log:/mosquitto/log'
-    #     restart: unless-stopped
+    db:
+        container_name: mysqldb
+        image: mysql
+        env_file:
+        - .env_mysql/.mysql.env
+        volumes:
+            - ./sql-data/db:/var/lib/mysql
+        ports: 
+            - "3307:3306"
+    api:
+         depends_on: 
+             - db 
+         container_name: backendapi
+         restart: always
+         build:
+             context: .
+             dockerfile: Dockerfile
+         command: bash -c 'while !</dev/tcp/db/3306; do sleep 1; done; npm run dev'
+         ports:
+             - "3001:3000"
+         env_file:
+         - ./api/.env
+         volumes:
+             - ./:/app
+    mosquitto:
+        image: eclipse-mosquitto
+        container_name: mosquittobroker
+        ports:
+            - "1883:1883"
+            - "9001:9001"
+        #network_mode: host
+        # command: >
+        #     bash -c "kill $(lsof -t -i:1883) || true && /usr/sbin/mosquitto -c /mosquitto/config/mosquitto.conf"
+        volumes:
+        - './mqtt/etc/mosquitto.conf:/mosquitto/config/mosquitto.conf'
+        - './mqtt/etc/mqttusers:/mosquitto/config/mqttusers'
+        - './mqtt/data:/mosquitto/data'
+        - './mqtt/log:/mosquitto/log'
+        restart: unless-stopped
     web:
         build:
             context: .
