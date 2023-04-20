@@ -11,6 +11,9 @@ WORKDIR /usr/src/ionic-app
 #COPY . .
 COPY frontend/ARAN ./
 
+# RUN npm install -g npm@9.5.0
+RUN apk add --update python3 make g++ && rm -rf /var/cache/apk/*
+
 # Instalar la CLI de Ionic
 RUN npm install -g @ionic/cli
 
