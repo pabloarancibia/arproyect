@@ -6,15 +6,16 @@ RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
 
-COPY api/package*.json ./
+COPY api-whatsapp-ts/package*.json ./
 
 RUN npm install
 
 # copiar directorio actual dentro de contenedor actual
 COPY . .
 
-EXPOSE 3001
+# Puerto para app messenger
+EXPOSE 3003
 
-VOLUME [ "/api/node_modules" ]
+VOLUME [ "/api-whatsapp-ts/node_modules" ]
 
 CMD [ "npm", "run", "dev" ]
