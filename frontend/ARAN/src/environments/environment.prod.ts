@@ -4,7 +4,7 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:3001',
+  apiUrl: 'http://192.168.2.141:3001',
   apiMessengerUrl:'http://localhost:3001',
 
   // ESTADOS PARA OT
