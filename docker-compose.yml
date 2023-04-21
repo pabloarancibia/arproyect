@@ -54,8 +54,6 @@ services:
              dockerfile: Dockerfile-messenger
          ports:
              - "3003:3003"
-         env_file:
-         - ./api/.env
          volumes:
              - ./:/messenger
 
