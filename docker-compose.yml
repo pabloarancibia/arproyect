@@ -3,6 +3,7 @@ version: '3'
 services:
     db:
         container_name: mysqldb
+        restart: always
         image: mysql
         env_file:
         - .env_mysql/.mysql.env
@@ -39,8 +40,10 @@ services:
         - './mqtt/etc/mqttusers:/mosquitto/config/mqttusers'
         - './mqtt/data:/mosquitto/data'
         - './mqtt/log:/mosquitto/log'
-        restart: unless-stopped
+        restart: always
     web:
+        container_name: web
+        restart: always
         build:
             context: .
             dockerfile: Dockerfile-frontend
@@ -50,10 +53,20 @@ services:
          container_name: messenger
          restart: always
          build:
-             context: .
-             dockerfile: Dockerfile-messenger
+             context: api-whatsapp-ts
+             dockerfile: Dockerfile
          ports:
              - "3003:3003"
          volumes:
              - ./:/messenger
+    portainer:
+        image: portainer/portainer-ce
+        restart: always
+        ports:
+            - "9000:9000"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - portainer_data:/data
+volumes:
+    portainer_data:
 

@@ -1,6 +1,15 @@
-FROM node:18
+FROM node:18-alpine
 
 # ENV NODE_ENV=development#production
+
+# Instalar apk-tools para utilizar apk
+# RUN apk update && apk add apk-tools
+
+# Especificar un repositorio de paquetes que incluya libnss3
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" > /etc/apk/repositories
+
+# Instalar las dependencias necesarias, incluyendo libnss3
+RUN apk add --update libnss3 && rm -rf /var/cache/apk/*
 
 RUN mkdir -p /usr/src/appmessenger
 
@@ -11,7 +20,10 @@ COPY api-whatsapp-ts/package*.json ./
 RUN npm install
 
 # copiar directorio actual dentro de contenedor actual
-COPY . .
+COPY api-whatsapp-ts/ .
+
+RUN npm run build
+
 
 # Puerto para app messenger
 EXPOSE 3003
