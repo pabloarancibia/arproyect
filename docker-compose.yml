@@ -49,16 +49,16 @@ services:
             dockerfile: Dockerfile-frontend
         ports:
             - "80:80"
-    messenger:
-         container_name: messenger
-         restart: always
-         build:
-             context: api-whatsapp-ts
-             dockerfile: Dockerfile
-         ports:
-             - "3003:3003"
-         volumes:
-             - ./:/messenger
+    # messenger:
+    #      container_name: messenger
+    #      restart: always
+    #      build:
+    #          context: api-whatsapp-ts
+    #          dockerfile: Dockerfile
+    #      ports:
+    #          - "3003:3003"
+    #      volumes:
+    #          - ./:/messenger
     portainer:
         image: portainer/portainer-ce
         restart: always
