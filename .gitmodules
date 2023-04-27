@@ -1,0 +1,3 @@
+[submodule "nombre-del-submodulo"]
+    path = api-whatsapp-ts
+    url = https://github.com/pabloarancibia/api-whatsapp-ts.git
