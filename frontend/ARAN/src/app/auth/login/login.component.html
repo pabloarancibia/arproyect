@@ -1,0 +1,63 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>Iniciar Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row style="height: 100%">
+      <ion-col size-md="6" offset-md="3" size-lg="4" offset-lg="4" style="margin: auto; text-align: center;">
+        <ion-title>INGRESAR CREDENCIALES DE ACCESO</ion-title>
+        <form [formGroup]="loginForm" (ngSubmit)="signIn()">
+          <ion-item>
+            <ion-label position="floating">Usuario</ion-label>
+            <ion-input type="text" formControlName="nombreusuario" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input type="password" formControlName="password" required></ion-input>
+          </ion-item>
+          <ion-button (click)="signIn()" expand="block">Iniciar Sesión</ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content> -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row style="height: 100%">
+      <ion-col size-md="6" offset-md="3" size-lg="4" offset-lg="4" style="margin: auto; text-align: center;">
+        <h1 class="title">Arancibia Rectificaciones</h1>
+        <form [formGroup]="loginForm" (ngSubmit)="signIn()">
+          <ion-item>
+            <ion-label position="floating">Usuario</ion-label>
+            <ion-input type="text" formControlName="nombreusuario" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input type="password" formControlName="password" required></ion-input>
+          </ion-item>
+          <ion-button (click)="signIn()" expand="block">Iniciar Sesión</ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<style>
+  .title {
+    font-size: 2rem;
+    color: white;
+    background-color: blue;
+    padding: 1rem;
+    border-radius: 5px;
+  }
+</style>
+

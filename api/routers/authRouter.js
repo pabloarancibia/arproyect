@@ -7,6 +7,8 @@ const authRouter = express.Router();
 //Middlewares
 
 // Controllers
+const authController = require('../controllers/authController');
+ 
 
 /** 
  * Routes
@@ -15,5 +17,7 @@ const authRouter = express.Router();
 authRouter.get('/', function (req,res){
     res.send('auth routes')
 });
+
+authRouter.post('/login',authController.signIn);
 
 module.exports = authRouter;

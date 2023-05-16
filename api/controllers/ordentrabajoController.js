@@ -208,8 +208,9 @@ const nuevaOrdenTrabajo = async (req,res) => {
 }
 
 /**
-     * Cambiar estado orden de trabajo y [tarjeta]
-     * a retirado y libre respectivamente
+     * Cambiar estado orden de trabajo a retirado
+     * is_active a libre para indicar que se retiro la orden 
+     * y [tarjeta] = libre 
      * @params id_orden, precio, saldo, detalle, estado(OT)
      * [TarjetaId][TarjetaEstado]
      * Si se recibe TarjetaId y TarjetaEstado se cambia el mismo
@@ -252,7 +253,8 @@ const retirarOrdenTrabajo = async (req, res) => {
                 EstadoId : estado.id,
                 precio: req.body.precio,
                 entrega: req.body.entrega,
-                detalle: req.body.detalle
+                detalle: req.body.detalle,
+                is_active: false, // indica que fue retirada
             });
 
         
