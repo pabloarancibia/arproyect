@@ -79,10 +79,11 @@ const Sequelize = require('sequelize');
                 return;
             }else{
 
-                // Busco la Orden en la db
+                // Busco la Orden en la db por su numero de tarjeta y active
                 const orden = await OrdenTrabajo.findOne({
                 where: {
                     tarjeta:tarjeta.numero,
+                    is_active: true, //no fue previamente retirada
                     }
                 });
 
